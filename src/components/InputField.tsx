@@ -1,10 +1,9 @@
 import React from "react";
-import "../Screens/signUpLawyer.css";
+
 interface InputFieldProps {
   name: string;
   value: string;
   type: string;
-  placeholder: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   style?: React.CSSProperties;
   label: string;
@@ -14,7 +13,6 @@ const InputField: React.FC<InputFieldProps> = ({
   name,
   value,
   type,
-  placeholder,
   onChange,
   style,
   label,
@@ -27,7 +25,7 @@ const InputField: React.FC<InputFieldProps> = ({
         value={value}
         onChange={onChange}
         id={name}
-        placeholder={placeholder}
+        placeholder={value ? " " : value}
         style={style}
         required
       />
@@ -35,5 +33,4 @@ const InputField: React.FC<InputFieldProps> = ({
     </div>
   );
 };
-
 export default InputField;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import "./signUpLawyer.css";
+import Button from "../components/buttons/button";
 
 interface SignupFormState {
   name: string;
@@ -38,34 +39,42 @@ function Signup() {
         name="name"
         value={formState.name}
         onChange={handleInputChange}
-        placeholder=""
         label="Name"
+        style={{ marginBottom: "1rem" }}
       />
       <InputField
         type="email"
         name="email"
         value={formState.email}
         onChange={handleInputChange}
-        placeholder=""
         label="Email"
+        style={{ marginBottom: "1rem" }}
       />
       <InputField
         type="password"
         name="password"
         value={formState.password}
         onChange={handleInputChange}
-        placeholder=""
         label="Password"
+        style={{ marginBottom: "1rem" }}
       />
       <InputField
         type="password"
         name="confirmPassword"
         value={formState.confirmPassword}
         onChange={handleInputChange}
-        placeholder=""
         label="Confirm Password"
+        style={{ marginBottom: "1.5rem" }}
       />
-      <button type="submit">Sign Up</button>
+      <Button
+        type="submit"
+        height="50px"
+        width="100px"
+        buttonColor="green"
+        textColor="white"
+      >
+        Sign Up
+      </Button>{" "}
     </form>
   );
 }
