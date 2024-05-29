@@ -2,7 +2,7 @@
 // import viteLogo from "/vite.svg";
 import "./App.css";
 import Signup from "./Screens/signUpLawyer";
-import Header from "./Screens/Header";
+
 
 function App() {
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../Css/Header.css"; // Import the CSS file for styling
 import { FaSearch } from "react-icons/fa"; // Import the search icon
+import { motion, AnimatePresence } from "framer-motion";
 import Button from "../components/buttons/button";
 
 interface HeaderProps {
@@ -38,13 +39,23 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
               onMouseLeave={handleMouseLeave}
             >
               <a href="#">Lawyers by Location</a>
-              {dropdown === "location" && (
-                <div className="dropdown">
-                  <a href="#">Location 1</a>
-                  <a href="#">Location 2</a>
-                  <a href="#">Location 3</a>
-                </div>
-              )}
+              <AnimatePresence>
+                {dropdown === "location" && (
+                  <motion.div
+                    className="dropdown"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="dropdown-grid">
+                      {["Islamabad", "Rawalpindi", "Lahore", "Karachi", "Peshawar", "Sargodha", "Quetta", "Gujranwala", "Multan", "Bahawalpur", "Sukkur"].map((city) => (
+                        <a href="#" key={city}>{city}</a>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             <div
               className="nav-item"
@@ -52,13 +63,24 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
               onMouseLeave={handleMouseLeave}
             >
               <a href="#">Lawyers by Practice Area</a>
-              {dropdown === "practice" && (
-                <div className="dropdown">
-                  <a href="#">Practice Area 1</a>
-                  <a href="#">Practice Area 2</a>
-                  <a href="#">Practice Area 3</a>
-                </div>
-              )}
+              <AnimatePresence>
+                {dropdown === "practice" && (
+                  <motion.div
+                    className="dropdown"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="dropdown-grid">
+                      {["Criminal", "Civil", "Corporate", "Family", "Constitutional", "Tax", "Intellectual Property", "Labor", "Environmental", "Banking", "Real Estate", "Immigration"]
+                        .map((area) => (
+                          <a href="#" key={area}>{area}</a>
+                        ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             <div
               className="nav-item"
@@ -66,13 +88,24 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
               onMouseLeave={handleMouseLeave}
             >
               <a href="#">Legal Topics and Q&A</a>
-              {dropdown === "qna" && (
-                <div className="dropdown">
-                  <a href="#">Topic 1</a>
-                  <a href="#">Topic 2</a>
-                  <a href="#">Topic 3</a>
-                </div>
-              )}
+              <AnimatePresence>
+                {dropdown === "qna" && (
+                  <motion.div
+                    className="dropdown"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="dropdown-grid">
+                      {["Constitutional Rights", "Consumer Protection", "Property Rights", "Contract Law", "Human Rights", "Employment Law", "Family Law", "Environmental Law", "Cyber Law", "Taxation", "Corporate Governance", "Criminal Justice"]
+.map((topic) => (
+                        <a href="#" key={topic}>{topic}</a>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </nav>
         </div>
@@ -99,10 +132,18 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
       {showSearch && (
         <div className="search-bar">
           <input
-            // style={{ width: "80%" }}
             type="text"
             placeholder="Search Q&A, lawyers and more"
           />
+          <Button
+            type="submit"
+            height="40px"
+            width="80px"
+            buttonColor="green"
+            textColor="white"
+          >
+            Search
+          </Button>
         </div>
       )}
     </>
