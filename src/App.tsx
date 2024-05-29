@@ -4,6 +4,7 @@ import { Routes } from "react-router-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import Signup from "./Screens/signUpLawyer";
+import LawyersPersonalDetails from '../src/Screens/lawyerPersonalDetails';
 
 function App() {
   return (
