@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../Css/Header.css"; // Import the CSS file for styling
 import { FaSearch } from "react-icons/fa"; // Import the search icon
+import Button from "../components/buttons/button";
 
 interface HeaderProps {
   logoSrc: string;
@@ -76,17 +77,32 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
           </nav>
         </div>
         <div className="header-right">
-          <FaSearch className="search-icon" onClick={toggleSearchBar} />
+          <FaSearch
+            className="search-icon"
+            onClick={toggleSearchBar}
+            style={{ width: "auto" }}
+          />
           <a href="#" className="grow-practice">
             Grow your practice
           </a>
-          <button className="sign-in">Sign in</button>
+          <Button
+            type="submit"
+            height="50px"
+            width="100px"
+            buttonColor="green"
+            textColor="white"
+          >
+            Sign Up
+          </Button>
         </div>
       </header>
       {showSearch && (
         <div className="search-bar">
-          <input type="text" placeholder="Search Q&A, lawyers and more" />
-          <button type="button">Search</button>
+          <input
+            // style={{ width: "80%" }}
+            type="text"
+            placeholder="Search Q&A, lawyers and more"
+          />
         </div>
       )}
     </>

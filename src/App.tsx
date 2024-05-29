@@ -8,9 +8,7 @@ function App() {
   return (
     <>
       <div>
-        <Header logoSrc="src/images/Gif.gif" logoAlt="WAUQLA" />
-        <Signup/>
-       
+        <Signup />
       </div>
     </>
   );

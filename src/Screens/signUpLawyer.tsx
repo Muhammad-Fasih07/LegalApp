@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import InputField from "../components/InputField";
 import "../Css/signUpLawyer.css";
 import Button from "../components/buttons/button";
+import Header from "./Header";
 
 interface SignupFormState {
   name: string;
@@ -33,49 +34,52 @@ function Signup() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputField
-        type="text"
-        name="name"
-        value={formState.name}
-        onChange={handleInputChange}
-        label="Name"
-        style={{ marginBottom: "1rem" }}
-      />
-      <InputField
-        type="email"
-        name="email"
-        value={formState.email}
-        onChange={handleInputChange}
-        label="Email"
-        style={{ marginBottom: "1rem" }}
-      />
-      <InputField
-        type="password"
-        name="password"
-        value={formState.password}
-        onChange={handleInputChange}
-        label="Password"
-        style={{ marginBottom: "1rem" }}
-      />
-      <InputField
-        type="password"
-        name="confirmPassword"
-        value={formState.confirmPassword}
-        onChange={handleInputChange}
-        label="Confirm Password"
-        style={{ marginBottom: "1.5rem" }}
-      />
-      <Button
-        type="submit"
-        height="50px"
-        width="100px"
-        buttonColor="green"
-        textColor="white"
-      >
-        Sign Up
-      </Button>{" "}
-    </form>
+    <>
+      <Header logoSrc="src/images/Gif.gif" logoAlt="WAUQLA" />
+      <form onSubmit={handleSubmit}>
+        <InputField
+          type="text"
+          name="name"
+          value={formState.name}
+          onChange={handleInputChange}
+          label="Name"
+          style={{ marginBottom: "1rem" }}
+        />
+        <InputField
+          type="email"
+          name="email"
+          value={formState.email}
+          onChange={handleInputChange}
+          label="Email"
+          style={{ marginBottom: "1rem" }}
+        />
+        <InputField
+          type="password"
+          name="password"
+          value={formState.password}
+          onChange={handleInputChange}
+          label="Password"
+          style={{ marginBottom: "1rem" }}
+        />
+        <InputField
+          type="password"
+          name="confirmPassword"
+          value={formState.confirmPassword}
+          onChange={handleInputChange}
+          label="Confirm Password"
+          style={{ marginBottom: "1.5rem" }}
+        />
+        <Button
+          type="submit"
+          height="50px"
+          width="100px"
+          buttonColor="green"
+          textColor="white"
+        >
+          Sign Up
+        </Button>
+      </form>
+    </>
   );
 }
 
