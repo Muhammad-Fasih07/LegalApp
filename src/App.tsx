@@ -2,12 +2,15 @@
 // import viteLogo from "/vite.svg";
 import "./App.css";
 import Signup from "./Screens/signUpLawyer";
+import Header from "./Screens/Header";
 
 function App() {
   return (
     <>
       <div>
-        <Signup />
+        <Header logoSrc="src/images/Gif.gif" logoAlt="WAUQLA" />
+        <Signup/>
+       
       </div>
     </>
   );

@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 70px;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 60px; /* Increase logo height */
+    margin-right: 20px;
+    margin-bottom: 100px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+    margin: 0 15px;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px; /* Adjust font size */
+}
+
+.nav-item a:hover {
+    font-weight: bold; /* Make bold on hover */
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.dropdown a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.dropdown a:hover {
+    background-color: #f0f0f0;
+}
+
+.grow-practice {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+}
+
+.sign-in {
+    background-color: #86ede5;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px; /* Increase padding */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.sign-in:hover {
+    background-color: #8bf08b;
+}
+
+.search-icon {
+    font-size: 20px;
+    margin-right: 15px;
+    color: #000;
+    cursor: pointer;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff; /* Match the header background */
+    position: absolute; /* Make it absolute */
+    top: 70px; /* Position it directly below the header */
+    left: 0;
+    z-index: 999; /* Make sure it appears above other elements */
+}
+
+.search-bar input {
+    width: calc(100% - 80px); /* Adjust for button width */
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-bar button {
+    padding: 10px;
+    background-color: #15b041;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+
+.search-bar button:hover {
+    background-color: #ff3300;
+}
+
+.content {
+    padding: 80px 20px;
+}
+

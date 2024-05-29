@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
-import "./signUpLawyer.css";
+import "../Css/signUpLawyer.css";
 import Button from "../components/buttons/button";
 
 interface SignupFormState {
