@@ -3,6 +3,7 @@ import InputField from "../components/InputField";
 import "../Css/signUpLawyer.css";
 import Button from "../components/buttons/button";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 interface SignupFormState {
   name: string;
@@ -20,6 +21,7 @@ const initialFormState: SignupFormState = {
 
 function Signup() {
   const [formState, setFormState] = useState<SignupFormState>(initialFormState);
+  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({
@@ -75,6 +77,7 @@ function Signup() {
           width="100px"
           buttonColor="green"
           textColor="white"
+          onClick={() => navigate("/LawyersPersonalDetails")}
         >
           Sign Up
         </Button>
