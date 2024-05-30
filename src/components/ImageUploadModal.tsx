@@ -1,0 +1,43 @@
+import React, { useState } from "react";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
+
+interface ImageUploadModalProps {
+  isOpen: boolean;
+  onRequestClose: () => void;
+  onImageUpload: (file: File) => void;
+}
+
+const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
+  isOpen,
+  onRequestClose,
+  onImageUpload,
+}) => {
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      onImageUpload(event.target.files[0]);
+    }
+  };
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      contentLabel="Image Upload Modal"
+      style={{
+        content: {
+          width: "400px",
+          height: "400px",
+          margin: "auto",
+        },
+      }}
+    >
+      <h2>Upload Image</h2>
+      <input type="file" accept="image/*" onChange={handleImageUpload} />
+      <button onClick={onRequestClose}>Close</button>
+    </Modal>
+  );
+};
+
+export default ImageUploadModal;

@@ -46,6 +46,7 @@ function Signup() {
           onChange={handleInputChange}
           label="Name"
           style={{ marginBottom: "1rem" }}
+          labelColor="#000"
         />
         <InputField
           type="email"
@@ -54,6 +55,7 @@ function Signup() {
           onChange={handleInputChange}
           label="Email"
           style={{ marginBottom: "1rem" }}
+          labelColor="#000"
         />
         <InputField
           type="password"
@@ -62,6 +64,7 @@ function Signup() {
           onChange={handleInputChange}
           label="Password"
           style={{ marginBottom: "1rem" }}
+          labelColor="#000"
         />
         <InputField
           type="password"
@@ -70,6 +73,7 @@ function Signup() {
           onChange={handleInputChange}
           label="Confirm Password"
           style={{ marginBottom: "1.5rem" }}
+          labelColor="#000"
         />
         <Button
           type="submit"

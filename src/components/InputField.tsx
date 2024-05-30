@@ -6,7 +6,9 @@ interface InputFieldProps {
   type: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   style?: React.CSSProperties;
-  label: string;
+  label?: string;
+  labelColor?: string;
+  enteredValueColor?: string;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -16,6 +18,8 @@ const InputField: React.FC<InputFieldProps> = ({
   onChange,
   style,
   label,
+  labelColor,
+  enteredValueColor = "black",
 }) => {
   return (
     <div className="input-field">
@@ -26,11 +30,16 @@ const InputField: React.FC<InputFieldProps> = ({
         onChange={onChange}
         id={name}
         placeholder={value ? " " : value}
-        style={style}
+        style={{ ...style, color: enteredValueColor }}
         required
       />
-      <label htmlFor={name}>{label}</label>
+      {label && (
+        <label htmlFor={name} style={{ color: labelColor }}>
+          {label}
+        </label>
+      )}
     </div>
   );
 };
+
 export default InputField;
