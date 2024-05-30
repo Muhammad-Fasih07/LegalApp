@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
   const handleMouseLeave = () => {
     setDropdown("");
   };
-
+  
   const toggleSearchBar = () => {
     setShowSearch(!showSearch);
   };
@@ -49,8 +49,22 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="dropdown-grid">
-                      {["Islamabad", "Rawalpindi", "Lahore", "Karachi", "Peshawar", "Sargodha", "Quetta", "Gujranwala", "Multan", "Bahawalpur", "Sukkur"].map((city) => (
-                        <a href="#" key={city}>{city}</a>
+                      {[
+                        "Islamabad",
+                        "Rawalpindi",
+                        "Lahore",
+                        "Karachi",
+                        "Peshawar",
+                        "Sargodha",
+                        "Quetta",
+                        "Gujranwala",
+                        "Multan",
+                        "Bahawalpur",
+                        "Sukkur",
+                      ].map((city) => (
+                        <a href="#" key={city}>
+                          {city}
+                        </a>
                       ))}
                     </div>
                   </motion.div>
@@ -73,10 +87,24 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="dropdown-grid">
-                      {["Criminal", "Civil", "Corporate", "Family", "Constitutional", "Tax", "Intellectual Property", "Labor", "Environmental", "Banking", "Real Estate", "Immigration"]
-                        .map((area) => (
-                          <a href="#" key={area}>{area}</a>
-                        ))}
+                      {[
+                        "Criminal",
+                        "Civil",
+                        "Corporate",
+                        "Family",
+                        "Constitutional",
+                        "Tax",
+                        "Intellectual Property",
+                        "Labor",
+                        "Environmental",
+                        "Banking",
+                        "Real Estate",
+                        "Immigration",
+                      ].map((area) => (
+                        <a href="#" key={area}>
+                          {area}
+                        </a>
+                      ))}
                     </div>
                   </motion.div>
                 )}
@@ -91,17 +119,44 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
               <AnimatePresence>
                 {dropdown === "qna" && (
                   <motion.div
-                    className="dropdown"
+                    className="dropdown dropdown-with-button"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
                   >
                     <div className="dropdown-grid">
-                      {["Constitutional Rights", "Consumer Protection", "Property Rights", "Contract Law", "Human Rights", "Employment Law", "Family Law", "Environmental Law", "Cyber Law", "Taxation", "Corporate Governance", "Criminal Justice"]
-.map((topic) => (
-                        <a href="#" key={topic}>{topic}</a>
+                      {[
+                        "Constitutional Rights",
+                        "Consumer Protection",
+                        "Property Rights",
+                        "Contract Law",
+                        "Human Rights",
+                        "Employment Law",
+                        "Family Law",
+                        "Environmental Law",
+                        "Cyber Law",
+                        "Taxation",
+                        "Corporate Governance",
+                        "Criminal Justice",
+                      ].map((topic) => (
+                        <a href="#" key={topic}>
+                          {topic}
+                        </a>
                       ))}
+                    </div>
+                    <div className="ask-question-container">
+                      <h4>Ask a Free Question</h4>
+                      <p>Post your question and get advice from multiple lawyers.</p>
+                      <Button
+                        type="button"
+                        height="50px"
+                        width="150px"
+                        buttonColor="orange"
+                        textColor="white"
+                      >
+                        Ask a Free Question
+                      </Button>
                     </div>
                   </motion.div>
                 )}
@@ -118,7 +173,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
           <a href="#" className="grow-practice">
             Grow your practice
           </a>
-          <Button
+          <Button 
             type="submit"
             height="50px"
             width="100px"
@@ -131,10 +186,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
       </header>
       {showSearch && (
         <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Search Q&A, lawyers and more"
-          />
+          <input type="text" placeholder="Search Q&A, lawyers and more" />
           <Button
             type="submit"
             height="40px"
