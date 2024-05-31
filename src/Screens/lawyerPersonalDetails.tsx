@@ -67,7 +67,6 @@ function LawyersPersonalDetails() {
       <h1 className="title">Enter your state bar license information</h1>
       <div className="card">
         <div style={{ width: "100%", textAlign: "left" }}>
-          {" "}
           <label
             style={{
               display: "block",
@@ -85,7 +84,7 @@ function LawyersPersonalDetails() {
             value={formState.licenseNumber}
             onChange={handleInputChange}
             style={{
-              width: "86%",
+              width: "100%",
             }}
             enteredValueColor="black"
           />
@@ -167,7 +166,9 @@ function LawyersPersonalDetails() {
             name="option"
             value="Option 1"
             labelText=" I have never been sanctioned by a state licensing authority.
+            
             "
+            labelStyle={{ fontWeight: "normal" }}
             checked={selectedOptions.includes("Option 1")}
             onChange={handleOptionChange}
           />
@@ -177,6 +178,7 @@ function LawyersPersonalDetails() {
             value="Option 2"
             labelText="I have been sanctioned by a state licensing authority.
             "
+            labelStyle={{ fontWeight: "normal" }}
             checked={selectedOptions.includes("Option 2")}
             onChange={handleOptionChange}
           />

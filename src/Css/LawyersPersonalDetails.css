@@ -13,41 +13,20 @@
 }
 
 .card {
-  width: 80%;
+  width: 60%;
   max-width: "auto";
   height: "auto";
   border-radius: 15px;
-  border: 1px solid #ddd; /* Lighter border color */
+  border: 1px solid #ddd;
   box-sizing: border-box;
   padding: 20px;
   justify-content: center;
   align-items: flex-start;
-  transition: all 0.3s ease; /* Add transition for smooth animation */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  transition: all 0.3s ease;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .card:hover {
-  border-color: #aaa; /* Darker border color on hover */
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
-}
-
-/* For tablets: */
-@media only screen and (min-width: 600px) {
-  .card {
-    width: 70%;
-  }
-}
-
-/* For desktop: */
-@media only screen and (min-width: 768px) {
-  .card {
-    width: 50%;
-  }
-}
-
-/* For large desktop: */
-@media only screen and (min-width: 1200px) {
-  .card {
-    width: 30%;
-  }
+  border-color: #aaa;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
