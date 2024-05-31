@@ -1,6 +1,5 @@
-// src/Screens/AskFreeQuestion.tsx
 import React, { useState, ChangeEvent, MouseEvent } from "react";
-import Header from "./Header";
+import Header from "../components/Header";
 import Button from "../components/buttons/button";
 import "../Css/AskFreeQuestion.css";
 
@@ -26,7 +25,12 @@ type FormErrors = {
   hireAttorney: string;
 };
 
-const AskFreeQuestion: React.FC = () => {
+type AskFreeQuestionProps = {
+  logoSrc: string;
+  logoAlt: string;
+};
+
+const AskFreeQuestion: React.FC<AskFreeQuestionProps> = ({ logoSrc, logoAlt }) => {
   const [formData, setFormData] = useState<FormData>({
     question: "",
     situation: "",
@@ -86,7 +90,7 @@ const AskFreeQuestion: React.FC = () => {
 
   return (
     <div>
-      <Header logoSrc="path/to/logo.png" logoAlt="Logo" />
+      <Header logoSrc={logoSrc} logoAlt={logoAlt} />
       <div className="ask-free-question-container">
         {showReview ? (
           <div className="review-container">
