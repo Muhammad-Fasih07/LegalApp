@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputField from "../components/InputField";
 import "../Css/signUpLawyer.css";
 import Button from "../components/buttons/button";
-import Header from "./Header";
+
 import { useNavigate } from "react-router-dom";
 
 interface SignupFormState {
@@ -21,7 +21,6 @@ const initialFormState: SignupFormState = {
 
 function Signup() {
   const [formState, setFormState] = useState<SignupFormState>(initialFormState);
-  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({
@@ -32,12 +31,11 @@ function Signup() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // TODO: Implement signup logic here
   };
 
+  const navigate = useNavigate();
   return (
     <>
-      <Header logoSrc="src/images/Gif.gif" logoAlt="WAUQLA" />
       <form onSubmit={handleSubmit}>
         <InputField
           type="text"
@@ -81,7 +79,7 @@ function Signup() {
           width="100px"
           buttonColor="green"
           textColor="white"
-          onClick={() => navigate("/LawyersPersonalDetails")}
+          onClick={() => navigate("/lawyersPersonalDetails")}
         >
           Sign Up
         </Button>
