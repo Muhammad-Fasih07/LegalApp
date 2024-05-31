@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 
 interface ButtonProps {
   type: "button" | "submit" | "reset";
@@ -8,7 +8,7 @@ interface ButtonProps {
   buttonColor?: string;
   textColor?: string;
   style?: React.CSSProperties;
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;  // Update onClick type
 }
 
 const Button: React.FC<ButtonProps> = ({

@@ -1,8 +1,10 @@
+// src/components/Header.js
 import React, { useState } from "react";
-import "../Css/Header.css"; // Import the CSS file for styling
-import { FaSearch } from "react-icons/fa"; // Import the search icon
+import "../Css/Header.css"; 
+import { FaSearch } from "react-icons/fa"; 
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../components/buttons/button";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   logoSrc: string;
@@ -12,6 +14,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
   const [dropdown, setDropdown] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const navigate = useNavigate();
 
   const handleMouseEnter = (menu: string) => {
     setDropdown(menu);
@@ -23,6 +26,10 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
   
   const toggleSearchBar = () => {
     setShowSearch(!showSearch);
+  };
+
+  const handleAskFreeQuestionClick = () => {
+    navigate("/askFreeQuestion");
   };
 
   return (
@@ -154,6 +161,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
                         width="150px"
                         buttonColor="orange"
                         textColor="white"
+                        onClick={handleAskFreeQuestionClick}
                       >
                         Ask a Free Question
                       </Button>
