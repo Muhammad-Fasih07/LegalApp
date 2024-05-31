@@ -21,7 +21,6 @@ const initialFormState: SignupFormState = {
 
 function Signup() {
   const [formState, setFormState] = useState<SignupFormState>(initialFormState);
-  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({
@@ -35,6 +34,7 @@ function Signup() {
     // TODO: Implement signup logic here
   };
 
+  const navigate = useNavigate();
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -80,7 +80,7 @@ function Signup() {
           width="100px"
           buttonColor="green"
           textColor="white"
-          onClick={() => navigate("/LawyersPersonalDetails")}
+          onClick={() => navigate("/lawyersPersonalDetails")}
         >
           Sign Up
         </Button>

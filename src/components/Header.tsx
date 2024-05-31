@@ -3,6 +3,7 @@ import "../Css/Header.css"; // Import the CSS file for styling
 import { FaSearch } from "react-icons/fa"; // Import the search icon
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../components/buttons/button";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   logoSrc: string;
@@ -20,10 +21,11 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
   const handleMouseLeave = () => {
     setDropdown("");
   };
-  
+
   const toggleSearchBar = () => {
     setShowSearch(!showSearch);
   };
+  const navigate = useNavigate();
 
   return (
     <>
@@ -147,7 +149,9 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
                     </div>
                     <div className="ask-question-container">
                       <h4>Ask a Free Question</h4>
-                      <p>Post your question and get advice from multiple lawyers.</p>
+                      <p>
+                        Post your question and get advice from multiple lawyers.
+                      </p>
                       <Button
                         type="button"
                         height="50px"
@@ -173,12 +177,13 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
           <a href="#" className="grow-practice">
             Grow your practice
           </a>
-          <Button 
+          <Button
             type="submit"
             height="50px"
             width="100px"
             buttonColor="green"
             textColor="white"
+            onClick={() => navigate("/Signup")}
           >
             Sign Up
           </Button>
