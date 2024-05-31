@@ -1,10 +1,9 @@
 import React, { CSSProperties } from "react";
-import "../../Css/DropDownField.css"; // Import the CSS file
+import "../../Css/DropDownField.css";
 
 interface SelectFieldProps<T> {
-  // Add a generic parameter T
-  options: T[]; // Use T[] instead of string[]
-  onChange?: (value: T) => void; // Use T instead of string
+  options: T[];
+  onChange?: (value: T) => void;
   style?: CSSProperties;
 }
 

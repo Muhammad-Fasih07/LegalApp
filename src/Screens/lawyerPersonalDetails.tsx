@@ -43,7 +43,14 @@ function LawyersPersonalDetails() {
 
   const yearsAdmitted = Array.from({ length: 50 }, (_, i) => i + 1);
 
-  const [formState, setFormState] = useState({ licenseNumber: "" });
+  const [formState, setFormState] = useState({
+    licenseNumber: "",
+    name: "",
+    address: "",
+    city: "",
+    zip: "",
+    phoneNum: "",
+  });
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,31 +71,96 @@ function LawyersPersonalDetails() {
   console.log("License Number: ", formState.licenseNumber);
   return (
     <div className="lawyers-details">
-      <h1 className="title">Enter your state bar license information</h1>
+      <h1 className="title" style={{ marginBottom: 0 }}>
+        Enter your state bar license information
+      </h1>
+      <h3
+        className="description"
+        style={{ color: "black", marginTop: 0, marginBottom: 35 }}
+      >
+        Once your license is confirmed, your profile will be listed in our
+        directory and search results
+      </h3>
       <div className="card">
         <div style={{ width: "100%", textAlign: "left" }}>
-          <label
-            style={{
-              display: "block",
-              textAlign: "left",
-              marginTop: 10,
-              color: "black",
-              fontWeight: "bold",
-            }}
-          >
-            License ID Number
-          </label>
           <InputField
-            type="number"
-            name="licenseNumber"
-            value={formState.licenseNumber}
+            type="text"
+            name="name"
+            label="Name"
+            labelColor="#000"
+            labelStyle={{ fontWeight: "bold" }}
+            value={formState.name}
             onChange={handleInputChange}
-            style={{
-              width: "100%",
-            }}
+            style={{ width: "100%", fontWeight: "bold" }}
             enteredValueColor="black"
           />
         </div>
+        <div style={{ width: "100%", textAlign: "left" }}>
+          <InputField
+            type="text"
+            name="address"
+            label="Adress"
+            labelColor="#000"
+            labelStyle={{ fontWeight: "bold" }}
+            value={formState.address}
+            onChange={handleInputChange}
+            style={{ width: "100%" }}
+            enteredValueColor="black"
+          />
+        </div>
+        <div style={{ width: "100%", textAlign: "left" }}>
+          <InputField
+            type="text"
+            name="city"
+            label="City"
+            labelColor="#000"
+            labelStyle={{ fontWeight: "bold" }}
+            value={formState.city}
+            onChange={handleInputChange}
+            style={{ width: "100%" }}
+            enteredValueColor="black"
+          />
+        </div>
+        <div style={{ width: "100%", textAlign: "left" }}>
+          <InputField
+            type="text"
+            name="zip"
+            label="Zip"
+            labelColor="#000"
+            labelStyle={{ fontWeight: "bold" }}
+            value={formState.zip}
+            onChange={handleInputChange}
+            style={{ width: "100%" }}
+            enteredValueColor="black"
+          />
+        </div>
+        <div style={{ width: "100%", textAlign: "left" }}>
+          <InputField
+            type="tel"
+            name="phoneNum"
+            label="Phone Number"
+            labelColor="#000"
+            labelStyle={{ fontWeight: "bold" }}
+            value={formState.phoneNum}
+            onChange={handleInputChange}
+            style={{ width: "100%" }}
+            enteredValueColor="black"
+          />
+        </div>
+        <div style={{ width: "100%", textAlign: "left" }}>
+          <InputField
+            type="number"
+            name="licenseNumber"
+            label=" License ID Number"
+            labelColor="#000"
+            labelStyle={{ fontWeight: "bold" }}
+            value={formState.licenseNumber}
+            onChange={handleInputChange}
+            style={{ width: "100%" }}
+            enteredValueColor="black"
+          />
+        </div>
+
         <div style={{ width: "100%", textAlign: "left" }}>
           {" "}
           <label

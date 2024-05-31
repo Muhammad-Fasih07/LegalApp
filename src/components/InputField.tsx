@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../Css/InputField.css";
 interface InputFieldProps {
   name: string;
   value: string;
@@ -9,6 +9,7 @@ interface InputFieldProps {
   label?: string;
   labelColor?: string;
   enteredValueColor?: string;
+  labelStyle?: React.CSSProperties;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -20,9 +21,11 @@ const InputField: React.FC<InputFieldProps> = ({
   label,
   labelColor,
   enteredValueColor = "black",
+  labelStyle,
 }) => {
   return (
     <div className="input-field">
+      {" "}
       <input
         type={type}
         name={name}
@@ -30,11 +33,15 @@ const InputField: React.FC<InputFieldProps> = ({
         onChange={onChange}
         id={name}
         placeholder={value ? " " : value}
-        style={{ ...style, color: enteredValueColor }}
+        style={{
+          width: "100%",
+          ...style,
+          color: enteredValueColor,
+        }} /* Set width to 100% here */
         required
       />
       {label && (
-        <label htmlFor={name} style={{ color: labelColor }}>
+        <label htmlFor={name} style={{ color: labelColor, ...labelStyle }}>
           {label}
         </label>
       )}

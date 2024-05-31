@@ -31,7 +31,6 @@ function Signup() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // TODO: Implement signup logic here
   };
 
   const navigate = useNavigate();

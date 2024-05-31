@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
+  justify-content: flex-start;
+  height: 200vh;
 }
 
 .title {
@@ -19,6 +19,7 @@
   border-radius: 15px;
   border: 1px solid #ddd;
   box-sizing: border-box;
+
   padding: 20px;
   justify-content: center;
   align-items: flex-start;
