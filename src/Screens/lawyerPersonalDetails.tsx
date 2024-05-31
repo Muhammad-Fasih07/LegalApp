@@ -6,6 +6,8 @@ import Modal from "react-modal";
 import ImageUploadModal from "../components/ImageUploadModal";
 import Button from "../components/buttons/button";
 
+import Checkbox from "../components/buttons/checkBox";
+
 Modal.setAppElement("#root");
 
 function LawyersPersonalDetails() {
@@ -43,8 +45,18 @@ function LawyersPersonalDetails() {
 
   const [formState, setFormState] = useState({ licenseNumber: "" });
 
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
+  };
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      setSelectedOptions((prev) => [...prev, event.target.value]);
+    } else {
+      setSelectedOptions((prev) =>
+        prev.filter((value) => value !== event.target.value)
+      );
+    }
   };
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -132,6 +144,43 @@ function LawyersPersonalDetails() {
           onRequestClose={() => setModalIsOpen(false)}
           onImageUpload={setSelectedImage}
         />
+        <hr
+          style={{
+            border: "none",
+            borderTop: "1px solid lightgray",
+            margin: "20px 0",
+          }}
+        />
+        <label
+          style={{
+            display: "block",
+            textAlign: "left",
+            marginBottom: 5,
+            marginTop: 20,
+            color: "black",
+            fontWeight: "bold",
+          }}
+        >
+          Verify disciplinary history
+          <Checkbox
+            id="option1"
+            name="option"
+            value="Option 1"
+            labelText=" I have never been sanctioned by a state licensing authority.
+            "
+            checked={selectedOptions.includes("Option 1")}
+            onChange={handleOptionChange}
+          />
+          <Checkbox
+            id="option2"
+            name="option"
+            value="Option 2"
+            labelText="I have been sanctioned by a state licensing authority.
+            "
+            checked={selectedOptions.includes("Option 2")}
+            onChange={handleOptionChange}
+          />
+        </label>
       </div>
     </div>
   );
