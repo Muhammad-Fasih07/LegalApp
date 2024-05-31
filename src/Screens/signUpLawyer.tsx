@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputField from "../components/InputField";
 import "../Css/signUpLawyer.css";
 import Button from "../components/buttons/button";
-import Header from "./Header";
+
 import { useNavigate } from "react-router-dom";
 
 interface SignupFormState {
@@ -37,7 +37,6 @@ function Signup() {
 
   return (
     <>
-      <Header logoSrc="src/images/Gif.gif" logoAlt="WAUQLA" />
       <form onSubmit={handleSubmit}>
         <InputField
           type="text"
