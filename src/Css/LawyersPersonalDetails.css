@@ -49,3 +49,11 @@
   border-color: #aaa;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
+
+.searchLawyer-title {
+  font-weight: bold;
+  text-align: center;
+  color: black;
+  font-size: 2rem;
+  margin-top: 80px;
+}

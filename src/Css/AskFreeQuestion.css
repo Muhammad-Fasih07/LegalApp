@@ -1,180 +1,180 @@
 /* src/Css/AskFreeQuestion.css */
 .ask-free-question-container {
-    width: 500px; /* Same width for both containers */
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #111111;
-    border-radius: 8px;
-    background-color: #b0d2f4; /* Light grey background color */
-    text-align: left; /* Align all text to the left */
-    margin-top: 100px; /* Add margin-top to push the form down if header is fixed */
+  width: 500px; /* Same width for both containers */
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #111111;
+  border-radius: 8px;
+  background-color: #b0d2f4; /* Light grey background color */
+  text-align: left; /* Align all text to the left */
+  margin-top: 100px; /* Add margin-top to push the form down if header is fixed */
 }
 
 .ask-free-question-container h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #212529; /* Darker text color for better contrast */
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #212529; /* Darker text color for better contrast */
 }
 
 .ask-free-question-container p {
-    margin-bottom: 20px;
-    color: #495057; /* Darker text color for better contrast */
+  margin-bottom: 20px;
+  color: #495057; /* Darker text color for better contrast */
 }
 
 .form-group {
-    margin-bottom: 20px;
-    text-align: left; /* Align text to the left */
+  margin-bottom: 20px;
+  text-align: left; /* Align text to the left */
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #212529; /* Darker text color for better contrast */
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #212529; /* Darker text color for better contrast */
 }
 
 .form-group textarea,
 .form-group select,
 .form-group input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da; /* Lighter border color */
-    border-radius: 4px;
-    font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da; /* Lighter border color */
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 .form-group textarea#situation {
-    height: 130px; /* Increased height for the textarea */
+  height: 130px;
 }
 
 #question,
 #situation,
 #city-state {
-    background-color: #ffffff; /* White background color */
-    color: #292121; /* Dark text color for better contrast */
+  background-color: #ffffff;
+  color: #292121;
 }
 
 .radio-group {
-    display: flex;
-    flex-direction: column; /* Arrange radio buttons in a column */
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .radio-group label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #212529; /* Darker text color for better contrast */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #212529;
 }
 
 button {
-    margin-top: 20px;
-    background-color: #007bff; /* Blue background color */
-    color: #fff; /* White text color */
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+  background-color: #007bff; /* Blue background color */
+  color: #fff; /* White text color */
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
 .review-container {
-    width: 500px; /* Match form width */
-    margin: 0 auto;
-    background-color: #ffffff; /* White background color for review */
-    padding: 20px;
-    border-radius: 8px;
-    border: 2px solid #007bff; /* Blue border */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-    text-align: left; /* Align text to the left */
+  width: 500px; /* Match form width */
+  margin: 0 auto;
+  background-color: #ffffff; /* White background color for review */
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #007bff; /* Blue border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  text-align: left; /* Align text to the left */
 }
 
 .review-container h2 {
-    font-size: 24px; /* Font size for heading */
-    margin-bottom: 10px;
-    color: #007bff; /* Blue color for heading */
+  font-size: 24px; /* Font size for heading */
+  margin-bottom: 10px;
+  color: #007bff; /* Blue color for heading */
 }
 
 .review-container p {
-    margin-bottom: 10px;
-    color: #495057; /* Darker text color for better contrast */
+  margin-bottom: 10px;
+  color: #495057; /* Darker text color for better contrast */
 }
 
 .review-section {
-    margin-bottom: 10px;
-    padding-bottom: 10px; /* Add padding to separate the sections */
-    border-bottom: 1px solid #ddd; /* Add a bottom border for separation */
+  margin-bottom: 10px;
+  padding-bottom: 10px; /* Add padding to separate the sections */
+  border-bottom: 1px solid #ddd; /* Add a bottom border for separation */
 }
 
 .review-section strong {
-    font-size: 16px; /* Font size for section titles */
-    color: #343a40; /* Darker color for section titles */
+  font-size: 16px; /* Font size for section titles */
+  color: #343a40; /* Darker color for section titles */
 }
 
 .review-section p {
-    color: #495057; /* Darker text color for better contrast */
+  color: #495057; /* Darker text color for better contrast */
 }
 
 .error {
-    border-color: #e3342f;
+  border-color: #e3342f;
 }
 
 .error-label {
-    color: #e3342f; /* Red color for error labels */
+  color: #e3342f; /* Red color for error labels */
 }
 
 .error-message {
-    color: #e3342f; /* Red color for error messages */
-    font-size: 14px;
-    margin-top: 5px;
+  color: #e3342f; /* Red color for error messages */
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 .confirmation-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .review-container .btn-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .review-container .btn-container button {
-    width: 48%;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none;
+  width: 48%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
 }
 
 .review-container .btn-container .edit-btn {
-    background-color: #6c757d; /* Gray background color */
-    color: white;
+  background-color: #6c757d; /* Gray background color */
+  color: white;
 }
 
 .review-container .btn-container .edit-btn:hover {
-    background-color: #5a6268; /* Darker gray on hover */
+  background-color: #5a6268; /* Darker gray on hover */
 }
 
 .review-container .btn-container .submit-btn {
-    background-color: #f0ad4e; /* Orange background color */
-    color: white;
+  background-color: #f0ad4e; /* Orange background color */
+  color: white;
 }
 
 .review-container .btn-container .submit-btn:hover {
-    background-color: #ec971f; /* Darker orange on hover */
+  background-color: #ec971f; /* Darker orange on hover */
 }
