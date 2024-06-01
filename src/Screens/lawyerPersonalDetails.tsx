@@ -52,10 +52,12 @@ function LawyersPersonalDetails() {
     phoneNum: "",
   });
 
+  // This function is used to handle the change in the input field
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
+  // This function is used to handle the change in the checkbox
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setSelectedOptions((prev) => [...prev, event.target.value]);
@@ -65,15 +67,14 @@ function LawyersPersonalDetails() {
       );
     }
   };
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   console.log("License Number: ", formState.licenseNumber);
   return (
     <div className="lawyers-details">
-      <h1 className="title" style={{ marginBottom: 0 }}>
-        Enter your state bar license information
-      </h1>
+      <h1 className="title">Enter your state bar license information</h1>
       <h3 style={{ color: "black", marginTop: 0, marginBottom: 35 }}>
         Once your license is confirmed, your profile will be listed in our
         directory and search results
@@ -198,7 +199,9 @@ function LawyersPersonalDetails() {
         <ImageUploadModal
           isOpen={modalIsOpen}
           onRequestClose={() => setModalIsOpen(false)}
-          onImageUpload={setSelectedImage}
+          onImageUpload={(image) => {
+            setSelectedImage(image);
+          }}
         />
         <hr
           style={{

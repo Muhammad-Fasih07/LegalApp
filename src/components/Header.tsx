@@ -186,16 +186,18 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
           <a href="#" className="grow-practice">
             Grow your practice
           </a>
-          <Button
-            type="button"
-            height="50px"
-            width="100px"
-            buttonColor="green"
-            textColor="white"
-            onClick={handleSignUpClick}
-          >
-            Sign Up
-          </Button>
+          <div className="button-container">
+            <Button
+              type="button"
+              height="50px"
+              width="100px"
+              buttonColor="green"
+              textColor="white"
+              onClick={handleSignUpClick}
+            >
+              Sign Up
+            </Button>
+          </div>
         </div>
       </header>
       {showSearch && (

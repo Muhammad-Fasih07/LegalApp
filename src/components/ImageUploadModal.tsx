@@ -14,9 +14,18 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
   onRequestClose,
   onImageUpload,
 }) => {
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      onImageUpload(event.target.files[0]);
+      setSelectedFile(event.target.files[0]);
+    }
+  };
+
+  const handleConfirmClick = () => {
+    if (selectedFile) {
+      onImageUpload(selectedFile);
+      onRequestClose();
     }
   };
 
@@ -34,7 +43,8 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
       }}
     >
       <h2>Upload Image</h2>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
+      <input type="file" accept="image/*" onChange={handleImageChange} />
+      <button onClick={handleConfirmClick}>Confirm</button>
       <button onClick={onRequestClose}>Close</button>
     </Modal>
   );

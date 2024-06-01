@@ -11,7 +11,8 @@
   font-weight: bold;
   text-align: center;
   color: black;
-  font-size: em;
+  font-size: 3rem;
+  margin-bottom: 10px;
 }
 
 .card {
