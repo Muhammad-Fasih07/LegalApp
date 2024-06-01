@@ -4,6 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../components/buttons/button";
 import { useNavigate } from "react-router-dom";
+import SearchImage from "../Screens/SearchImage"; // Import the new component
 
 interface HeaderProps {
   logoSrc: string;
@@ -214,6 +215,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
           </Button>
         </div>
       )}
+      <SearchImage /> {/* Add the SearchImage component below the header */}
     </>
   );
 };
