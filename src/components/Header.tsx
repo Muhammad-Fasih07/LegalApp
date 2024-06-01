@@ -1,7 +1,6 @@
-
 import React, { useState } from "react";
-import "../Css/Header.css"; 
-import { FaSearch } from "react-icons/fa"; 
+import "../Css/Header.css";
+import { FaSearch } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../components/buttons/button";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
   const handleMouseLeave = () => {
     setDropdown("");
   };
-  
+
   const toggleSearchBar = () => {
     setShowSearch(!showSearch);
   };
@@ -158,7 +157,9 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
                     </div>
                     <div className="ask-question-container">
                       <h4>Ask a Free Question</h4>
-                      <p>Post your question and get advice from multiple lawyers.</p>
+                      <p>
+                        Post your question and get advice from multiple lawyers.
+                      </p>
                       <Button
                         type="button"
                         height="50px"
@@ -185,7 +186,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
           <a href="#" className="grow-practice">
             Grow your practice
           </a>
-          <Button 
+          <Button
             type="button"
             height="50px"
             width="100px"

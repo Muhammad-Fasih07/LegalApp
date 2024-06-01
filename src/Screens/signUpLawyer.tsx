@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
-import "../Css/signUpLawyer.css";
 import Button from "../components/buttons/button";
 
 import { useNavigate } from "react-router-dom";
@@ -35,44 +34,54 @@ function Signup() {
 
   const navigate = useNavigate();
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <InputField
-          type="text"
-          name="name"
-          value={formState.name}
-          onChange={handleInputChange}
-          label="Name"
-          style={{ marginBottom: "1rem" }}
-          labelColor="#000"
-        />
-        <InputField
-          type="email"
-          name="email"
-          value={formState.email}
-          onChange={handleInputChange}
-          label="Email"
-          style={{ marginBottom: "1rem" }}
-          labelColor="#000"
-        />
-        <InputField
-          type="password"
-          name="password"
-          value={formState.password}
-          onChange={handleInputChange}
-          label="Password"
-          style={{ marginBottom: "1rem" }}
-          labelColor="#000"
-        />
-        <InputField
-          type="password"
-          name="confirmPassword"
-          value={formState.confirmPassword}
-          onChange={handleInputChange}
-          label="Confirm Password"
-          style={{ marginBottom: "1.5rem" }}
-          labelColor="#000"
-        />
+    <div className="container">
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div className="signup-Card">
+          <InputField
+            type="text"
+            name="name"
+            value={formState.name}
+            onChange={handleInputChange}
+            label="Name"
+            style={{ marginBottom: "1rem" }}
+            labelColor="#000"
+          />
+          <InputField
+            type="email"
+            name="email"
+            value={formState.email}
+            onChange={handleInputChange}
+            label="Email"
+            style={{ marginBottom: "1rem" }}
+            labelColor="#000"
+          />
+          <InputField
+            type="password"
+            name="password"
+            value={formState.password}
+            onChange={handleInputChange}
+            label="Password"
+            style={{ marginBottom: "1rem" }}
+            labelColor="#000"
+          />
+          <InputField
+            type="password"
+            name="confirmPassword"
+            value={formState.confirmPassword}
+            onChange={handleInputChange}
+            label="Confirm Password"
+            style={{ marginBottom: "1.5rem" }}
+            labelColor="#000"
+          />
+        </div>
+
         <Button
           type="submit"
           height="50px"
@@ -84,7 +93,7 @@ function Signup() {
           Sign Up
         </Button>
       </form>
-    </>
+    </div>
   );
 }
 

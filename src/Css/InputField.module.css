@@ -1,10 +1,10 @@
-.input-field {
+.inputField {
   position: relative;
   margin-bottom: 20px;
-  width: 18rem;
+  width: "auto";
 }
 
-.input-field input {
+.inputField input {
   width: 100%;
   border: none;
   outline: none;
@@ -13,7 +13,7 @@
   border-bottom: 2px solid #333;
 }
 
-.input-field label {
+.inputField label {
   position: absolute;
   top: 0;
   left: 0;
@@ -21,14 +21,15 @@
   transition: 0.5s;
 }
 
-.input-field input:valid + label,
-.input-field input:focus + label {
+.inputField input:valid + label,
+.inputField input:focus + label {
   top: -20px;
   font-size: 12px;
   color: #333;
 }
-.input-field input:not(:placeholder-shown) + label,
-.input-field input:focus + label {
+
+.inputField input:not(:placeholder-shown) + label,
+.inputField input:focus + label {
   top: -20px;
   font-size: 12px;
   color: #333;
