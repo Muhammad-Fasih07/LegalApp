@@ -1,10 +1,12 @@
 import React from "react";
-import Header from "../components/Header";
+import SearchImage from "./SearchImage"; // Import the SearchImage component
+import Footer from "../Screens/Footer"; // Import the Footer component
 
 const HomePage: React.FC = () => {
   return (
     <div>
-      <Header logoSrc="src/images/Gif.gif" logoAlt="WAUQLA" />
+      <SearchImage /> {/* Include the SearchImage component */}
+      <Footer /> {/* Include the Footer component */}
     </div>
   );
 };
