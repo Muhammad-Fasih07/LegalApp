@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../Css/LawyersPersonalDetails.css";
 import DropDownField from "../components/fields/DropDownField";
-import InputField from "../components/InputField";
+import InputField from "../components/fields/InputField";
 import Modal from "react-modal";
 import ImageUploadModal from "../components/ImageUploadModal";
 import Button from "../components/buttons/button";
@@ -185,6 +185,7 @@ function LawyersPersonalDetails() {
             onChange={(value) => console.log(value)}
           />
         </div>
+
         <Button
           type="submit"
           height="50px"

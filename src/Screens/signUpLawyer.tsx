@@ -81,17 +81,18 @@ function Signup() {
             labelColor="#000"
           />
         </div>
-
-        <Button
-          type="submit"
-          height="50px"
-          width="100px"
-          buttonColor="green"
-          textColor="white"
-          onClick={() => navigate("/lawyersPersonalDetails")}
-        >
-          Sign Up
-        </Button>
+        <div className="signup-Button">
+          <Button
+            type="submit"
+            height="50px"
+            width="100px"
+            buttonColor="green"
+            textColor="white"
+            onClick={() => navigate("/lawyersPersonalDetails")}
+          >
+            Sign Up
+          </Button>
+        </div>
       </form>
     </div>
   );
