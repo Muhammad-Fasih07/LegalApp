@@ -57,3 +57,30 @@
   font-size: 2rem;
   margin-top: 80px;
 }
+
+.searchTopRatedLawyers-Section {
+  margin-top: 15%;
+}
+.lawyerDetailCard {
+  width: 30%;
+  height: 400px;
+  margin-top: 10%;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  padding: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.lawyerDetailCard:hover {
+  border-color: #aaa;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.lawyerDetailCardContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
