@@ -49,7 +49,7 @@ const SearchLawyers = () => {
       <div
         style={{
           display: "flex",
-          gap: "20px", // Add some space between the dropdowns and the button
+          gap: "20px",
         }}
       >
         <DropDownField options={cities} onChange={handleCityChange} />
@@ -75,39 +75,122 @@ const SearchLawyers = () => {
             <img
               src="https://via.placeholder.com/150"
               alt="Lawyer Profile Picture"
+              height={125}
+              width={125}
             />
             <div style={{}}>
-              <h3 style={{ marginTop: 5, marginBottom: 0, marginLeft: 15 }}>
+              <h3
+                style={{
+                  marginTop: 0,
+                  marginBottom: 0,
+                  marginLeft: 10,
+                  color: "#ffa500",
+                  fontWeight: "bold",
+                  textAlign: "left",
+                }}
+              >
                 Ahmed Shah
               </h3>
-              <MyRating
-                emptySymbol={
-                  <span style={{ color: "gray", fontSize: "1.5em" }}>☆</span>
-                }
-                fullSymbol={
-                  <span style={{ color: "gold", fontSize: "1.5em" }}>★</span>
-                }
-                initialRating={4}
-                readonly
-              />{" "}
-              <p>9 reviews</p>
-              <p>Location</p>
-              <p>White Bear lk. Mn</p>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: 0,
+                  marginBottom: 0,
+                  marginLeft: 5,
+                }}
+              >
+                <MyRating
+                  emptySymbol={
+                    <span style={{ color: "gray", fontSize: "1.5em" }}>☆</span>
+                  }
+                  fullSymbol={
+                    <span style={{ color: "gold", fontSize: "1.5em" }}>★</span>
+                  }
+                  initialRating={4}
+                  readonly
+                />
+                <p style={{ fontSize: 12, marginLeft: 2 }}>(9) reviews</p>
+              </div>
+
+              <div
+                style={{
+                  fontSize: 16,
+                  textAlign: "left",
+
+                  marginLeft: 10,
+                }}
+              >
+                <text>Location</text>
+              </div>
+              <div
+                style={{
+                  fontSize: 14,
+                  textAlign: "left",
+                  marginTop: 2,
+                  marginLeft: 10,
+                }}
+              >
+                <text>Khanna Pul, Tarlai</text>
+              </div>
             </div>
           </div>
 
-          <p>Practice Area</p>
-          <p>Gujrat, Islamabad</p>
+          <div
+            style={{
+              fontSize: 14,
+              fontWeight: "bold",
+              textAlign: "left",
+              marginTop: 15,
+            }}
+          >
+            <text>Practice Areas</text>
+          </div>
+          <div
+            style={{
+              fontSize: 14,
+              textAlign: "left",
+              marginTop: 2,
+              marginBottom: 20,
+            }}
+          >
+            <text>Consumate, Family, Health, Probation</text>
+          </div>
+          <hr style={{ marginBottom: 10 }} />
+          <div
+            style={{
+              textAlign: "left",
+              marginTop: 2,
+            }}
+          >
+            <text
+              style={{ fontWeight: "bold", fontSize: 14, textAlign: "left" }}
+            >
+              Excellent Lawyer
+            </text>
+            <p
+              style={{
+                fontSize: 14,
+                fontWeight: "normal",
+                textAlign: "left",
+                marginTop: 4,
+              }}
+            >
+              This lawyer has received a 4.5-star rating based on 9 reviews.
+              Clients have praised their professionalism, responsiveness, and
+              expertise.
+            </p>
+          </div>
 
-          <p>9 Consumate Professional</p>
           <Button
             type="button"
-            height="40px"
-            width="100px"
+            height="35px"
+            width="300px"
             buttonColor="#1d73b4"
             textColor="white"
           >
-            View Profile
+            See more Consumate Lawyers
           </Button>
         </div>
         <div className="lawyerDetailCard"></div>
