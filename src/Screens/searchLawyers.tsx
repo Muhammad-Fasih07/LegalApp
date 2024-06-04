@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DropDownField from "../components/fields/DropDownField";
 import Button from "../components/buttons/button";
 import Rating from "react-rating";
+
 import lawyer from "../images/lawyer.jpg";
+import LawyerDetailCard from "../components/lawyerDetailCard";
 interface IPracticeAreasData {
   [key: string]: string[];
 }
@@ -64,391 +66,48 @@ const SearchLawyers = () => {
           Search
         </Button>
       </div>
-      <div className="lawyerDetailCardContainer">
-        <div className="lawyerDetailCard">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
-            <img
-              src={"../../images/lawyer.jpg"}
-              alt="Lawyer Profile Picture"
-              height={125}
-              width={125}
-            />
-            <div style={{}}>
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: 0,
-                  marginLeft: 10,
-                  color: "#ffa500",
-                  fontWeight: "bold",
-                  textAlign: "left",
-                }}
-              >
-                Ahmed Shah
-              </h3>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 0,
-                  marginBottom: 0,
-                  marginLeft: 5,
-                }}
-              >
-                <MyRating
-                  emptySymbol={
-                    <span style={{ color: "gray", fontSize: "1.5em" }}>☆</span>
-                  }
-                  fullSymbol={
-                    <span style={{ color: "gold", fontSize: "1.5em" }}>★</span>
-                  }
-                  initialRating={4}
-                  readonly
-                />
-                <p style={{ fontSize: 12, marginLeft: 2 }}>(9) reviews</p>
-              </div>
-
-              <div
-                style={{
-                  fontSize: 16,
-                  textAlign: "left",
-
-                  marginLeft: 10,
-                }}
-              >
-                <text>Location</text>
-              </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  textAlign: "left",
-                  marginTop: 2,
-                  marginLeft: 10,
-                }}
-              >
-                <text>Khanna Pul, Tarlai</text>
-              </div>
-            </div>
-          </div>
-
-          <div
-            style={{
-              fontSize: 14,
-              fontWeight: "bold",
-              textAlign: "left",
-              marginTop: 15,
-            }}
-          >
-            <text>Practice Areas</text>
-          </div>
-          <div
-            style={{
-              fontSize: 14,
-              textAlign: "left",
-              marginTop: 2,
-              marginBottom: 20,
-            }}
-          >
-            <text>Consumate, Family, Health, Probation</text>
-          </div>
-          <hr style={{ marginBottom: 10 }} />
-          <div
-            style={{
-              textAlign: "left",
-              marginTop: 2,
-            }}
-          >
-            <text
-              style={{ fontWeight: "bold", fontSize: 14, textAlign: "left" }}
-            >
-              Excellent Lawyer
-            </text>
-            <p
-              style={{
-                fontSize: 14,
-                fontWeight: "normal",
-                textAlign: "left",
-                marginTop: 4,
-              }}
-            >
-              This lawyer has received a 4.5-star rating based on 9 reviews.
-              Clients have praised their professionalism, responsiveness, and
-              expertise.
-            </p>
-          </div>
-
-          <Button
-            type="button"
-            height="35px"
-            width="300px"
-            buttonColor="#1d73b4"
-            textColor="white"
-          >
-            See more Consumate Lawyers
-          </Button>
-        </div>
-        <div className="lawyerDetailCard">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
-            <img
-              src={"../../images/lawyer.jpg"}
-              alt="Lawyer Profile Picture"
-              height={125}
-              width={125}
-            />
-            <div style={{}}>
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: 0,
-                  marginLeft: 10,
-                  color: "#ffa500",
-                  fontWeight: "bold",
-                  textAlign: "left",
-                }}
-              >
-                Ahmed Shah
-              </h3>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 0,
-                  marginBottom: 0,
-                  marginLeft: 5,
-                }}
-              >
-                <MyRating
-                  emptySymbol={
-                    <span style={{ color: "gray", fontSize: "1.5em" }}>☆</span>
-                  }
-                  fullSymbol={
-                    <span style={{ color: "gold", fontSize: "1.5em" }}>★</span>
-                  }
-                  initialRating={4}
-                  readonly
-                />
-                <p style={{ fontSize: 12, marginLeft: 2 }}>(9) reviews</p>
-              </div>
-
-              <div
-                style={{
-                  fontSize: 16,
-                  textAlign: "left",
-
-                  marginLeft: 10,
-                }}
-              >
-                <text>Location</text>
-              </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  textAlign: "left",
-                  marginTop: 2,
-                  marginLeft: 10,
-                }}
-              >
-                <text>Khanna Pul, Tarlai</text>
-              </div>
-            </div>
-          </div>
-
-          <div
-            style={{
-              fontSize: 14,
-              fontWeight: "bold",
-              textAlign: "left",
-              marginTop: 15,
-            }}
-          >
-            <text>Practice Areas</text>
-          </div>
-          <div
-            style={{
-              fontSize: 14,
-              textAlign: "left",
-              marginTop: 2,
-              marginBottom: 20,
-            }}
-          >
-            <text>Consumate, Family, Health, Probation</text>
-          </div>
-          <hr style={{ marginBottom: 10 }} />
-          <div
-            style={{
-              textAlign: "left",
-              marginTop: 2,
-            }}
-          >
-            <text
-              style={{ fontWeight: "bold", fontSize: 14, textAlign: "left" }}
-            >
-              Excellent Lawyer
-            </text>
-            <p
-              style={{
-                fontSize: 14,
-                fontWeight: "normal",
-                textAlign: "left",
-                marginTop: 4,
-              }}
-            >
-              This lawyer has received a 4.5-star rating based on 9 reviews.
-              Clients have praised their professionalism, responsiveness, and
-              expertise.
-            </p>
-          </div>
-
-          <Button
-            type="button"
-            height="35px"
-            width="300px"
-            buttonColor="#1d73b4"
-            textColor="white"
-          >
-            See more Consumate Lawyers
-          </Button>
-        </div>
-        <div className="lawyerDetailCard">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
-            <img
-              src={"../../images/lawyer.jpg"}
-              alt="Lawyer Profile Picture"
-              height={125}
-              width={125}
-            />
-            <div style={{}}>
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: 0,
-                  marginLeft: 10,
-                  color: "#ffa500",
-                  fontWeight: "bold",
-                  textAlign: "left",
-                }}
-              >
-                Ahmed Shah
-              </h3>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 0,
-                  marginBottom: 0,
-                  marginLeft: 5,
-                }}
-              >
-                <MyRating
-                  emptySymbol={
-                    <span style={{ color: "gray", fontSize: "1.5em" }}>☆</span>
-                  }
-                  fullSymbol={
-                    <span style={{ color: "gold", fontSize: "1.5em" }}>★</span>
-                  }
-                  initialRating={4}
-                  readonly
-                />
-                <p style={{ fontSize: 12, marginLeft: 2 }}>(9) reviews</p>
-              </div>
-
-              <div
-                style={{
-                  fontSize: 16,
-                  textAlign: "left",
-
-                  marginLeft: 10,
-                }}
-              >
-                <text>Location</text>
-              </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  textAlign: "left",
-                  marginTop: 2,
-                  marginLeft: 10,
-                }}
-              >
-                <text>Khanna Pul, Tarlai</text>
-              </div>
-            </div>
-          </div>
-
-          <div
-            style={{
-              fontSize: 14,
-              fontWeight: "bold",
-              textAlign: "left",
-              marginTop: 15,
-            }}
-          >
-            <text>Practice Areas</text>
-          </div>
-          <div
-            style={{
-              fontSize: 14,
-              textAlign: "left",
-              marginTop: 2,
-              marginBottom: 20,
-            }}
-          >
-            <text>Consumate, Family, Health, Probation</text>
-          </div>
-          <hr style={{ marginBottom: 10 }} />
-          <div
-            style={{
-              textAlign: "left",
-              marginTop: 2,
-            }}
-          >
-            <text
-              style={{ fontWeight: "bold", fontSize: 14, textAlign: "left" }}
-            >
-              Excellent Lawyer
-            </text>
-            <p
-              style={{
-                fontSize: 14,
-                fontWeight: "normal",
-                textAlign: "left",
-                marginTop: 4,
-              }}
-            >
-              This lawyer has received a 4.5-star rating based on 9 reviews.
-              Clients have praised their professionalism, responsiveness, and
-              expertise.
-            </p>
-          </div>
-
-          <Button
-            type="button"
-            height="35px"
-            width="300px"
-            buttonColor="#1d73b4"
-            textColor="white"
-          >
-            See more Consumate Lawyers
-          </Button>
-        </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <LawyerDetailCard
+          label="Business Lawyer"
+          imageSrc={lawyer}
+          name="Ahmed Shah"
+          rating={4}
+          reviews={9}
+          location="Khanna Pul, Tarlai"
+          practiceAreas="Consumate, Family, Health, Probation"
+          descriptionTitle="Excellent Lawyer"
+          descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
+          buttonText="See more Consumate Lawyers"
+        />
+        <LawyerDetailCard
+          label="Business Lawyer"
+          imageSrc={lawyer}
+          name="Ahmed Shah"
+          rating={4}
+          reviews={9}
+          location="Khanna Pul, Tarlai"
+          practiceAreas="Consumate, Family, Health, Probation"
+          descriptionTitle="Excellent Lawyer"
+          descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
+          buttonText="See more Consumate Lawyers"
+        />
+        <LawyerDetailCard
+          label="Business Lawyer"
+          imageSrc={lawyer}
+          name="Ahmed Shah"
+          rating={4}
+          reviews={9}
+          location="Khanna Pul, Tarlai"
+          practiceAreas="Consumate, Family, Health, Probation"
+          descriptionTitle="Excellent Lawyer"
+          descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
+          buttonText="See more Consumate Lawyers"
+        />
       </div>
     </div>
   );
