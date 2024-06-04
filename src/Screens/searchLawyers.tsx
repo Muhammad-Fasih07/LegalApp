@@ -73,7 +73,7 @@ const SearchLawyers = () => {
         }}
       >
         <LawyerDetailCard
-          label="Business Lawyer"
+          label="Consumate Lawyer"
           imageSrc={lawyer}
           name="Ahmed Shah"
           rating={4}
@@ -85,12 +85,12 @@ const SearchLawyers = () => {
           buttonText="See more Consumate Lawyers"
         />
         <LawyerDetailCard
-          label="Business Lawyer"
+          label="Divorce Lawyer"
           imageSrc={lawyer}
           name="Ahmed Shah"
           rating={4}
-          reviews={9}
-          location="Khanna Pul, Tarlai"
+          reviews={12}
+          location="Deena, Rawat"
           practiceAreas="Consumate, Family, Health, Probation"
           descriptionTitle="Excellent Lawyer"
           descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
@@ -101,8 +101,8 @@ const SearchLawyers = () => {
           imageSrc={lawyer}
           name="Ahmed Shah"
           rating={4}
-          reviews={9}
-          location="Khanna Pul, Tarlai"
+          reviews={89}
+          location="Dhoke Kala khan"
           practiceAreas="Consumate, Family, Health, Probation"
           descriptionTitle="Excellent Lawyer"
           descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
