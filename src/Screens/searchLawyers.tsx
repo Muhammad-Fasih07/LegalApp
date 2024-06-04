@@ -66,48 +66,56 @@ const SearchLawyers = () => {
           Search
         </Button>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <LawyerDetailCard
-          label="Consumate Lawyer"
-          imageSrc={lawyer}
-          name="Ahmed Shah"
-          rating={4}
-          reviews={9}
-          location="Khanna Pul, Tarlai"
-          practiceAreas="Consumate, Family, Health, Probation"
-          descriptionTitle="Excellent Lawyer"
-          descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
-          buttonText="See more Consumate Lawyers"
-        />
-        <LawyerDetailCard
-          label="Divorce Lawyer"
-          imageSrc={lawyer}
-          name="Ahmed Shah"
-          rating={4}
-          reviews={12}
-          location="Deena, Rawat"
-          practiceAreas="Consumate, Family, Health, Probation"
-          descriptionTitle="Excellent Lawyer"
-          descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
-          buttonText="See more Consumate Lawyers"
-        />
-        <LawyerDetailCard
-          label="Business Lawyer"
-          imageSrc={lawyer}
-          name="Ahmed Shah"
-          rating={4}
-          reviews={89}
-          location="Dhoke Kala khan"
-          practiceAreas="Consumate, Family, Health, Probation"
-          descriptionTitle="Excellent Lawyer"
-          descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
-          buttonText="See more Consumate Lawyers"
-        />
+      <div className="topRatedLawyersCard-Section" style={{}}>
+        <div className="lawyerForYou-title">
+          <text>Top Rated Lawyers for You</text>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "25px",
+          }}
+        >
+          <LawyerDetailCard
+            label="Consumate Lawyer"
+            imageSrc={lawyer}
+            name="Ahmed Shah"
+            rating={4}
+            reviews={9}
+            location="Khanna Pul, Tarlai"
+            practiceAreas="Consumate, Family, Health, Probation"
+            descriptionTitle="Excellent Lawyer"
+            descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
+            buttonText="See more Consumate Lawyers"
+          />
+          <LawyerDetailCard
+            label="Divorce Lawyer"
+            imageSrc={lawyer}
+            name="Ahmed Shah"
+            rating={4}
+            reviews={12}
+            location="Deena, Rawat"
+            practiceAreas="Consumate, Family, Health, Probation"
+            descriptionTitle="Excellent Lawyer"
+            descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
+            buttonText="See more Consumate Lawyers"
+          />
+          <LawyerDetailCard
+            label="Business Lawyer"
+            imageSrc={lawyer}
+            name="Ahmed Shah"
+            rating={4}
+            reviews={89}
+            location="Dhoke Kala khan"
+            practiceAreas="Consumate, Family, Health, Probation"
+            descriptionTitle="Excellent Lawyer"
+            descriptionText="This lawyer has received a 4.5-star rating based on 9 reviews. Clients have praised their professionalism, responsiveness, and expertise."
+            buttonText="See more Consumate Lawyers"
+          />
+        </div>
       </div>
     </div>
   );
