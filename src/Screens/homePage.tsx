@@ -8,6 +8,8 @@ const HomePage: React.FC = () => {
     <div>
       <SearchImage /> {/* Include the SearchImage component */}
       <SearchLawyers />
+
+
       <Footer /> {/* Include the Footer component */}
       
     </div>
