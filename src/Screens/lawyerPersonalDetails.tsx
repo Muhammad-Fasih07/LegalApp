@@ -7,6 +7,7 @@ import ImageUploadModal from "../components/ImageUploadModal";
 import Button from "../components/buttons/button";
 
 import Checkbox from "../components/buttons/checkBox";
+import Footer from "./Footer";
 
 Modal.setAppElement("#root");
 
@@ -74,7 +75,7 @@ function LawyersPersonalDetails() {
   console.log("License Number: ", formState.licenseNumber);
   return (
     <div className="lawyers-details">
-      <h1 className="title">Enter your state bar license information</h1>
+      <h1 className="title">Enter your State Bar License Information</h1>
       <h3 style={{ color: "black", marginTop: 0, marginBottom: 35 }}>
         Once your license is confirmed, your profile will be listed in our
         directory and search results
@@ -215,10 +216,9 @@ function LawyersPersonalDetails() {
           style={{
             display: "block",
             textAlign: "left",
-            marginBottom: 5,
-            marginTop: 20,
             color: "black",
             fontWeight: "bold",
+            fontSize: 22,
           }}
         >
           Verify disciplinary history
@@ -227,9 +227,8 @@ function LawyersPersonalDetails() {
             name="option"
             value="Option 1"
             labelText=" I have never been sanctioned by a state licensing authority.
-            
             "
-            labelStyle={{ fontWeight: "normal" }}
+            labelStyle={{ fontWeight: "normal", fontSize: 16 }}
             checked={selectedOptions.includes("Option 1")}
             onChange={handleOptionChange}
           />
@@ -239,12 +238,13 @@ function LawyersPersonalDetails() {
             value="Option 2"
             labelText="I have been sanctioned by a state licensing authority.
             "
-            labelStyle={{ fontWeight: "normal" }}
+            labelStyle={{ fontWeight: "normal", fontSize: 16 }}
             checked={selectedOptions.includes("Option 2")}
             onChange={handleOptionChange}
           />
         </label>
       </div>
+      <Footer />
     </div>
   );
 }
