@@ -25,7 +25,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
 }) => {
   return (
     <div
-      style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: "10px",
+      }}
     >
       <label htmlFor={id} style={labelStyle}>
         {labelText}

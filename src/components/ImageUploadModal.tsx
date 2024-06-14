@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-
+import uploadImage from "../images/uploadImage.png";
 Modal.setAppElement("#root");
 
 interface ImageUploadModalProps {
@@ -43,6 +43,7 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
       }}
     >
       <h2>Upload Image</h2>
+
       <input type="file" accept="image/*" onChange={handleImageChange} />
       <button onClick={handleConfirmClick}>Confirm</button>
       <button onClick={onRequestClose}>Close</button>

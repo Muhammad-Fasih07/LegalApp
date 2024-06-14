@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 200vh;
+  height: 100vh;
   margin-top: 50px;
 }
 
@@ -22,12 +22,15 @@
   border-radius: 15px;
   border: 1px solid #ddd;
   box-sizing: border-box;
-
-  padding: 20px;
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
   justify-content: center;
   align-items: flex-start;
   transition: all 0.3s ease;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
 }
 
 .signup-Card {
