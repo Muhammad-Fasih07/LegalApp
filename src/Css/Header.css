@@ -15,7 +15,7 @@ html {
   align-items: center;
   width: 100%;
   padding: 10px 20px;
-  background-color: #ffffff;
+  background-color: #8ad9f8;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
@@ -124,7 +124,7 @@ html {
 .grow-practice {
   margin-right: 10px;
   text-decoration: none;
-  color: orange;
+  color: rgb(29, 30, 31);
   font-size: 16px;
 }
 
