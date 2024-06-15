@@ -6,12 +6,10 @@ import SearchLawyers from "./searchLawyers";
 const HomePage: React.FC = () => {
   return (
     <div>
-      <SearchImage /> {/* Include the SearchImage component */}
+      <SearchImage />
       <SearchLawyers />
 
-
-      <Footer /> {/* Include the Footer component */}
-      
+      <Footer />
     </div>
   );
 };
