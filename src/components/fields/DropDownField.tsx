@@ -3,19 +3,21 @@ import "../../Css/DropDownField.css";
 
 interface SelectFieldProps<T> {
   options: T[];
+  value: T;
   onChange?: (value: T) => void;
   style?: CSSProperties;
 }
 
 const DropDownField: React.FC<SelectFieldProps<any>> = ({
-  // Use any as the generic argument
   options,
+  value,
   onChange,
   style,
 }) => {
   return (
     <select
       className="select-field"
+      value={value}
       onChange={(e) => onChange && onChange(e.target.value)}
       style={style}
     >

@@ -16,9 +16,9 @@
 }
 
 .card {
-  width: 60%;
-  max-width: "auto";
-  height: "auto";
+  width: 100%; /* Adjust the width as needed */
+  max-width: 100%;
+  height: auto;
   border-radius: 15px;
   border: 1px solid #ddd;
   box-sizing: border-box;

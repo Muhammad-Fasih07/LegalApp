@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/buttons/button";
-
 import { useNavigate } from "react-router-dom";
 
 interface SignupFormState {
@@ -20,19 +19,32 @@ const initialFormState: SignupFormState = {
 
 function Signup() {
   const [formState, setFormState] = useState<SignupFormState>(initialFormState);
+  const [passwordMatch, setPasswordMatch] = useState<boolean>(true); // State to track password match
+  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({
       ...formState,
       [event.target.name]: event.target.value,
     });
+
+    // Check if passwords match when either password or confirmPassword changes
+    if (event.target.name === "password" || event.target.name === "confirmPassword") {
+      setPasswordMatch(formState.password === event.target.value);
+    }
   };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    
+    // Check if passwords match
+    if (formState.password === formState.confirmPassword) {
+      navigate("/lawyersPersonalDetails", { state: formState });
+    } else {
+      alert("Passwords do not match. Please check and try again.");
+    }
   };
 
-  const navigate = useNavigate();
   return (
     <div className="container">
       <form
@@ -49,7 +61,7 @@ function Signup() {
             name="name"
             value={formState.name}
             onChange={handleInputChange}
-            label="Name"
+            label="Username"
             style={{ marginBottom: "1rem" }}
             labelColor="#000"
           />
@@ -78,7 +90,7 @@ function Signup() {
             onChange={handleInputChange}
             label="Confirm Password"
             style={{ marginBottom: "1.5rem" }}
-            labelColor="#000"
+            labelColor={passwordMatch ? "#000" : "red"} // Change label color based on password match
           />
         </div>
         <div className="signup-Button">
@@ -86,9 +98,8 @@ function Signup() {
             type="submit"
             height="50px"
             width="100px"
-            buttonColor="green"
+            buttonColor={passwordMatch ? "green" : "red"} // Change button color based on password match
             textColor="white"
-            onClick={() => navigate("/lawyersPersonalDetails")}
           >
             Sign Up
           </Button>

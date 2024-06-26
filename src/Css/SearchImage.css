@@ -7,7 +7,7 @@
       position: relative;
       width: 100%;
       overflow: hidden; /* Ensure the image takes full width */
-      height: 60vh; /* Adjust the height as desired */
+      height: 70vh; /* Adjust the height as desired */
       border-radius: 20px; /* Add border radius */
     }
 

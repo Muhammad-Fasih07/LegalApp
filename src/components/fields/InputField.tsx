@@ -12,6 +12,7 @@ interface InputFieldProps {
   enteredValueColor?: string;
   labelStyle?: React.CSSProperties;
   width?: string; // added width property
+  readOnly?: boolean; // added readOnly property
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -25,6 +26,7 @@ const InputField: React.FC<InputFieldProps> = ({
   enteredValueColor = "black",
   labelStyle,
   width, // added width
+  readOnly, // added readOnly
 }) => {
   return (
     <div className={styles.inputField}>
@@ -41,6 +43,7 @@ const InputField: React.FC<InputFieldProps> = ({
           width: width,
         }}
         required
+        readOnly={readOnly} // add readOnly property to input
       />
       {label && (
         <label htmlFor={name} style={{ color: labelColor, ...labelStyle }}>
