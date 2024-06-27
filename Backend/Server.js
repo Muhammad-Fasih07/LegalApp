@@ -55,7 +55,7 @@ const lawyerSchema = new mongoose.Schema({
 const Lawyer = mongoose.model('Lawyer', lawyerSchema);
 
 // Sign-Up Endpoint
-app.post('/api/lawyers', async (req, res) => {
+app.post('/api/lawyers/signup', async (req, res) => {
   const { name, email, password, licenseNumber, address, city, zip, phoneNum, practiceArea, yearsAdmitted, disciplinaryHistory, licenseImage } = req.body;
 
   try {
@@ -96,6 +96,79 @@ app.post('/api/lawyers', async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+// Login Endpoint
+app.post('/api/lawyers/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if user exists
+    const lawyer = await Lawyer.findOne({ email });
+    if (!lawyer) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Verify password
+    const passwordMatch = await bcrypt.compare(password, lawyer.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ id: lawyer._id }, JWT_SECRET, { expiresIn: '1h' });
+
+    res.status(200).json({ token, lawyer });
+  } catch (error) {
+    console.error("Error logging in:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// Middleware to authenticate JWT token
+const authenticateToken = (req, res, next) => {
+  const token = req.headers['authorization'];
+  if (!token) return res.status(401).json({ message: 'Access denied' });
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ message: 'Invalid token' });
+    req.user = user;
+    next();
+  });
+};
+
+// Get Lawyer Details Endpoint
+app.get('/api/lawyers/me', authenticateToken, async (req, res) => {
+  try {
+    const lawyer = await Lawyer.findById(req.user.id);
+    if (!lawyer) {
+      return res.status(404).json({ message: "Lawyer not found" });
+    }
+    res.status(200).json(lawyer);
+  } catch (error) {
+    console.error("Error fetching lawyer data:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// Update Lawyer Details Endpoint
+app.put('/api/lawyers/update', authenticateToken, async (req, res) => {
+  const { id } = req.user;
+  const updateData = req.body;
+
+  try {
+    const updatedLawyer = await Lawyer.findByIdAndUpdate(id, updateData, { new: true });
+    if (!updatedLawyer) {
+      return res.status(404).json({ message: "Lawyer not found" });
+    }
+    res.status(200).json(updatedLawyer);
+  } catch (error) {
+    console.error("Error updating lawyer data:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
+
 
 app.listen(5001, () => {
   console.log("Node js server started.");

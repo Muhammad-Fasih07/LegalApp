@@ -8,7 +8,8 @@ interface ButtonProps {
   buttonColor?: string;
   textColor?: string;
   style?: React.CSSProperties;
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;  // Update onClick type
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean; // Add disabled prop
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -20,6 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   textColor,
   style,
   onClick,
+  disabled, // Include disabled prop in destructuring
 }) => {
   return (
     <button
@@ -32,6 +34,7 @@ const Button: React.FC<ButtonProps> = ({
         ...style,
       }}
       onClick={onClick}
+      disabled={disabled} // Use disabled prop here
     >
       {children}
     </button>

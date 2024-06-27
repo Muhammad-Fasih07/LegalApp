@@ -8,10 +8,13 @@ import logoImage from "./images/Gif.gif"; // replace with your image path
 import SearchLawyers from "./Screens/searchLawyers";
 import HomePage from "./Screens/homePage"; // Import the HomePage component
 // import ViewLawyersScreen from "./Screens/viewLawyersScreen";
+import Login from "../src/Screens/Login";
+import Dashboard from "../src/Screens/Dashboard";
 function App() {
   return (
     <Router>
-      <Header logoSrc={logoImage} logoAlt="Logo" />
+      <Header logoSrc={logoImage} logoAlt="
+      .0.03Logo" />
       <Routes>
         <Route path="/" element={<HomePage />} />{" "}
         {/* Add the HomePage route */}
@@ -25,6 +28,8 @@ function App() {
           path="/lawyersPersonalDetails"
           element={<LawyersPersonalDetails />}
         />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
 
     </Router>

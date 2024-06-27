@@ -1,0 +1,84 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    margin-top: 60px; /* Adjust this value to ensure it's not under the header */
+  }
+  
+  .dashboard-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .dashboard-header h2 {
+    margin-top: 10px;
+    color: #4CAF50;
+  }
+  
+  .edit-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #4CAF50;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .edit-button svg {
+    margin-right: 5px;
+  }
+  
+  .dashboard-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .detail-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .detail-item span, .detail-item input {
+    margin-left: 10px;
+    color: #333;
+    width: 100%;
+    border: none;
+    background: none;
+  }
+  
+  .detail-item input {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .save-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .save-button:hover {
+    background-color: #45a049;
+  }
+  

@@ -35,7 +35,9 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
   const handleSignUpClick = () => {
     navigate("/signUp");
   };
-
+  const handleLoginClick = () => {
+    navigate("/Login");
+  };
   return (
     <>
       <header className="header">
@@ -184,14 +186,23 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
             onClick={toggleSearchBar}
             style={{ width: "auto" }}
           />
-          <a href="#" className="grow-practice">
-            Grow your practice
-          </a>
+          <div className="button-container" style={{ marginRight: '10px' }}>
+            <Button
+              type="button"
+              height="50px"
+              width="90px"
+              buttonColor="green"
+              textColor="white"
+            onClick={handleLoginClick}
+            >
+              Login
+            </Button>
+          </div>
           <div className="button-container">
             <Button
               type="button"
               height="50px"
-              width="100px"
+              width="90px"
               buttonColor="green"
               textColor="white"
               onClick={handleSignUpClick}
@@ -199,6 +210,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
               Sign Up
             </Button>
           </div>
+
         </div>
       </header>
       {showSearch && (
