@@ -28,7 +28,7 @@ if (!JWT_SECRET) {
 }
 
 mongoose
-  .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, dbName: 'LaywerApp' })
+  .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, dbName: 'LawyerApp' })
   .then(() => {
     console.log("Database Connected");
   })
@@ -50,7 +50,7 @@ const lawyerSchema = new mongoose.Schema({
   yearsAdmitted: String,
   disciplinaryHistory: [String],
   licenseImage: String, // You can change this based on how you handle image storage
-}, { collection: 'LaywerData' });
+}, { collection: 'LawyerData' });
 
 const Lawyer = mongoose.model('Lawyer', lawyerSchema);
 
@@ -166,9 +166,6 @@ app.put('/api/lawyers/update', authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
-
-
 
 app.listen(5001, () => {
   console.log("Node js server started.");

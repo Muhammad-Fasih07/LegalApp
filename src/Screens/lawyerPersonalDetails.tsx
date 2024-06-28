@@ -61,7 +61,7 @@ function LawyersPersonalDetails() {
     };
   
     try {
-      const response = await axios.post(`${ENV.API_BASE_URL}/api/lawyers`, fullFormData);
+      const response = await axios.post(`${ENV.API_BASE_URL}/api/lawyers/signup`, fullFormData);
       alert("Sign Up Successful!");
       console.log("Response:", response.data);
      
