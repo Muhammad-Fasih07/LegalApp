@@ -1,6 +1,6 @@
 import React from "react";
 import "../Css/SearchImage.css";
-import lawyerSearchImage from "../images/lawyersearch.svg"; // Import the image
+import lawyerSearchImage from "../images/lawyersearch (2).svg"; // Import the image
 import Button from "../components/buttons/button";
 
 const SearchImage: React.FC = () => {
