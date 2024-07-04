@@ -10,6 +10,10 @@ import {
   FaEdit,
   FaBook,
   FaMoneyBill,
+  FaBuilding,
+  FaLanguage,
+  FaWrench,
+  FaSchool,
 } from "react-icons/fa";
 import "../Css/Dashboard.css";
 import ENV from "../env";
@@ -56,7 +60,7 @@ const Dashboard: React.FC = () => {
   }, [navigate, passedLawyer]);
 
   const handleEditClick = () => {
-    setEditData(lawyer);
+    setEditData(lawyer); // Clone the lawyer object for editing
     setIsEditing(true);
   };
 
@@ -93,7 +97,6 @@ const Dashboard: React.FC = () => {
       }
 
       const updatedLawyer = await response.json();
-      console.log("Updated Lawyer Data:", updatedLawyer); // Log the updated data for debugging
       setLawyer(updatedLawyer);
       setIsEditing(false);
     } catch (error) {
@@ -104,7 +107,6 @@ const Dashboard: React.FC = () => {
   if (!lawyer) {
     return <div>Loading...</div>;
   }
-
   return (
     <div className="dashboard-container">
       <aside className="sidebar">
@@ -141,147 +143,90 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
         {isEditing ? (
-          <div
-            className="dashbo
-          ard-details"
-          >
-            <div className="detail-item">
-              <FaEnvelope size={20} />
-              <input
-                type="email"
-                name="email"
-                value={editData.email}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="detail-item">
-              <FaPhone size={20} />
-              <input
-                type="tel"
-                name="phoneNum"
-                value={editData.phoneNum}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="detail-item">
-              <FaMapMarkerAlt size={20} />
-              <input
-                type="text"
-                name="address"
-                value={editData.address}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="detail-item">
-              <FaMapMarkerAlt size={20} />
-              <input
-                type="text"
-                name="city"
-                value={editData.city}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="detail-item">
-              <FaMapMarkerAlt size={20} />
-              <input
-                type="text"
-                name="zip"
-                value={editData.zip}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="detail-item">
-              <FaGavel size={20} />
-              <input
-                type="text"
-                name="practiceArea"
-                value={editData.practiceArea}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <input
-                type="text"
-                name="licenseNumber"
-                value={editData.licenseNumber}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <input
-                type="text"
-                name="yearsAdmitted"
-                value={editData.yearsAdmitted}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <input
-                type="text"
-                name="disciplinaryHistory"
-                value={editData.disciplinaryHistory}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="detail-item">
-              <FaBook size={20} />
-              <textarea
-                name="bio"
-                value={editData.bio}
-                onChange={handleInputChange}
-                placeholder="Enter biography"
-                rows={5}
-              />
-            </div>
+          <div className="dashboard-details">
+            {/* Dynamically generate editable fields based on editData */}
+            {Object.keys(editData).map((key) => (
+              <div className="detail-item" key={key}>
+                <FaIdBadge size={20} />
+                <input
+                  type="text"
+                  name={key}
+                  value={editData[key]}
+                  onChange={handleInputChange}
+                />
+              </div>
+            ))}
             <button className="save-button" onClick={handleSaveClick}>
               Save
             </button>
           </div>
         ) : (
-          <div className="dashboard-details">
-            <div className="detail-item">
-              <FaBook size={20} />
-              <span>Bio: {lawyer.bio}</span>
-            </div>
-            <div className="detail-item">
-              <FaMoneyBill size={20} />
-              <span>Fee: {lawyer.fee}</span>
-            </div>
-            <div className="detail-item">
-              <FaGavel size={20} />
-              <span>Practice Area: {lawyer.practiceArea}</span>
-            </div>
-            <div className="detail-item">
-              <FaEnvelope size={20} />
-              <span>{lawyer.email}</span>
-            </div>
-            <div className="detail-item">
-              <FaPhone size={20} />
-              <span>{lawyer.phoneNum}</span>
-            </div>
-            <div className="detail-item">
-              <FaMapMarkerAlt size={20} />
-              <span>
-                {lawyer.address}, {lawyer.city}, {lawyer.zip}
-              </span>
-            </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div className="dashboard-details">
+              <div className="detail-item">
+                <FaBook size={20} />
+                <span>Bio: {lawyer.bio}</span>
+              </div>
+              <div className="detail-item">
+                <FaMoneyBill size={20} />
+                <span>Fee: {lawyer.fee}</span>
+              </div>
+              <div className="detail-item">
+                <FaGavel size={20} />
+                <span>Practice Area: {lawyer.practiceArea}</span>
+              </div>
+              <div className="detail-item">
+                <FaBuilding size={20} />
+                <span>Court: {lawyer.practiceArea}</span>
+              </div>
+              <div className="detail-item">
+                <FaWrench size={20} />
+                <span>Specialization: {lawyer.practiceArea}</span>
+              </div>
+              <div className="detail-item">
+                <FaSchool size={20} />
+                <span>Education: {lawyer.practiceArea}</span>
+              </div>
+              <div className="detail-item">
+                <FaLanguage size={20} />
+                <span>Languages: {lawyer.practiceArea}</span>
+              </div>
+              <hr style={{ color: "gray", width: "100%" }} />
+              <div className="detail-item">
+                <FaEnvelope size={20} />
+                <span>{lawyer.email}</span>
+              </div>
+              <div className="detail-item">
+                <FaPhone size={20} />
+                <span>{lawyer.phoneNum}</span>
+              </div>
+              <div className="detail-item">
+                <FaMapMarkerAlt size={20} />
+                <span>
+                  {lawyer.address}, {lawyer.city}, {lawyer.zip}
+                </span>
+              </div>
 
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <span>License Number: {lawyer.licenseNumber}</span>
-            </div>
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <span>Years Admitted: {lawyer.yearsAdmitted}</span>
-            </div>
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <span>
-                Disciplinary History: {lawyer.disciplinaryHistory.join(", ")}
-              </span>
+              <div className="detail-item">
+                <FaIdBadge size={20} />
+                <span>License Number: {lawyer.licenseNumber}</span>
+              </div>
+              <div className="detail-item">
+                <FaIdBadge size={20} />
+                <span>Years Admitted: {lawyer.yearsAdmitted}</span>
+              </div>
+              <div className="detail-item">
+                <FaIdBadge size={20} />
+                <span>
+                  Disciplinary History: {lawyer.disciplinaryHistory.join(", ")}
+                </span>
+              </div>
             </div>
           </div>
         )}
