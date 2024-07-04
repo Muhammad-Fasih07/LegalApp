@@ -1,13 +1,22 @@
 import React from "react";
-import SearchImage from "./SearchImage"; // Import the SearchImage component
-import Footer from "../Screens/Footer"; // Import the Footer component
+import SearchImage from "./SearchImage";
+import Footer from "../Screens/Footer";
 import SearchLawyers from "./searchLawyers";
 
 const HomePage: React.FC = () => {
   return (
-    <div>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <SearchImage />
-      <SearchLawyers />
+      <div
+        style={{
+          width: "90%",
+          margin: "2% auto",
+        }}
+      >
+        <SearchLawyers />
+      </div>
 
       <Footer />
     </div>
