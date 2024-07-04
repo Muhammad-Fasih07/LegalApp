@@ -1,84 +1,134 @@
 .dashboard-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-    margin-top: 60px; /* Adjust this value to ensure it's not under the header */
-  }
-  
-  .dashboard-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    position: relative;
-  }
-  
-  .dashboard-header h2 {
-    margin-top: 10px;
-    color: #4CAF50;
-  }
-  
-  .edit-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: #4CAF50;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .edit-button svg {
-    margin-right: 5px;
-  }
-  
-  .dashboard-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .detail-item {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 15px;
-  }
-  
-  .detail-item span, .detail-item input {
-    margin-left: 10px;
-    color: #333;
-    width: 100%;
-    border: none;
-    background: none;
-  }
-  
-  .detail-item input {
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .save-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .save-button:hover {
-    background-color: #45a049;
-  }
-  
+  display: flex;
+  height: calc(100vh - 60px); /* Adjusting height to account for header */
+  background-color: #f9f9f9;
+  margin-top: 60px; /* Adjust this value to ensure it's not under the header */
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #2d3e50;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  position: fixed; /* Make the sidebar fixed */
+  top: 60px; /* Adjust this value to match the height of your header */
+  bottom: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.sidebar-header h2 {
+  margin-top: 10px;
+}
+
+.sidebar-nav {
+  flex-grow: 1;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-nav ul li {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sidebar-nav ul li:hover,
+.sidebar-nav ul li.active {
+  background-color: #1a252f;
+}
+
+.sidebar-nav ul li svg {
+  margin-right: 10px;
+}
+
+.main-content {
+  margin-left: 250px; /* Adjust margin to account for the sidebar width */
+  flex-grow: 1;
+  padding: 20px;
+  margin-top: 60px; /* Adjust this value to ensure it's not under the header */
+}
+
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.dashboard-header h2 {
+  margin-top: 10px;
+  color: #4CAF50;
+}
+
+.edit-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #4CAF50;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.edit-button svg {
+  margin-right: 5px;
+}
+
+.dashboard-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.detail-item span, .detail-item input {
+  margin-left: 10px;
+  color: #333;
+  width: 100%;
+  border: none;
+  background: none;
+}
+
+.detail-item input {
+  border-bottom: 1px solid #ddd;
+}
+
+.save-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}

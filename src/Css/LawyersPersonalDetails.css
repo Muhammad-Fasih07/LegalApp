@@ -36,8 +36,8 @@
 .signup-Card {
   margin-top: 150px;
   width: 40%;
-  max-width: "auto";
-  height: "auto";
+  max-width: auto;
+  height: auto;
   border-radius: 15px;
   border: 1px solid #ddd;
   box-sizing: border-box;
@@ -48,6 +48,7 @@
   transition: all 0.3s ease;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
 .signup-Card:hover {
   border-color: #aaa;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
@@ -64,9 +65,10 @@
 .searchTopRatedLawyers-Section {
   margin-top: 15%;
 }
+
 .lawyerDetailCard {
   width: 100%;
-  height: "auto";
+  height: auto;
   background-color: white;
   margin-top: 2%;
   margin-bottom: 3%;
@@ -79,16 +81,19 @@
   transition: all 0.3s ease;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
 .lawyerDetailCard:hover {
   border-color: #aaa;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
+
 .lawyerDetailCardContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+
 .topRatedLawyersCard-Section {
   display: flex;
   flex-direction: column;
@@ -100,6 +105,7 @@
   margin-top: 3%;
   border-radius: 15px;
 }
+
 .lawyerForYou-title {
   font-weight: bold;
   text-align: center;

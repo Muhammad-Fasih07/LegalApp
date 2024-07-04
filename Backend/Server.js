@@ -167,6 +167,32 @@ app.put('/api/lawyers/update', authenticateToken, async (req, res) => {
   }
 });
 
+
+
+// Search Lawyers by City and Practice Area Endpoint
+app.get('/api/lawyers/search', async (req, res) => {
+  const { city, practiceArea } = req.query;
+
+  try {
+    const lawyers = await Lawyer.find({
+      city: city,
+      practiceArea: practiceArea
+    });
+
+    if (!lawyers.length) {
+      return res.status(404).json({ message: "No lawyers found" });
+    }
+
+    res.status(200).json(lawyers);
+  } catch (error) {
+    console.error("Error searching for lawyers:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
+
+
 app.listen(5001, () => {
   console.log("Node js server started.");
 });

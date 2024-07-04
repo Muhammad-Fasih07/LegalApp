@@ -64,16 +64,17 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
                     <div className="dropdown-grid">
                       {[
                         "Islamabad",
-                        "Rawalpindi",
                         "Lahore",
                         "Karachi",
+                        "Multan",
+                        "Faisalabad",
+                        "Hyderabad",
                         "Peshawar",
-                        "Sargodha",
                         "Quetta",
                         "Gujranwala",
-                        "Multan",
+                        "Dera Ismail Khan",
                         "Bahawalpur",
-                        "Sukkur",
+                        "Abbottabad",
                       ].map((city) => (
                         <a href="#" key={city}>
                           {city}
@@ -101,18 +102,19 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
                   >
                     <div className="dropdown-grid">
                       {[
-                        "Criminal",
-                        "Civil",
-                        "Corporate",
-                        "Family",
-                        "Constitutional",
-                        "Tax",
-                        "Intellectual Property",
-                        "Labor",
-                        "Environmental",
-                        "Banking",
-                        "Real Estate",
-                        "Immigration",
+                          "Divorce Lawyers",
+                          "Accident Lawyer",
+                          "Tax Lawyer",
+                          "Criminal Lawyer",
+                          "Family Lawyer",
+                          "Immigration Lawyer",
+                          "Property Lawyer",
+                          "Civil Lawyer",
+                          "Marriage Lawyer",
+                          "Medical Lawyer",
+                          "Inheritance Lawyer",
+                          "Nab & Anti Corruption Lawyer",
+                          "Child Custody Lawyer",
                       ].map((area) => (
                         <a href="#" key={area}>
                           {area}

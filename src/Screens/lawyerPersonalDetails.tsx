@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../Css/LawyersPersonalDetails.css";
 import DropDownField from "../components/fields/DropDownField";
 import InputField from "../components/fields/InputField";
@@ -18,8 +20,37 @@ function LawyersPersonalDetails() {
   const { name, email, password } = state;
   const navigate = useNavigate(); // Use useNavigate hook for navigation
 
-  const cities = ["Karachi", "Lahore", "Faisalabad", "Rawalpindi", "Multan", "Hyderabad", "Gujranwala", "Peshawar", "Quetta", "Islamabad", "Sargodha", "Sialkot", "Bahawalpur", "Sukkur", "Jhang", "Sheikhupura", "Larkana", "Gujrat", "Mardan", "Kasur", "Rahim Yar Khan", "Sahiwal", "Okara", "Wah Cantonment", "Dera Ghazi Khan", "Mirpur Khas", "Nawabshah"];
-  const practiceAreas = ["Criminal", "Civil", "Corporate", "Family", "Constitutional", "Tax", "Intellectual Property", "Labor", "Environmental", "Banking", "Real Estate", "Immigration"];
+  const cities = [
+    "Islamabad",
+    "Lahore",
+    "Karachi",
+    "Multan",
+    "Faisalabad",
+    "Hyderabad",
+    "Peshawar",
+    "Quetta",
+    "Gujranwala",
+    "Dera Ismail Khan",
+    "Bahawalpur",
+    "Abbottabad",
+  ];
+
+  const practiceAreas = [
+    "Divorce Lawyers",
+    "Accident Lawyer",
+    "Tax Lawyer",
+    "Criminal Lawyer",
+    "Family Lawyer",
+    "Immigration Lawyer",
+    "Property Lawyer",
+    "Civil Lawyer",
+    "Marriage Lawyer",
+    "Medical Lawyer",
+    "Inheritance Lawyer",
+    "Nab & Anti Corruption Lawyer",
+    "Child Custody Lawyer",
+  ];
+
   const yearsAdmitted = Array.from({ length: 50 }, (_, i) => i + 1);
 
   const [formState, setFormState] = useState({
@@ -50,7 +81,7 @@ function LawyersPersonalDetails() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-  
+
     const fullFormData = {
       ...formState,
       name,
@@ -59,21 +90,31 @@ function LawyersPersonalDetails() {
       disciplinaryHistory: selectedOptions,
       licenseImage: selectedImage ? selectedImage.name : "",
     };
-  
+
     try {
       const response = await axios.post(`${ENV.API_BASE_URL}/api/lawyers/signup`, fullFormData);
-      alert("Sign Up Successful!");
+      toast.success("Sign Up Successful!", {
+        position: "top-center",
+        autoClose: 3000, // Auto close after 3 seconds
+      });
       console.log("Response:", response.data);
-     
+
+      setTimeout(() => {
+        navigate('/Login'); // Navigate to login after toast message
+      }, 3000); // Wait for the toast message to close
+
     } catch (error) {
       console.error("Error signing up:", (error as any).response ? (error as any).response.data : (error as any).message);
-      alert("Error signing up, please try again.");
+      toast.error("Error signing up, please try again.", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
-  
 
   return (
     <div className="lawyers-details">
+      <ToastContainer />
       <h1 className="title">Enter your State Bar License Information</h1>
       <h3 style={{ color: "black", marginTop: 0, marginBottom: 35 }}>
         Once your license is confirmed, your profile will be listed in our directory and search results
@@ -90,7 +131,7 @@ function LawyersPersonalDetails() {
             value={name}
             enteredValueColor="black"
             readOnly // Use the readOnly prop
-            onChange={() => {}} // Dummy onChange handler
+            onChange={() => { }} // Dummy onChange handler
           />
           <InputField
             type="text"

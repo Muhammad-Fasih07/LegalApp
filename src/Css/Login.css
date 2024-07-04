@@ -41,3 +41,11 @@
 .login-form button {
   margin-top: 20px;
 }
+.animation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* Adjust based on your animation size */
+  width: 200px;  /* Adjust based on your animation size */
+  margin-top: 20px; /* Optional: Add margin for better spacing */
+}

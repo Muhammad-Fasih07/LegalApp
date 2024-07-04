@@ -10,6 +10,7 @@ import HomePage from "./Screens/homePage"; // Import the HomePage component
 // import ViewLawyersScreen from "./Screens/viewLawyersScreen";
 import Login from "../src/Screens/Login";
 import Dashboard from "../src/Screens/Dashboard";
+
 function App() {
   return (
     <Router>
@@ -30,6 +31,7 @@ function App() {
         />
         <Route path="/Login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        
       </Routes>
 
     </Router>
