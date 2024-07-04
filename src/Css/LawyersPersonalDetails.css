@@ -16,8 +16,8 @@
 }
 
 .card {
-  width: 100%; /* Adjust the width as needed */
-  max-width: 100%;
+  width: calc(120% + 80px); /* Increase the width by 60px (30px on each side) */
+  max-width: calc(120% + 80px); /* Ensure the max-width is also increased */
   height: auto;
   border-radius: 15px;
   border: 1px solid #ddd;
@@ -31,7 +31,10 @@
   transition: all 0.3s ease;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 50px;
+  margin-left: -30px; /* Move the card 30px to the left */
+  margin-right: -30px; /* Move the card 30px to the right */
 }
+
 
 .signup-Card {
   margin-top: 150px;
@@ -113,4 +116,15 @@
   color: black;
   font-size: 1.5rem;
   margin-top: 2%;
+}
+/* LawyersPersonalDetails.css */
+
+.animation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px; /* Adjust based on your animation size */
+  width: 500px;  /* Adjust based on your animation size */
+  margin: 0 auto; /* Center horizontally */
+  margin-top: 20px; /* Optional: Add margin for better spacing */
 }

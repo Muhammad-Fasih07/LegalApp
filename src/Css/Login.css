@@ -7,7 +7,7 @@
 }
 
 .login-form {
-  width: 320px;
+  width: 380px;
   padding: 40px;
   background-color: #ffffff;
   border-radius: 8px;
@@ -45,7 +45,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px; /* Adjust based on your animation size */
-  width: 200px;  /* Adjust based on your animation size */
+  height: 500px; /* Adjust based on your animation size */
+  width: 500px;  /* Adjust based on your animation size */
   margin-top: 20px; /* Optional: Add margin for better spacing */
 }
