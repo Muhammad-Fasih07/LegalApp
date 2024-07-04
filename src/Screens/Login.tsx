@@ -70,7 +70,7 @@ const Login: React.FC = () => {
       // Redirect to dashboard after animation
       setTimeout(() => {
         navigate("/dashboard", { state: { lawyer } });
-      }, 1500); // Adjusted the timeout duration to 3.5 seconds
+      }, 1500); // Adjusted the timeout duration to 1.5 seconds
     } catch (error: unknown) {
       console.error("Login error:", error as Error);
       alert((error as Error).message || "Login failed. Please try again.");

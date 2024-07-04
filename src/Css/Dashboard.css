@@ -133,3 +133,16 @@
 .save-button:hover {
   background-color: #45a049;
 }
+/* Dashboard.css */
+.animation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 25;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+  z-index: 9999; /* Make sure it is on top */
+}
