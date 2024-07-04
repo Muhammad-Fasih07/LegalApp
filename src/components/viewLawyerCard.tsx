@@ -13,10 +13,12 @@ interface LawyerDetailCardProps {
   descriptionTitle: string;
   descriptionText: string;
   buttonText: string;
+  labelStyle?: React.CSSProperties; // Optional prop for label styling
 }
+
 const MyRating = Rating as any;
 
-const ViewLayerCard: React.FC<LawyerDetailCardProps> = ({
+const ViewLawyerCard: React.FC<LawyerDetailCardProps> = ({
   label,
   imageSrc,
   name,
@@ -27,9 +29,17 @@ const ViewLayerCard: React.FC<LawyerDetailCardProps> = ({
   descriptionTitle,
   descriptionText,
   buttonText,
+  labelStyle = {}, // Provide a default value for optional prop
 }) => (
   <div style={{ position: "relative", width: "100%", marginTop: 20 }}>
-    <div style={{ fontWeight: "bold", textAlign: "left", marginLeft: 5 }}>
+    <div
+      style={{
+        fontWeight: "bold",
+        textAlign: "left",
+        marginLeft: 5,
+        ...labelStyle, // Apply the labelStyle, spreading it last to override defaults if provided
+      }}
+    >
       {label}
     </div>
     <div className="lawyerDetailCard">
@@ -78,7 +88,8 @@ const ViewLayerCard: React.FC<LawyerDetailCardProps> = ({
             </p>
           </div>
           <div style={{ fontSize: 14, textAlign: "left", marginLeft: 10 }}>
-            <text style={{ fontWeight: "bold" }}>Location</text>
+            <span style={{ fontWeight: "bold" }}>Location</span>{" "}
+            {/* Changed from <text> to <span> */}
           </div>
           <div
             style={{
@@ -88,7 +99,7 @@ const ViewLayerCard: React.FC<LawyerDetailCardProps> = ({
               marginLeft: 10,
             }}
           >
-            <text>{location}</text>
+            <span>{location}</span> {/* Changed from <text> to <span> */}
           </div>
         </div>
       </div>
@@ -100,7 +111,7 @@ const ViewLayerCard: React.FC<LawyerDetailCardProps> = ({
           marginTop: 15,
         }}
       >
-        <text>Practice Areas</text>
+        <span>Practice Areas</span> {/* Changed from <text> to <span> */}
       </div>
       <div
         style={{
@@ -110,13 +121,14 @@ const ViewLayerCard: React.FC<LawyerDetailCardProps> = ({
           marginBottom: 20,
         }}
       >
-        <text>{practiceAreas}</text>
+        <span>{practiceAreas}</span> {/* Changed from <text> to <span> */}
       </div>
       <hr style={{ marginBottom: 10 }} />
       <div style={{ textAlign: "left", marginTop: 2 }}>
-        <text style={{ fontWeight: "bold", fontSize: 14, textAlign: "left" }}>
+        <span style={{ fontWeight: "bold", fontSize: 14, textAlign: "left" }}>
           {descriptionTitle}
-        </text>
+        </span>{" "}
+        {/* Changed from <text> to <span> */}
         <p
           style={{
             fontSize: 14,
@@ -141,4 +153,4 @@ const ViewLayerCard: React.FC<LawyerDetailCardProps> = ({
   </div>
 );
 
-export default ViewLayerCard;
+export default ViewLawyerCard;
