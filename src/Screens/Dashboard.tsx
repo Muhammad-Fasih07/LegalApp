@@ -9,9 +9,10 @@ import {
   FaIdBadge,
   FaEdit,
   FaBook,
+  FaMoneyBill,
 } from "react-icons/fa";
 import "../Css/Dashboard.css";
-import ENV from '../env';
+import ENV from "../env";
 
 const Dashboard: React.FC = () => {
   const [lawyer, setLawyer] = useState<any>(null);
@@ -28,26 +29,26 @@ const Dashboard: React.FC = () => {
     }
 
     const fetchLawyerData = async () => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (!token) {
-        navigate('/login');
+        navigate("/login");
         return;
       }
 
       try {
         const response = await fetch(`${ENV.API_BASE_URL}/api/lawyers/me`, {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         if (!response.ok) {
-          throw new Error('Failed to fetch lawyer data');
+          throw new Error("Failed to fetch lawyer data");
         }
         const data = await response.json();
         setLawyer(data);
       } catch (error) {
         console.error("Error fetching lawyer data:", error);
-        navigate('/login');
+        navigate("/login");
       }
     };
 
@@ -59,7 +60,9 @@ const Dashboard: React.FC = () => {
     setIsEditing(true);
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = event.target;
     setEditData((prevData: any) => ({
       ...prevData,
@@ -69,24 +72,24 @@ const Dashboard: React.FC = () => {
 
   const handleSaveClick = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (!token) {
-        navigate('/login');
+        navigate("/login");
         return;
       }
 
       const response = await fetch(`${ENV.API_BASE_URL}/api/lawyers/update`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(editData),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to update lawyer data');
+        throw new Error(errorData.message || "Failed to update lawyer data");
       }
 
       const updatedLawyer = await response.json();
@@ -111,11 +114,21 @@ const Dashboard: React.FC = () => {
         </div>
         <nav className="sidebar-nav">
           <ul>
-            <li className="active"><FaUserCircle /> Dashboard</li>
-            <li><FaEnvelope /> Announcements</li>
-            <li><FaGavel /> My Cases</li>
-            <li><FaIdBadge /> Profile</li>
-            <li><FaMapMarkerAlt /> Contact</li>
+            <li className="active">
+              <FaUserCircle /> Dashboard
+            </li>
+            <li>
+              <FaEnvelope /> Announcements
+            </li>
+            <li>
+              <FaGavel /> My Cases
+            </li>
+            <li>
+              <FaIdBadge /> Profile
+            </li>
+            <li>
+              <FaMapMarkerAlt /> Contact
+            </li>
           </ul>
         </nav>
       </aside>
@@ -128,7 +141,10 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
         {isEditing ? (
-          <div className="dashboard-details">
+          <div
+            className="dashbo
+          ard-details"
+          >
             <div className="detail-item">
               <FaEnvelope size={20} />
               <input
@@ -227,6 +243,18 @@ const Dashboard: React.FC = () => {
         ) : (
           <div className="dashboard-details">
             <div className="detail-item">
+              <FaBook size={20} />
+              <span>Bio: {lawyer.bio}</span>
+            </div>
+            <div className="detail-item">
+              <FaMoneyBill size={20} />
+              <span>Fee: {lawyer.fee}</span>
+            </div>
+            <div className="detail-item">
+              <FaGavel size={20} />
+              <span>Practice Area: {lawyer.practiceArea}</span>
+            </div>
+            <div className="detail-item">
               <FaEnvelope size={20} />
               <span>{lawyer.email}</span>
             </div>
@@ -236,12 +264,11 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="detail-item">
               <FaMapMarkerAlt size={20} />
-              <span>{lawyer.address}, {lawyer.city}, {lawyer.zip}</span>
+              <span>
+                {lawyer.address}, {lawyer.city}, {lawyer.zip}
+              </span>
             </div>
-            <div className="detail-item">
-              <FaGavel size={20} />
-              <span>Practice Area: {lawyer.practiceArea}</span>
-            </div>
+
             <div className="detail-item">
               <FaIdBadge size={20} />
               <span>License Number: {lawyer.licenseNumber}</span>
@@ -252,11 +279,9 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="detail-item">
               <FaIdBadge size={20} />
-              <span>Disciplinary History: {lawyer.disciplinaryHistory.join(', ')}</span>
-            </div>
-            <div className="detail-item">
-              <FaBook size={20} />
-              <span>Bio: {lawyer.bio}</span>
+              <span>
+                Disciplinary History: {lawyer.disciplinaryHistory.join(", ")}
+              </span>
             </div>
           </div>
         )}

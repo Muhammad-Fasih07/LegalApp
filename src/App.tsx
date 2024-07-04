@@ -10,15 +10,18 @@ import HomePage from "./Screens/homePage"; // Import the HomePage component
 // import ViewLawyersScreen from "./Screens/viewLawyersScreen";
 import Login from "../src/Screens/Login";
 import Dashboard from "../src/Screens/Dashboard";
+import ViewLawyersScreen from "./Screens/viewLawyersScreen";
 
 function App() {
   return (
     <Router>
-      <Header logoSrc={logoImage} logoAlt="
-      .0.03Logo" />
+      <Header
+        logoSrc={logoImage}
+        logoAlt="
+      .0.03Logo"
+      />
       <Routes>
-        <Route path="/" element={<HomePage />} />{" "}
-        {/* Add the HomePage route */}
+        <Route path="/" element={<HomePage />} /> {/* Add the HomePage route */}
         <Route path="/searchLawyers" element={<SearchLawyers />} />
         <Route path="/signUp" element={<Signup />} />
         <Route
@@ -31,9 +34,8 @@ function App() {
         />
         <Route path="/Login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        
+        <Route path="/ViewLawyersScreen" element={<ViewLawyersScreen />} />
       </Routes>
-
     </Router>
   );
 }
