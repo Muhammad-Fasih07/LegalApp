@@ -17,6 +17,7 @@ import {
 } from "react-icons/fa";
 import "../Css/Dashboard.css";
 import ENV from "../env";
+import UserProfileImage from "../components/fields/UserProfileImage";
 
 const Dashboard: React.FC = () => {
   const [lawyer, setLawyer] = useState<any>(null);
@@ -25,6 +26,7 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const passedLawyer = location.state?.lawyer;
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
   useEffect(() => {
     if (passedLawyer) {
@@ -107,6 +109,20 @@ const Dashboard: React.FC = () => {
   if (!lawyer) {
     return <div>Loading...</div>;
   }
+
+  // code of functions used for the image uploader
+
+  const handleIconClick = () => {
+    document.getElementById("imageUpload")?.click();
+  };
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setUploadedImage(imageUrl);
+    }
+  };
   return (
     <div className="dashboard-container">
       <aside className="sidebar">
@@ -136,7 +152,8 @@ const Dashboard: React.FC = () => {
       </aside>
       <main className="main-content">
         <div className="dashboard-header">
-          <FaUserCircle size={100} color="#4CAF50" />
+          {/* <FaUserCircle size={100} color="#4CAF50" /> */}
+          <UserProfileImage />
           <h2>Welcome, {lawyer.name}</h2>
           <button className="edit-button" onClick={handleEditClick}>
             <FaEdit /> Edit
