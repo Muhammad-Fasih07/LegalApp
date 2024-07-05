@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import DropDownField from "../components/fields/DropDownField";
 import Button from "../components/buttons/button";
 import Rating from "react-rating";
@@ -10,12 +10,14 @@ import LawyerDetailCard from "../components/lawyerDetailCard";
 import ENV from '../env';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
 const SearchLawyers = () => {
   const cities = [
     "Karachi", "Lahore", "Faisalabad", "Rawalpindi", "Multan", "Hyderabad", "Gujranwala", "Peshawar", "Quetta", "Islamabad",
   ];
 
   const practiceAreasData: IPracticeAreasData = {
+    // Define practice areas for each city
     Islamabad: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
     Karachi: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
     Lahore: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
@@ -53,20 +55,25 @@ const SearchLawyers = () => {
         },
       });
 
-      setLawyers(response.data);
+      const uniqueLawyers = Array.from(new Set(response.data.map((lawyer: Lawyer) => lawyer._id)))
+        .map((id: string | unknown) => {
+          return response.data.find((lawyer: Lawyer) => lawyer._id === id);
+        });
+
+      setLawyers(uniqueLawyers as Lawyer[]);
     } catch (error) {
       console.error("Error fetching lawyers:", error);
     }
   };
-
-  const MyRating = Rating as any;
 
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    nextArrow: <div className="slick-next">Next</div>,
+    prevArrow: <div className="slick-prev">Prev</div>,
   };
 
   return (
