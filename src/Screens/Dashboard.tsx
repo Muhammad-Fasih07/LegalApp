@@ -25,10 +25,12 @@ const Dashboard: React.FC = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  const [name, setName] = useState("Default Name");
-  const [email, setEmail] = useState("");
-  const [phone, phoneNumber] = useState("");
-  const [address, setAddress] = useState("");
+  const [name, setName] = useState("Name Here");
+  const [email, setEmail] = useState("Email Here");
+  const [phone, phoneNumber] = useState("Phone Here");
+  const [address, setAddress] = useState("Address Here");
+  const [licenseNumber, setLicenseNumber] = useState("License Here");
+  const [yearsAdmitted, setYearsAdmitted] = useState("Years Here");
 
   useEffect(() => {
     if (passedLawyer) {
@@ -192,24 +194,23 @@ const Dashboard: React.FC = () => {
           <div className="dashboard-InfoCard">
             <div
               style={{
-                marginTop: 10,
+                marginTop: 15,
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
               }}
             >
-              <text style={{ fontSize: 20, fontWeight: "bold" }}>
-                Profile Info
-              </text>
+              <text style={{ fontSize: 20, fontWeight: "bold" }}>Profile</text>
               <button className="edit-button" onClick={toggleEdit}>
                 Edit
+                <FaPen style={{ width: 14, height: "auto" }} />
               </button>
             </div>{" "}
             <div style={{ marginTop: 12 }}>
               <text style={{ color: "gray", fontWeight: "bold" }}>
                 User Information
               </text>
-              <div style={{ marginTop: 15 }}>
+              <div style={{ marginTop: 18 }}>
                 <text style={{ color: "black", fontWeight: "bold" }}>Name</text>
                 <EditableInputField
                   isEditing={isEditing}
@@ -222,8 +223,127 @@ const Dashboard: React.FC = () => {
                     padding: "5px",
                     marginTop: "10px",
                   }}
-                  placeholderStyle={{ color: "blue", fontSize: "16px" }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
                   placeholder={name}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Email
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(email)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={email}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Phone
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(phone)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={phone}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Address
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(address)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={address}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  License No.
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(licenseNumber)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={licenseNumber}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Years Admitted
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(yearsAdmitted)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={yearsAdmitted}
                 />
               </div>
             </div>
