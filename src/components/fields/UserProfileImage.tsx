@@ -1,7 +1,35 @@
 import React, { useState } from "react";
-import { FaUserCircle, FaCamera } from "react-icons/fa"; // Import FaCamera
+import { FaCamera } from "react-icons/fa";
 
-const UserProfileImage: React.FC = () => {
+interface UserProfileImageProps {
+  style?: React.CSSProperties;
+  cameraStyle?: React.CSSProperties;
+}
+interface CustomUserIconProps {
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}
+
+const CustomUserIcon: React.FC<CustomUserIconProps> = ({ style, onClick }) => (
+  <svg
+    width="100"
+    height="100"
+    viewBox="0 0 100 100"
+    style={style}
+    onClick={onClick}
+  >
+    <rect width="100" height="100" rx="15" ry="15" fill="#E0E0E0" />
+    <path
+      d="M50 30c8.284 0 15-6.716 15-15S58.284 0 50 0 35 6.716 35 15s6.716 15 15 15zm0 10c-12.15 0-35 6.075-35 18.225V70h70v-11.775C85 46.075 62.15 40 50 40z"
+      fill="#757575"
+    />
+  </svg>
+);
+
+const UserProfileImage: React.FC<UserProfileImageProps> = ({
+  style,
+  cameraStyle,
+}) => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
   const handleIconClick = () => {
@@ -11,9 +39,9 @@ const UserProfileImage: React.FC = () => {
   return (
     <div
       style={{
-        textAlign: "center",
         position: "relative",
         display: "inline-block",
+        ...style,
       }}
     >
       {uploadedImage ? (
@@ -23,14 +51,19 @@ const UserProfileImage: React.FC = () => {
           style={{
             width: 100,
             height: 100,
-            borderRadius: "50%",
+            borderRadius: "25%",
+            ...style,
           }}
         />
       ) : (
-        <FaUserCircle
-          size={100}
+        <CustomUserIcon
           onClick={handleIconClick}
-          style={{ cursor: "pointer", color: "#4CAF50" }}
+          style={{
+            cursor: "pointer",
+            color: "#4CAF50",
+
+            ...style,
+          }}
         />
       )}
       <FaCamera
@@ -39,10 +72,11 @@ const UserProfileImage: React.FC = () => {
         style={{
           cursor: "pointer",
           position: "absolute",
-          bottom: 5,
-          right: 0,
+          bottom: 0,
+          right: -5,
           color: "grey",
           borderRadius: "25%",
+          ...cameraStyle,
         }}
       />
       <input
