@@ -1,210 +1,33 @@
-import { useState } from "react";
+import  { useState } from "react";
 import DropDownField from "../components/fields/DropDownField";
 import Button from "../components/buttons/button";
 import Rating from "react-rating";
 import axios from 'axios';
+import Slider from "react-slick"; // Import Slider
 import { Lawyer, IPracticeAreasData } from '../Screens/types'; // Import types
-
 import lawyerImage from "../images/lawyer.jpg";
 import LawyerDetailCard from "../components/lawyerDetailCard";
 import ENV from '../env';
-
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 const SearchLawyers = () => {
   const cities = [
-    "Karachi",
-    "Lahore",
-    "Faisalabad",
-    "Rawalpindi",
-    "Multan",
-    "Hyderabad",
-    "Gujranwala",
-    "Peshawar",
-    "Quetta",
-    "Islamabad",
+    "Karachi", "Lahore", "Faisalabad", "Rawalpindi", "Multan", "Hyderabad", "Gujranwala", "Peshawar", "Quetta", "Islamabad",
   ];
 
   const practiceAreasData: IPracticeAreasData = {
-    Islamabad: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Karachi: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Lahore: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Faisalabad: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Multan: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Hyderabad: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Gujranwala: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Peshawar: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Quetta: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Dera_Ismail_Khan: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Bahawalpur: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    Abbottabad: [
-      "Divorce Lawyers",
-      "Accident Lawyer",
-      "Tax Lawyer",
-      "Criminal Lawyer",
-      "Family Lawyer",
-      "Immigration Lawyer",
-      "Property Lawyer",
-      "Civil Lawyer",
-      "Marriage Lawyer",
-      "Medical Lawyer",
-      "Inheritance Lawyer",
-      "Nab & Anti Corruption Lawyer",
-      "Child Custody Lawyer",
-    ],
-    // Add more cities and their corresponding practice areas if needed
+    Islamabad: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Karachi: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Lahore: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Faisalabad: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Multan: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Hyderabad: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Gujranwala: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Peshawar: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Quetta: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Dera_Ismail_Khan: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Bahawalpur: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
+    Abbottabad: ["Divorce Lawyers", "Accident Lawyer", "Tax Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Property Lawyer", "Civil Lawyer", "Marriage Lawyer", "Medical Lawyer", "Inheritance Lawyer", "Nab & Anti Corruption Lawyer", "Child Custody Lawyer"],
   };
 
   const [selectedCity, setSelectedCity] = useState<string>("");
@@ -238,15 +61,18 @@ const SearchLawyers = () => {
 
   const MyRating = Rating as any;
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1
+  };
+
   return (
     <div className="searchTopRatedLawyers-Section">
       <h1 className="searchLawyer-title">Search for top-rated lawyers</h1>
-      <div
-        style={{
-          display: "flex",
-          gap: "20px",
-        }}
-      >
+      <div style={{ display: "flex", gap: "20px" }}>
         <DropDownField options={cities} onChange={handleCityChange} value={selectedCity} />
         <DropDownField options={practiceAreas} onChange={handlePracticeAreaChange} value={selectedPracticeArea} />
         <Button
@@ -260,35 +86,28 @@ const SearchLawyers = () => {
           Search
         </Button>
       </div>
-      <div className="topRatedLawyersCard-Section" style={{}}>
+      <div className="topRatedLawyersCard-Section">
         <div className="lawyerForYou-title">
           <text>Top Rated Lawyers for You</text>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "25px",
-          }}
-        >
+        <Slider {...settings}>
           {lawyers.map((lawyer) => (
-            <LawyerDetailCard
-              key={lawyer._id}
-              label={lawyer.practiceArea}
-              imageSrc={lawyer.imageSrc || lawyerImage}
-              name={lawyer.name}
-              rating={lawyer.rating || 0}
-              reviews={lawyer.reviews || 0}
-              location={lawyer.city}
-              practiceAreas={lawyer.practiceAreas?.join(", ") || ""}
-              descriptionTitle="Excellent Lawyer"
-              descriptionText={`This lawyer has received a ${lawyer.rating}-star rating based on ${lawyer.reviews} reviews. Clients have praised their professionalism, responsiveness, and expertise.`}
-              buttonText={`See more ${lawyer.practiceArea}`}
-            />
+            <div key={lawyer._id} style={{ padding: "0 10px" }}>
+              <LawyerDetailCard
+                label={lawyer.practiceArea}
+                imageSrc={lawyer.imageSrc || lawyerImage}
+                name={lawyer.name}
+                rating={lawyer.rating || 0}
+                reviews={lawyer.reviews || 0}
+                location={lawyer.city}
+                practiceAreas={lawyer.practiceAreas?.join(", ") || ""}
+                descriptionTitle="Excellent Lawyer"
+                descriptionText={`This lawyer has received a ${lawyer.rating}-star rating based on ${lawyer.reviews} reviews. Clients have praised their professionalism, responsiveness, and expertise.`}
+                buttonText={`See more ${lawyer.practiceArea}`}
+              />
+            </div>
           ))}
-        </div>
+        </Slider>
       </div>
     </div>
   );
