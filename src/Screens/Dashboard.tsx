@@ -10,12 +10,6 @@ import {
   FaEdit,
   FaLocationArrow,
   FaPen,
-  FaMoneyBill,
-  FaBuilding,
-  FaWrench,
-  FaSchool,
-  FaLanguage,
-  FaBook, // Add this line to import the FaMoneyBill component
 } from "react-icons/fa";
 import "../Css/Dashboard.css";
 import ENV from "../env";
@@ -33,18 +27,10 @@ const Dashboard: React.FC = () => {
 
   const [name, setName] = useState("Name Here");
   const [email, setEmail] = useState("Email Here");
-  const [phone, setPhone] = useState("Phone Here");
+  const [phone, phoneNumber] = useState("Phone Here");
   const [address, setAddress] = useState("Address Here");
   const [licenseNumber, setLicenseNumber] = useState("License Here");
   const [yearsAdmitted, setYearsAdmitted] = useState("Years Here");
-
-  const [bio, setBio] = useState("Bio Here");
-  const [fee, setFee] = useState("Fee Here");
-  const [practiceArea, setPracticeArea] = useState("Area Here");
-  const [court, setCourt] = useState("Court Here");
-  const [specialization, setSpecialization] = useState("Specialization Here");
-  const [education, setEducation] = useState("Education Here");
-  const [languages, setLanguages] = useState("Languages Here");
 
   useEffect(() => {
     if (passedLawyer) {
@@ -124,52 +110,29 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleAdditionalProfileDetailsClick = () => {
-    navigate("/furtherDetails");
-  };
-
   if (!lawyer) {
     return <div>Loading...</div>;
   }
-  const handleImageUpload = (file: File) => {
-    // Implement your image upload logic here
-    // For example, updating the state or sending the image to a server
-    console.log("Uploading image", file);
-  };
-  const toggleEdit = () => {
-    setIsEditing(!isEditing); // Toggle the state
-  };
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
+
+  // code of functions used for the image uploader
+
+  const handleIconClick = () => {
+    document.getElementById("imageUpload")?.click();
   };
 
-  const handleSave = (field: string, value: string) => {
-    switch (field) {
-      case "name":
-        setName(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-
-      case "phone":
-        setPhone(value);
-        break;
-      case "address":
-        setAddress(value);
-        break;
-      case "licenseNumber":
-        setAddress(value);
-        break;
-      case "yearsAdmitted":
-        setYearsAdmitted(value);
-        break;
-
-      default:
-        console.warn(`No handler for field: ${field}`);
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setUploadedImage(imageUrl);
     }
+  };
 
-    setIsEditing(false);
+  const toggleEdit = () => setIsEditing(!isEditing);
+
+  const handleSave = (value: string) => {
+    setName(value); // Optionally update the placeholder or handle the value as needed
+    setIsEditing(false); // Ensure editing is turned off after saving
   };
   return (
     <div className="dashboard-container">
@@ -192,22 +155,20 @@ const Dashboard: React.FC = () => {
             <li>
               <FaIdBadge /> Profile
             </li>
-            <li onClick={handleAdditionalProfileDetailsClick}>
-              <FaIdBadge /> Additional Profile Details
-            </li>
             <li>
               <FaMapMarkerAlt /> Contact
             </li>
           </ul>
         </nav>
       </aside>
+
       <main className="main-content">
         <div style={{ display: "flex" }}>
           <div className="dashboard-MainCard" style={{ marginRight: "20px" }}>
             {" "}
             <UserProfileImage
               style={{ width: 200, height: 200, borderRadius: "15%" }}
-              cameraStyle={{ width: 40, height: 40 }}
+              cameraStyle={{ width: 60, height: 60 }}
             />
             <div
               style={{

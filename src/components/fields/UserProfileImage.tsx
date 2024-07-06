@@ -1,40 +1,18 @@
-import React from "react";
-import { FaCamera } from "react-icons/fa";
+import React, { useState, CSSProperties } from "react";
+import { FaUserCircle, FaCamera } from "react-icons/fa";
 
+// Update the component's props type to include cameraStyle
 interface UserProfileImageProps {
-  style?: React.CSSProperties;
-  cameraStyle?: React.CSSProperties;
-  onImageUpload: (file: File) => void;
-  src?: string; // Add src prop to accept image URL
+  style?: CSSProperties; // Optional style prop for the outer div
+  cameraStyle?: CSSProperties; // Optional style prop for the camera icon
 }
-
-interface CustomUserIconProps {
-  style?: React.CSSProperties;
-  onClick?: () => void;
-}
-
-const CustomUserIcon: React.FC<CustomUserIconProps> = ({ style, onClick }) => (
-  <svg
-    width="100"
-    height="100"
-    viewBox="0 0 100 100"
-    style={style}
-    onClick={onClick}
-  >
-    <rect width="100" height="100" rx="15" ry="15" fill="#E0E0E0" />
-    <path
-      d="M50 30c8.284 0 15-6.716 15-15S58.284 0 50 0 35 6.716 35 15s6.716 15 15 15zm0 10c-12.15 0-35 6.075-35 18.225V70h70v-11.775C85 46.075 62.15 40 50 40z"
-      fill="#757575"
-    />
-  </svg>
-);
 
 const UserProfileImage: React.FC<UserProfileImageProps> = ({
   style,
   cameraStyle,
-  onImageUpload,
-  src,
 }) => {
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+
   const handleIconClick = () => {
     document.getElementById("imageUpload")?.click();
   };
@@ -42,30 +20,27 @@ const UserProfileImage: React.FC<UserProfileImageProps> = ({
   return (
     <div
       style={{
+        textAlign: "center",
         position: "relative",
         display: "inline-block",
-        ...style,
+        ...style, // Spread the optional style prop here for the outer div
       }}
     >
-      {src ? (
+      {uploadedImage ? (
         <img
-          src={src}
+          src={uploadedImage}
           alt="Profile"
           style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "25%",
-            ...style,
+            width: 200,
+            height: 200,
+            borderRadius: "15%",
           }}
         />
       ) : (
-        <CustomUserIcon
+        <FaUserCircle
+          size={100}
           onClick={handleIconClick}
-          style={{
-            cursor: "pointer",
-            color: "#4CAF50",
-            ...style,
-          }}
+          style={{ cursor: "pointer", color: "#4CAF50" }}
         />
       )}
       <FaCamera
@@ -74,11 +49,11 @@ const UserProfileImage: React.FC<UserProfileImageProps> = ({
         style={{
           cursor: "pointer",
           position: "absolute",
-          bottom: 0,
+          bottom: -3,
           right: -5,
-          color: "grey",
+          color: "#8ad9f8",
           borderRadius: "25%",
-          ...cameraStyle,
+          ...cameraStyle, // Apply the optional cameraStyle prop here
         }}
       />
       <input
@@ -88,7 +63,9 @@ const UserProfileImage: React.FC<UserProfileImageProps> = ({
         accept="image/*"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           if (event.target.files && event.target.files[0]) {
-            onImageUpload(event.target.files[0]);
+            const file = event.target.files[0];
+            const imageUrl = URL.createObjectURL(file);
+            setUploadedImage(imageUrl);
           }
         }}
       />
