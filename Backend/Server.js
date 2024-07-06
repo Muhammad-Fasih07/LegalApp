@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const path = require("path"); // Add this line to require 'path'
 
 console.log("MONGO_URL:", process.env.MONGO_URL); // Check if the MONGO_URL is loaded
 console.log("JWT_SECRET:", process.env.JWT_SECRET); // Check if the JWT_SECRET is loaded
@@ -15,6 +17,9 @@ app.use(express.json()); // Ensure body parser is used to parse JSON requests
 
 // Add this line to handle the strictQuery deprecation warning
 mongoose.set("strictQuery", true);
+
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Add this line
 
 const mongoUrl = process.env.MONGO_URL;
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -61,7 +66,8 @@ const lawyerSchema = new mongoose.Schema(
     court: [String],
     specialization: [String],
     education: [String],
-    languages: [String]
+    languages: [String],
+    profileImage: String // Field added to store the image URL or path
   },
   { collection: "LawyerData" }
 );
@@ -154,9 +160,44 @@ app.put("/api/lawyers/:id/additional-info", async (req, res) => {
   }
 });
 
+// Multer configuration for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
 
+const upload = multer({ storage: storage });
 
+// Profile image upload endpoint
+app.post('/api/lawyers/:id/profile-image', upload.single('profileImage'), async (req, res) => {
+  const { id } = req.params;
 
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded' });
+  }
+
+  try {
+    const lawyer = await Lawyer.findById(id);
+    if (!lawyer) {
+      return res.status(404).json({ message: 'Lawyer not found' });
+    }
+
+    // Assuming the frontend is hosted on the same server
+    const profileImageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+
+    lawyer.profileImage = profileImageUrl;
+    await lawyer.save();
+
+    res.status(200).json({ message: 'Profile image uploaded successfully', profileImage: lawyer.profileImage });
+  } catch (error) {
+    console.error('Error uploading profile image:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 // Login Endpoint
 app.post("/api/lawyers/login", async (req, res) => {

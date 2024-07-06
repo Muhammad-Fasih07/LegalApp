@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaCamera } from "react-icons/fa";
 
 interface UserProfileImageProps {
   style?: React.CSSProperties;
   cameraStyle?: React.CSSProperties;
+  onImageUpload: (file: File) => void;
+  src?: string; // Add src prop to accept image URL
 }
+
 interface CustomUserIconProps {
   style?: React.CSSProperties;
   onClick?: () => void;
@@ -29,9 +32,9 @@ const CustomUserIcon: React.FC<CustomUserIconProps> = ({ style, onClick }) => (
 const UserProfileImage: React.FC<UserProfileImageProps> = ({
   style,
   cameraStyle,
+  onImageUpload,
+  src,
 }) => {
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-
   const handleIconClick = () => {
     document.getElementById("imageUpload")?.click();
   };
@@ -44,13 +47,13 @@ const UserProfileImage: React.FC<UserProfileImageProps> = ({
         ...style,
       }}
     >
-      {uploadedImage ? (
+      {src ? (
         <img
-          src={uploadedImage}
+          src={src}
           alt="Profile"
           style={{
-            width: 100,
-            height: 100,
+            width: "100%",
+            height: "100%",
             borderRadius: "25%",
             ...style,
           }}
@@ -61,7 +64,6 @@ const UserProfileImage: React.FC<UserProfileImageProps> = ({
           style={{
             cursor: "pointer",
             color: "#4CAF50",
-
             ...style,
           }}
         />
@@ -86,9 +88,7 @@ const UserProfileImage: React.FC<UserProfileImageProps> = ({
         accept="image/*"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            const imageUrl = URL.createObjectURL(file);
-            setUploadedImage(imageUrl);
+            onImageUpload(event.target.files[0]);
           }
         }}
       />
