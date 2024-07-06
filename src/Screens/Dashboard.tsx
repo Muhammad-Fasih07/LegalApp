@@ -10,6 +10,12 @@ import {
   FaEdit,
   FaLocationArrow,
   FaPen,
+  FaMoneyBill,
+  FaBuilding,
+  FaWrench,
+  FaSchool,
+  FaLanguage,
+  FaBook, // Add this line to import the FaMoneyBill component
 } from "react-icons/fa";
 import "../Css/Dashboard.css";
 import ENV from "../env";
