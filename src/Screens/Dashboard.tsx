@@ -32,6 +32,13 @@ const Dashboard: React.FC = () => {
   const [licenseNumber, setLicenseNumber] = useState("License Here");
   const [yearsAdmitted, setYearsAdmitted] = useState("Years Here");
 
+  const [bio, setBio] = useState("Set your bio here");
+  const [fee, setFee] = useState("Fee Here");
+  const [practiceArea, setPracticeArea] = useState("Area Here");
+  const [specialization, setSpecialization] = useState("Specialization Here");
+  const [education, setEducation] = useState("Education Here");
+  const [labguages, setLanguages] = useState("Years Here");
+
   useEffect(() => {
     if (passedLawyer) {
       setLawyer(passedLawyer);
