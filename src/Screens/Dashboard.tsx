@@ -104,9 +104,14 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const handleAdditionalProfileDetailsClick = () => {
+    navigate("/furtherDetails");
+  };
+
   if (!lawyer) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="dashboard-container">
       <aside className="sidebar">
@@ -127,6 +132,9 @@ const Dashboard: React.FC = () => {
             </li>
             <li>
               <FaIdBadge /> Profile
+            </li>
+            <li onClick={handleAdditionalProfileDetailsClick}>
+              <FaIdBadge /> Additional Profile Details
             </li>
             <li>
               <FaMapMarkerAlt /> Contact
@@ -161,72 +169,64 @@ const Dashboard: React.FC = () => {
             </button>
           </div>
         ) : (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div className="dashboard-details">
-              <div className="detail-item">
-                <FaBook size={20} />
-                <span>Bio: {lawyer.bio}</span>
-              </div>
-              <div className="detail-item">
-                <FaMoneyBill size={20} />
-                <span>Fee: {lawyer.fee}</span>
-              </div>
-              <div className="detail-item">
-                <FaGavel size={20} />
-                <span>Practice Area: {lawyer.practiceArea}</span>
-              </div>
-              <div className="detail-item">
-                <FaBuilding size={20} />
-                <span>Court: {lawyer.practiceArea}</span>
-              </div>
-              <div className="detail-item">
-                <FaWrench size={20} />
-                <span>Specialization: {lawyer.practiceArea}</span>
-              </div>
-              <div className="detail-item">
-                <FaSchool size={20} />
-                <span>Education: {lawyer.practiceArea}</span>
-              </div>
-              <div className="detail-item">
-                <FaLanguage size={20} />
-                <span>Languages: {lawyer.practiceArea}</span>
-              </div>
-              <hr style={{ color: "gray", width: "100%" }} />
-              <div className="detail-item">
-                <FaEnvelope size={20} />
-                <span>{lawyer.email}</span>
-              </div>
-              <div className="detail-item">
-                <FaPhone size={20} />
-                <span>{lawyer.phoneNum}</span>
-              </div>
-              <div className="detail-item">
-                <FaMapMarkerAlt size={20} />
-                <span>
-                  {lawyer.address}, {lawyer.city}, {lawyer.zip}
-                </span>
-              </div>
+          <div className="dashboard-details">
+            <div className="detail-item">
+              <FaBook size={20} />
+              <span>Bio: {lawyer.bio}</span>
+            </div>
+            <div className="detail-item">
+              <FaMoneyBill size={20} />
+              <span>Fee: {lawyer.fee}</span>
+            </div>
+            <div className="detail-item">
+              <FaGavel size={20} />
+              <span>Practice Area: {lawyer.practiceArea}</span>
+            </div>
+            <div className="detail-item">
+              <FaBuilding size={20} />
+              <span>Court: {lawyer.practiceArea}</span>
+            </div>
+            <div className="detail-item">
+              <FaWrench size={20} />
+              <span>Specialization: {lawyer.practiceArea}</span>
+            </div>
+            <div className="detail-item">
+              <FaSchool size={20} />
+              <span>Education: {lawyer.practiceArea}</span>
+            </div>
+            <div className="detail-item">
+              <FaLanguage size={20} />
+              <span>Languages: {lawyer.practiceArea}</span>
+            </div>
+            <hr style={{ color: "gray", width: "100%" }} />
+            <div className="detail-item">
+              <FaEnvelope size={20} />
+              <span>{lawyer.email}</span>
+            </div>
+            <div className="detail-item">
+              <FaPhone size={20} />
+              <span>{lawyer.phoneNum}</span>
+            </div>
+            <div className="detail-item">
+              <FaMapMarkerAlt size={20} />
+              <span>
+                {lawyer.address}, {lawyer.city}, {lawyer.zip}
+              </span>
+            </div>
 
-              <div className="detail-item">
-                <FaIdBadge size={20} />
-                <span>License Number: {lawyer.licenseNumber}</span>
-              </div>
-              <div className="detail-item">
-                <FaIdBadge size={20} />
-                <span>Years Admitted: {lawyer.yearsAdmitted}</span>
-              </div>
-              <div className="detail-item">
-                <FaIdBadge size={20} />
-                <span>
-                  Disciplinary History: {lawyer.disciplinaryHistory.join(", ")}
-                </span>
-              </div>
+            <div className="detail-item">
+              <FaIdBadge size={20} />
+              <span>License Number: {lawyer.licenseNumber}</span>
+            </div>
+            <div className="detail-item">
+              <FaIdBadge size={20} />
+              <span>Years Admitted: {lawyer.yearsAdmitted}</span>
+            </div>
+            <div className="detail-item">
+              <FaIdBadge size={20} />
+              <span>
+                Disciplinary History: {lawyer.disciplinaryHistory.join(", ")}
+              </span>
             </div>
           </div>
         )}
