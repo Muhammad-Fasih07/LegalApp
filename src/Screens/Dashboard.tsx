@@ -7,13 +7,15 @@ import {
   FaMapMarkerAlt,
   FaGavel,
   FaIdBadge,
+  FaEdit,
   FaLocationArrow,
+  FaPen,
   FaMoneyBill,
   FaBuilding,
   FaWrench,
   FaSchool,
   FaLanguage,
-  FaBook,
+  FaBook, // Add this line to import the FaMoneyBill component
 } from "react-icons/fa";
 import "../Css/Dashboard.css";
 import ENV from "../env";
@@ -27,13 +29,26 @@ const Dashboard: React.FC = () => {
   const location = useLocation();
   const passedLawyer = location.state?.lawyer;
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-  const [uploadSuccess, setUploadSuccess] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+
+  const [name, setName] = useState("Name Here");
+  const [email, setEmail] = useState("Email Here");
+  const [phone, setPhone] = useState("Phone Here");
+  const [address, setAddress] = useState("Address Here");
+  const [licenseNumber, setLicenseNumber] = useState("License Here");
+  const [yearsAdmitted, setYearsAdmitted] = useState("Years Here");
+
+  const [bio, setBio] = useState("Bio Here");
+  const [fee, setFee] = useState("Fee Here");
+  const [practiceArea, setPracticeArea] = useState("Area Here");
+  const [court, setCourt] = useState("Court Here");
+  const [specialization, setSpecialization] = useState("Specialization Here");
+  const [education, setEducation] = useState("Education Here");
+  const [languages, setLanguages] = useState("Languages Here");
 
   useEffect(() => {
     if (passedLawyer) {
       setLawyer(passedLawyer);
-      setUploadedImage(passedLawyer.profileImage); // Set uploaded image if available
       return;
     }
 
@@ -55,7 +70,6 @@ const Dashboard: React.FC = () => {
         }
         const data = await response.json();
         setLawyer(data);
-        setUploadedImage(data.profileImage); // Set uploaded image if available
       } catch (error) {
         console.error("Error fetching lawyer data:", error);
         navigate("/login");
@@ -110,36 +124,6 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleImageUpload = async (file: File) => {
-    const formData = new FormData();
-    formData.append("profileImage", file);
-
-    try {
-      const response = await fetch(`${ENV.API_BASE_URL}/api/lawyers/${lawyer._id}/profile-image`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to upload image");
-      }
-
-      const data = await response.json();
-      setUploadedImage(data.profileImage);
-      setLawyer((prevLawyer: any) => ({ ...prevLawyer, profileImage: data.profileImage }));
-      setUploadSuccess("Profile image uploaded successfully");
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      setUploadSuccess("Failed to upload profile image");
-    }
-
-    // Clear the success message after a delay
-    setTimeout(() => setUploadSuccess(null), 3000);
-  };
-
   const handleAdditionalProfileDetailsClick = () => {
     navigate("/furtherDetails");
   };
@@ -147,7 +131,46 @@ const Dashboard: React.FC = () => {
   if (!lawyer) {
     return <div>Loading...</div>;
   }
+  const handleImageUpload = (file: File) => {
+    // Implement your image upload logic here
+    // For example, updating the state or sending the image to a server
+    console.log("Uploading image", file);
+  };
+  const toggleEdit = () => {
+    setIsEditing(!isEditing); // Toggle the state
+  };
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
 
+  const handleSave = (field: string, value: string) => {
+    switch (field) {
+      case "name":
+        setName(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+
+      case "phone":
+        setPhone(value);
+        break;
+      case "address":
+        setAddress(value);
+        break;
+      case "licenseNumber":
+        setAddress(value);
+        break;
+      case "yearsAdmitted":
+        setYearsAdmitted(value);
+        break;
+
+      default:
+        console.warn(`No handler for field: ${field}`);
+    }
+
+    setIsEditing(false);
+  };
   return (
     <div className="dashboard-container">
       <aside className="sidebar">
@@ -181,13 +204,11 @@ const Dashboard: React.FC = () => {
       <main className="main-content">
         <div style={{ display: "flex" }}>
           <div className="dashboard-MainCard" style={{ marginRight: "20px" }}>
+            {" "}
             <UserProfileImage
               style={{ width: 200, height: 200, borderRadius: "15%" }}
               cameraStyle={{ width: 40, height: 40 }}
-              onImageUpload={handleImageUpload}
-              src={uploadedImage ?? undefined} // Pass the uploaded image URL or undefined
             />
-            {uploadSuccess && <p>{uploadSuccess}</p>}
             <div
               style={{
                 display: "flex",
@@ -195,7 +216,7 @@ const Dashboard: React.FC = () => {
                 alignItems: "left",
               }}
             >
-              <h1 style={{ marginLeft: 15, marginBottom: 0 }}>{lawyer?.name || "Loading..."}</h1>
+              <h1 style={{ marginLeft: 15, marginBottom: 0 }}>{lawyer.name}</h1>
               <div
                 style={{
                   display: "flex",
@@ -206,65 +227,165 @@ const Dashboard: React.FC = () => {
                 <FaLocationArrow
                   style={{ color: "grey", marginRight: "10px" }}
                 />
-                <p>{lawyer?.address || "Loading..."}</p>
+                <p>Hubertusstraße 149, 41239 Mönchengladbach</p>
               </div>
             </div>
           </div>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <div className="dashboard-details">
-            <div className="detail-item">
-              <FaBook size={20} />
-              <span>Bio: {lawyer?.bio || "Loading..."}</span>
-            </div>
-            <div className="detail-item">
-              <FaMoneyBill size={20} />
-              <span>Fee: {lawyer?.fee || "Loading..."}</span>
-            </div>
-            <div className="detail-item">
-              <FaGavel size={20} />
-              <span>Practice Area: {lawyer?.morePracticeArea?.join(", ") || "Loading..."}</span>
-            </div>
-            <div className="detail-item">
-              <FaBuilding size={20} />
-              <span>Court: {lawyer?.court?.join(", ") || "Loading..."}</span>
-            </div>
-            <div className="detail-item">
-              <FaWrench size={20} />
-              <span>Specialization: {lawyer?.specialization?.join(", ") || "Loading..."}</span>
-            </div>
-            <div className="detail-item">
-              <FaSchool size={20} />
-              <span>Education: {lawyer?.education?.join(", ") || "Loading..."}</span>
-            </div>
-            <div className="detail-item">
-              <FaLanguage size={20} />
-              <span>Languages: {lawyer?.languages?.join(", ") || "Loading..."}</span>
-            </div>
-            <hr style={{ color: "gray", width: "100%" }} />
-            <div className="detail-item">
-              <FaEnvelope size={20} />
-              <span>{lawyer?.email || "Loading..."}</span>
-            </div>
-            <div className="detail-item">
-              <FaPhone size={20} />
-              <span>{lawyer?.phoneNum || "Loading..."}</span>
-            </div>
-            <div className="detail-item">
-              <FaMapMarkerAlt size={20} />
-              <span>{lawyer?.address}, {lawyer?.city}, {lawyer?.zip}</span>
-            </div>
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <span>License Number: {lawyer?.licenseNumber || "Loading..."}</span>
-            </div>
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <span>Years Admitted: {lawyer?.yearsAdmitted || "Loading..."}</span>
-            </div>
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <span>Disciplinary History: {lawyer?.disciplinaryHistory?.join(", ") || "Loading..."}</span>
+          <div className="dashboard-InfoCard">
+            <div
+              style={{
+                marginTop: 15,
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <text style={{ fontSize: 20, fontWeight: "bold" }}>Profile</text>
+              <button className="edit-button" onClick={toggleEdit}>
+                Edit
+                <FaPen style={{ width: 14, height: "auto" }} />
+              </button>
+            </div>{" "}
+            <div style={{ marginTop: 12 }}>
+              <text style={{ color: "gray", fontWeight: "bold" }}>
+                User Information
+              </text>
+              <div style={{ marginTop: 18 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>Name</text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(name)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={name}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Email
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(email)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={email}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Phone
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(phone)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={phone}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Address
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(address)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={address}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  License No.
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(licenseNumber)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={licenseNumber}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Years Admitted
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(yearsAdmitted)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={yearsAdmitted}
+                />
+              </div>
             </div>
           </div>
         </div>
