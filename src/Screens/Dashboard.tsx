@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
   const [practiceArea, setPracticeArea] = useState("Area Here");
   const [specialization, setSpecialization] = useState("Specialization Here");
   const [education, setEducation] = useState("Education Here");
-  const [labguages, setLanguages] = useState("Years Here");
+  const [languages, setLanguages] = useState("Years Here");
 
   useEffect(() => {
     if (passedLawyer) {
@@ -331,13 +331,13 @@ const Dashboard: React.FC = () => {
                   placeholder={licenseNumber}
                 />
               </div>
+
+              <hr style={{ marginTop: 20, color: "grey" }}></hr>
               <div style={{ marginTop: 15 }}>
-                <text style={{ color: "black", fontWeight: "bold" }}>
-                  Years Admitted
-                </text>
+                <text style={{ color: "black", fontWeight: "bold" }}>Bio</text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(yearsAdmitted)}
+                  toggleEdit={() => handleSave(bio)}
                   width="200px"
                   height="30px"
                   style={{
@@ -351,7 +351,120 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={yearsAdmitted}
+                  placeholder={bio}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>Fee</text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(fee)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={fee}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Practice Area
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(practiceArea)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={practiceArea}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Specialization
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(specialization)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={specialization}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Education
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(education)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={education}
+                />
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <text style={{ color: "black", fontWeight: "bold" }}>
+                  Languages
+                </text>
+                <EditableInputField
+                  isEditing={isEditing}
+                  toggleEdit={() => handleSave(languages)}
+                  width="200px"
+                  height="30px"
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 8,
+                    padding: "5px",
+                    marginTop: "10px",
+                  }}
+                  placeholderStyle={{
+                    marginTop: "5px",
+                    color: "black",
+                    fontSize: "16px",
+                  }}
+                  placeholder={languages}
                 />
               </div>
             </div>
