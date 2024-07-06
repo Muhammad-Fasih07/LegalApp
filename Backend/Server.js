@@ -52,9 +52,16 @@ const lawyerSchema = new mongoose.Schema(
     zip: String,
     phoneNum: String,
     practiceArea: String,
+    morePracticeArea: [String], // New field added for more practice areas
     yearsAdmitted: String,
     disciplinaryHistory: [String],
     licenseImage: String, // You can change this based on how you handle image storage
+    bio: String,
+    fee: Number,
+    court: [String],
+    specialization: [String],
+    education: [String],
+    languages: [String]
   },
   { collection: "LawyerData" }
 );
@@ -116,6 +123,40 @@ app.post("/api/lawyers/signup", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+// Update Lawyer Additional Information Endpoint
+app.put("/api/lawyers/:id/additional-info", async (req, res) => {
+  const {
+    bio,
+    fee,
+    court,
+    specialization,
+    education,
+    languages,
+    morePracticeArea
+  } = req.body;
+
+  try {
+    const updatedLawyer = await Lawyer.findByIdAndUpdate(
+      req.params.id,
+      { bio, fee, court, specialization, education, languages, morePracticeArea },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedLawyer) {
+      return res.status(404).json({ message: "Lawyer not found" });
+    }
+
+    res.status(200).json(updatedLawyer);
+  } catch (error) {
+    console.error("Error updating additional info:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
+
+
 
 // Login Endpoint
 app.post("/api/lawyers/login", async (req, res) => {

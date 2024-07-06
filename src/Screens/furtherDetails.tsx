@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/buttons/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import ENV from "../env";
 
 interface FurtherDetailsState {
   bio: string;
@@ -26,8 +27,10 @@ const initialFormState: FurtherDetailsState = {
 function FurtherDetails() {
   const [formState, setFormState] =
     useState<FurtherDetailsState>(initialFormState);
-  const [isBioTyped, setIsBioTyped] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const lawyerId = location.state?.lawyerId;
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -47,18 +50,43 @@ function FurtherDetails() {
     }
   };
 
-  // New handler for focus event
   const handleInputFocus = () => {
     setIsInputFocused(true);
   };
 
-  // New handler for blur event
   const handleInputBlur = () => {
     setIsInputFocused(false);
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (!lawyerId) {
+      console.error("No lawyer ID provided");
+      return;
+    }
+
+    const apiUrl = `${ENV.API_BASE_URL}/api/lawyers/${lawyerId}/additional-info`;
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      });
+
+      if (response.ok) {
+        const updatedLawyer = await response.json();
+        console.log("Updated Lawyer:", updatedLawyer);
+        navigate("/dashboard");
+      } else {
+        console.error("Failed to update lawyer");
+      }
+    } catch (error) {
+      console.error("Error updating lawyer:", error);
+    }
   };
 
   return (
@@ -82,7 +110,6 @@ function FurtherDetails() {
             label="Bio"
             style={{
               marginBottom: "1rem",
-
               marginTop: isInputFocused || formState.bio !== "" ? 20 : 0,
             }}
             labelColor="#000"
@@ -121,7 +148,7 @@ function FurtherDetails() {
             name="specialization"
             value={formState.specialization}
             onChange={handleInputChange}
-            label="Specialization "
+            label="Specialization"
             style={{ marginBottom: "1.5rem" }}
           />
           <InputField
@@ -129,7 +156,7 @@ function FurtherDetails() {
             name="languages"
             value={formState.languages}
             onChange={handleInputChange}
-            label="Languages "
+            label="Languages"
             style={{ marginBottom: "1.5rem" }}
           />
           <InputField
@@ -137,14 +164,14 @@ function FurtherDetails() {
             name="education"
             value={formState.education}
             onChange={handleInputChange}
-            label="Education "
+            label="Education"
             style={{ marginBottom: "1.5rem" }}
           />
         </div>
 
         <div className="signup-Button">
           <Button type="submit" height="50px" width="100px">
-            Sign Up
+            Submit
           </Button>
         </div>
       </form>

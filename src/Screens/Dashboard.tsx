@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
 
   const [name, setName] = useState("Name Here");
   const [email, setEmail] = useState("Email Here");
-  const [phone, phoneNumber] = useState("Phone Here");
+  const [phone, setPhone] = useState("Phone Here");
   const [address, setAddress] = useState("Address Here");
   const [licenseNumber, setLicenseNumber] = useState("License Here");
   const [yearsAdmitted, setYearsAdmitted] = useState("Years Here");
@@ -117,12 +117,15 @@ const Dashboard: React.FC = () => {
   };
 
   const handleAdditionalProfileDetailsClick = () => {
-    navigate("/furtherDetails");
+    if (lawyer && lawyer._id) {
+      navigate("/furtherDetails", { state: { lawyerId: lawyer._id } });
+    }
   };
 
   if (!lawyer) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="dashboard-container">
       <aside className="sidebar">
@@ -156,7 +159,6 @@ const Dashboard: React.FC = () => {
       <main className="main-content">
         <div style={{ display: "flex" }}>
           <div className="dashboard-MainCard" style={{ marginRight: "20px" }}>
-            {" "}
             <UserProfileImage
               style={{ width: 200, height: 200, borderRadius: "15%" }}
               cameraStyle={{ width: 40, height: 40 }}
@@ -183,73 +185,65 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div className="dashboard-details">
-              <div className="detail-item">
-                <FaBook size={20} />
-                <span>Bio: {lawyer.bio}</span>
-              </div>
-              <div className="detail-item">
-                <FaMoneyBill size={20} />
-                <span>Fee: {lawyer.fee}</span>
-              </div>
-              <div className="detail-item">
-                <FaGavel size={20} />
-                <span>Practice Area: {lawyer.practiceArea}</span>
-              </div>
-              <div className="detail-item">
-                <FaBuilding size={20} />
-                <span>Court: {lawyer.practiceArea}</span>
-              </div>
-              <div className="detail-item">
-                <FaWrench size={20} />
-                <span>Specialization: {lawyer.practiceArea}</span>
-              </div>
-              <div className="detail-item">
-                <FaSchool size={20} />
-                <span>Education: {lawyer.practiceArea}</span>
-              </div>
-              <div className="detail-item">
-                <FaLanguage size={20} />
-                <span>Languages: {lawyer.practiceArea}</span>
-              </div>
-              <hr style={{ color: "gray", width: "100%" }} />
-              <div className="detail-item">
-                <FaEnvelope size={20} />
-                <span>{lawyer.email}</span>
-              </div>
-              <div className="detail-item">
-                <FaPhone size={20} />
-                <span>{lawyer.phoneNum}</span>
-              </div>
-              <div className="detail-item">
-                <FaMapMarkerAlt size={20} />
-                <span>
-                  {lawyer.address}, {lawyer.city}, {lawyer.zip}
-                </span>
-              </div>
-
-              <div className="detail-item">
-                <FaIdBadge size={20} />
-                <span>License Number: {lawyer.licenseNumber}</span>
-              </div>
-              <div className="detail-item">
-                <FaIdBadge size={20} />
-                <span>Years Admitted: {lawyer.yearsAdmitted}</span>
-              </div>
-              <div className="detail-item">
-                <FaIdBadge size={20} />
-                <span>
-                  Disciplinary History: {lawyer.disciplinaryHistory.join(", ")}
-                </span>
-              </div>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <div className="dashboard-details">
+            <div className="detail-item">
+              <FaBook size={20} />
+              <span>Bio: {lawyer.bio}</span>
+            </div>
+            <div className="detail-item">
+              <FaMoneyBill size={20} />
+              <span>Fee: {lawyer.fee}</span>
+            </div>
+            <div className="detail-item">
+              <FaGavel size={20} />
+              <span>Practice Area: {lawyer.morepracticeArea}</span>
+            </div>
+            <div className="detail-item">
+              <FaBuilding size={20} />
+              <span>Court: {lawyer.court}</span>
+            </div>
+            <div className="detail-item">
+              <FaWrench size={20} />
+              <span>Specialization: {lawyer.specialization}</span>
+            </div>
+            <div className="detail-item">
+              <FaSchool size={20} />
+              <span>Education: {lawyer.education}</span>
+            </div>
+            <div className="detail-item">
+              <FaLanguage size={20} />
+              <span>Languages: {lawyer.languages}</span>
+            </div>
+            <hr style={{ color: "gray", width: "100%" }} />
+            <div className="detail-item">
+              <FaEnvelope size={20} />
+              <span>{lawyer.email}</span>
+            </div>
+            <div className="detail-item">
+              <FaPhone size={20} />
+              <span>{lawyer.phoneNum}</span>
+            </div>
+            <div className="detail-item">
+              <FaMapMarkerAlt size={20} />
+              <span>
+                {lawyer.address}, {lawyer.city}, {lawyer.zip}
+              </span>
+            </div>
+            <div className="detail-item">
+              <FaIdBadge size={20} />
+              <span>License Number: {lawyer.licenseNumber}</span>
+            </div>
+            <div className="detail-item">
+              <FaIdBadge size={20} />
+              <span>Years Admitted: {lawyer.yearsAdmitted}</span>
+            </div>
+            <div className="detail-item">
+              <FaIdBadge size={20} />
+              <span>
+                Disciplinary History: {lawyer.disciplinaryHistory.join(", ")}
+              </span>
             </div>
           </div>
         </div>
