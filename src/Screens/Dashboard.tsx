@@ -8,23 +8,29 @@ import {
   FaGavel,
   FaIdBadge,
   FaEdit,
-  FaBook,
-  FaMoneyBill,
-  FaBuilding,
-  FaLanguage,
-  FaWrench,
-  FaSchool,
+  FaLocationArrow,
+  FaPen,
 } from "react-icons/fa";
 import "../Css/Dashboard.css";
 import ENV from "../env";
+import UserProfileImage from "../components/fields/UserProfileImage";
+import EditableInputField from "../components/fields/EditableInputField";
 
 const Dashboard: React.FC = () => {
   const [lawyer, setLawyer] = useState<any>(null);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editData, setEditData] = useState<any>(null);
   const navigate = useNavigate();
   const location = useLocation();
   const passedLawyer = location.state?.lawyer;
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [name, setName] = useState("Name Here");
+  const [email, setEmail] = useState("Email Here");
+  const [phone, phoneNumber] = useState("Phone Here");
+  const [address, setAddress] = useState("Address Here");
+  const [licenseNumber, setLicenseNumber] = useState("License Here");
+  const [yearsAdmitted, setYearsAdmitted] = useState("Years Here");
 
   useEffect(() => {
     if (passedLawyer) {
@@ -111,7 +117,6 @@ const Dashboard: React.FC = () => {
   if (!lawyer) {
     return <div>Loading...</div>;
   }
-
   return (
     <div className="dashboard-container">
       <aside className="sidebar">
@@ -143,93 +148,105 @@ const Dashboard: React.FC = () => {
         </nav>
       </aside>
       <main className="main-content">
-        <div className="dashboard-header">
-          <FaUserCircle size={100} color="#4CAF50" />
-          <h2>Welcome, {lawyer.name}</h2>
-          <button className="edit-button" onClick={handleEditClick}>
-            <FaEdit /> Edit
-          </button>
-        </div>
-        {isEditing ? (
-          <div className="dashboard-details">
-            {/* Dynamically generate editable fields based on editData */}
-            {Object.keys(editData).map((key) => (
-              <div className="detail-item" key={key}>
-                <FaIdBadge size={20} />
-                <input
-                  type="text"
-                  name={key}
-                  value={editData[key]}
-                  onChange={handleInputChange}
+        <div style={{ display: "flex" }}>
+          <div className="dashboard-MainCard" style={{ marginRight: "20px" }}>
+            {" "}
+            <UserProfileImage
+              style={{ width: 200, height: 200, borderRadius: "15%" }}
+              cameraStyle={{ width: 40, height: 40 }}
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "left",
+              }}
+            >
+              <h1 style={{ marginLeft: 15, marginBottom: 0 }}>{lawyer.name}</h1>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginLeft: 15,
+                }}
+              >
+                <FaLocationArrow
+                  style={{ color: "grey", marginRight: "10px" }}
                 />
+                <p>Hubertusstraße 149, 41239 Mönchengladbach</p>
               </div>
-            ))}
-            <button className="save-button" onClick={handleSaveClick}>
-              Save
-            </button>
+            </div>
           </div>
         ) : (
-          <div className="dashboard-details">
-            <div className="detail-item">
-              <FaBook size={20} />
-              <span>Bio: {lawyer.bio}</span>
-            </div>
-            <div className="detail-item">
-              <FaMoneyBill size={20} />
-              <span>Fee: {lawyer.fee}</span>
-            </div>
-            <div className="detail-item">
-              <FaGavel size={20} />
-              <span>Practice Area: {lawyer.practiceArea}</span>
-            </div>
-            <div className="detail-item">
-              <FaBuilding size={20} />
-              <span>Court: {lawyer.practiceArea}</span>
-            </div>
-            <div className="detail-item">
-              <FaWrench size={20} />
-              <span>Specialization: {lawyer.practiceArea}</span>
-            </div>
-            <div className="detail-item">
-              <FaSchool size={20} />
-              <span>Education: {lawyer.practiceArea}</span>
-            </div>
-            <div className="detail-item">
-              <FaLanguage size={20} />
-              <span>Languages: {lawyer.practiceArea}</span>
-            </div>
-            <hr style={{ color: "gray", width: "100%" }} />
-            <div className="detail-item">
-              <FaEnvelope size={20} />
-              <span>{lawyer.email}</span>
-            </div>
-            <div className="detail-item">
-              <FaPhone size={20} />
-              <span>{lawyer.phoneNum}</span>
-            </div>
-            <div className="detail-item">
-              <FaMapMarkerAlt size={20} />
-              <span>
-                {lawyer.address}, {lawyer.city}, {lawyer.zip}
-              </span>
-            </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div className="dashboard-details">
+              <div className="detail-item">
+                <FaBook size={20} />
+                <span>Bio: {lawyer.bio}</span>
+              </div>
+              <div className="detail-item">
+                <FaMoneyBill size={20} />
+                <span>Fee: {lawyer.fee}</span>
+              </div>
+              <div className="detail-item">
+                <FaGavel size={20} />
+                <span>Practice Area: {lawyer.practiceArea}</span>
+              </div>
+              <div className="detail-item">
+                <FaBuilding size={20} />
+                <span>Court: {lawyer.practiceArea}</span>
+              </div>
+              <div className="detail-item">
+                <FaWrench size={20} />
+                <span>Specialization: {lawyer.practiceArea}</span>
+              </div>
+              <div className="detail-item">
+                <FaSchool size={20} />
+                <span>Education: {lawyer.practiceArea}</span>
+              </div>
+              <div className="detail-item">
+                <FaLanguage size={20} />
+                <span>Languages: {lawyer.practiceArea}</span>
+              </div>
+              <hr style={{ color: "gray", width: "100%" }} />
+              <div className="detail-item">
+                <FaEnvelope size={20} />
+                <span>{lawyer.email}</span>
+              </div>
+              <div className="detail-item">
+                <FaPhone size={20} />
+                <span>{lawyer.phoneNum}</span>
+              </div>
+              <div className="detail-item">
+                <FaMapMarkerAlt size={20} />
+                <span>
+                  {lawyer.address}, {lawyer.city}, {lawyer.zip}
+                </span>
+              </div>
 
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <span>License Number: {lawyer.licenseNumber}</span>
-            </div>
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <span>Years Admitted: {lawyer.yearsAdmitted}</span>
-            </div>
-            <div className="detail-item">
-              <FaIdBadge size={20} />
-              <span>
-                Disciplinary History: {lawyer.disciplinaryHistory.join(", ")}
-              </span>
+              <div className="detail-item">
+                <FaIdBadge size={20} />
+                <span>License Number: {lawyer.licenseNumber}</span>
+              </div>
+              <div className="detail-item">
+                <FaIdBadge size={20} />
+                <span>Years Admitted: {lawyer.yearsAdmitted}</span>
+              </div>
+              <div className="detail-item">
+                <FaIdBadge size={20} />
+                <span>
+                  Disciplinary History: {lawyer.disciplinaryHistory.join(", ")}
+                </span>
+              </div>
             </div>
           </div>
-        )}
+        </div>
       </main>
     </div>
   );
