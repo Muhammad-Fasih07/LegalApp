@@ -1,5 +1,4 @@
-import React, { useState, FC } from "react";
-import { FaEdit } from "react-icons/fa";
+import React, { FC } from "react";
 
 interface EditableInputFieldProps {
   isEditing: boolean;
@@ -9,6 +8,9 @@ interface EditableInputFieldProps {
   style?: React.CSSProperties;
   placeholderStyle?: React.CSSProperties;
   placeholder?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name: string;
 }
 
 const EditableInputField: FC<EditableInputFieldProps> = ({
@@ -19,12 +21,10 @@ const EditableInputField: FC<EditableInputFieldProps> = ({
   style = {},
   placeholderStyle = {},
   placeholder = "Enter your text here",
+  value,
+  onChange,
+  name,
 }) => {
-  const [value, setValue] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setValue(e.target.value);
-
   const defaultStyle = { width, height, ...style };
   const defaultPlaceholderStyle = {
     color: "grey",
@@ -37,8 +37,9 @@ const EditableInputField: FC<EditableInputFieldProps> = ({
       {isEditing ? (
         <input
           type="text"
+          name={name}
           value={value}
-          onChange={handleChange}
+          onChange={onChange}
           onBlur={toggleEdit}
           style={defaultStyle}
           placeholder={placeholder}

@@ -43,9 +43,9 @@ const Login: React.FC = () => {
 
     try {
       const response = await fetch(`${ENV.API_BASE_URL}/api/lawyers/login`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: formState.email,
@@ -55,14 +55,15 @@ const Login: React.FC = () => {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.message || 'Login failed');
+        throw new Error(data.message || "Login failed");
       }
 
       const data = await response.json();
       const { token, lawyer } = data;
 
-      // Store token in localStorage or state for further use (e.g., authentication)
-      localStorage.setItem('token', token);
+      // Store token and lawyerId in localStorage or state for further use (e.g., authentication)
+      localStorage.setItem("token", token);
+      localStorage.setItem("lawyerId", lawyer._id);
 
       // Show success animation and message
       setShowAnimation(true);
@@ -86,7 +87,7 @@ const Login: React.FC = () => {
           <Lottie
             animationData={successAnimation}
             loop={false}
-            style={{ height: '100%', width: '100%' }}
+            style={{ height: "100%", width: "100%" }}
           />
         </div>
       ) : (

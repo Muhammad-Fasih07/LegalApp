@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/buttons/button";
 import { useNavigate, useLocation } from "react-router-dom";
+import Lottie from "lottie-react";
+import furtherDetailsAnimation from "../animations/furtherdetailsanimation.json";
 import ENV from "../env";
+import "../Css/details.css";
 
 interface FurtherDetailsState {
   bio: string;
   fee: number;
-  practiceArea: string;
+  morePracticeArea: string;
   court: string;
   specialization: string;
   education: string;
@@ -17,7 +20,7 @@ interface FurtherDetailsState {
 const initialFormState: FurtherDetailsState = {
   bio: "",
   fee: 0,
-  practiceArea: "",
+  morePracticeArea: "",
   court: "",
   specialization: "",
   education: "",
@@ -25,12 +28,27 @@ const initialFormState: FurtherDetailsState = {
 };
 
 function FurtherDetails() {
-  const [formState, setFormState] =
-    useState<FurtherDetailsState>(initialFormState);
+  const [formState, setFormState] = useState<FurtherDetailsState>(initialFormState);
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [showSuccessAnimation, setShowSuccessAnimation] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const lawyerId = location.state?.lawyerId;
+  const lawyerIdFromState = location.state?.lawyerId;
+  const [lawyerId, setLawyerId] = useState<string | null>(lawyerIdFromState);
+
+  useEffect(() => {
+    if (!lawyerIdFromState) {
+      const storedLawyerId = localStorage.getItem("lawyerId");
+      setLawyerId(storedLawyerId);
+    }
+  }, [lawyerIdFromState]);
+
+  // Log the lawyerId to verify it's being received
+  useEffect(() => {
+    console.log("Received lawyerId:", lawyerId);
+  }, [lawyerId]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -60,9 +78,12 @@ function FurtherDetails() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setErrorMessage(null); // Reset error message
+    setShowSuccessAnimation(false); // Reset success animation
 
     if (!lawyerId) {
-      console.error("No lawyer ID provided");
+      setErrorMessage("No lawyer ID provided");
+      setShowPopup(true);
       return;
     }
 
@@ -77,16 +98,33 @@ function FurtherDetails() {
         body: JSON.stringify(formState),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        const updatedLawyer = await response.json();
-        console.log("Updated Lawyer:", updatedLawyer);
-        navigate("/dashboard");
+        console.log("Updated Lawyer:", data);
+        setFormState(initialFormState); // Clear form fields
+        setShowSuccessAnimation(true); // Show success animation
+
+        // Remove the animation after 4 seconds
+        setTimeout(() => {
+          setShowSuccessAnimation(false);
+        }, 4000);
       } else {
-        console.error("Failed to update lawyer");
+        setErrorMessage(`Failed to update lawyer: ${data.message || 'Unknown error'}`);
+        console.error("Failed to update lawyer:", data);
+        setShowPopup(true);
       }
-    } catch (error) {
+    } catch (error: any) {
+      setErrorMessage(`Error updating lawyer: ${error.message}`);
       console.error("Error updating lawyer:", error);
+      setShowPopup(true);
     }
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    setErrorMessage(null);
+    setFormState(initialFormState); // Clear form fields when closing the popup
   };
 
   return (
@@ -128,8 +166,8 @@ function FurtherDetails() {
           />
           <InputField
             type="text"
-            name="practiceArea"
-            value={formState.practiceArea}
+            name="morePracticeArea"
+            value={formState.morePracticeArea}
             onChange={handleInputChange}
             label="Practice Area"
             style={{ marginBottom: "1rem" }}
@@ -175,6 +213,21 @@ function FurtherDetails() {
           </Button>
         </div>
       </form>
+
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-message">
+            <p>{errorMessage}</p>
+            <button onClick={handleClosePopup} className="close-button">OK</button>
+          </div>
+        </div>
+      )}
+
+      {showSuccessAnimation && (
+        <div className="animation-container">
+          <Lottie animationData={furtherDetailsAnimation} loop={false} style={{ width: '300px', height: '300px' }} />
+        </div>
+      )}
     </div>
   );
 }

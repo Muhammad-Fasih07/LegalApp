@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
-const path = require("path"); // Add this line to require 'path'
+const path = require("path");
 
 console.log("MONGO_URL:", process.env.MONGO_URL); // Check if the MONGO_URL is loaded
 console.log("JWT_SECRET:", process.env.JWT_SECRET); // Check if the JWT_SECRET is loaded
@@ -15,11 +15,11 @@ console.log("JWT_SECRET:", process.env.JWT_SECRET); // Check if the JWT_SECRET i
 app.use(cors());
 app.use(express.json()); // Ensure body parser is used to parse JSON requests
 
-// Add this line to handle the strictQuery deprecation warning
+// Handle the strictQuery deprecation warning
 mongoose.set("strictQuery", true);
 
 // Serve static files from the 'uploads' directory
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Add this line
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const mongoUrl = process.env.MONGO_URL;
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -60,7 +60,7 @@ const lawyerSchema = new mongoose.Schema(
     morePracticeArea: [String], // New field added for more practice areas
     yearsAdmitted: String,
     disciplinaryHistory: [String],
-    licenseImage: String, // You can change this based on how you handle image storage
+    licenseImage: String,
     bio: String,
     fee: Number,
     court: [String],
@@ -132,6 +132,13 @@ app.post("/api/lawyers/signup", async (req, res) => {
 
 // Update Lawyer Additional Information Endpoint
 app.put("/api/lawyers/:id/additional-info", async (req, res) => {
+  const { id } = req.params;
+  console.log('Received lawyerId:', id); // Log the lawyerId
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({ message: 'Invalid Lawyer ID' });
+  }
+
   const {
     bio,
     fee,
@@ -143,8 +150,13 @@ app.put("/api/lawyers/:id/additional-info", async (req, res) => {
   } = req.body;
 
   try {
+    const existingLawyer = await Lawyer.findById(id);
+    if (existingLawyer.bio || existingLawyer.fee || existingLawyer.court.length || existingLawyer.specialization.length || existingLawyer.education.length || existingLawyer.languages.length || existingLawyer.morePracticeArea.length) {
+      return res.status(400).json({ message: "You have already completed this form. Duplicate submissions are not allowed." });
+    }
+
     const updatedLawyer = await Lawyer.findByIdAndUpdate(
-      req.params.id,
+      id,
       { bio, fee, court, specialization, education, languages, morePracticeArea },
       { new: true, runValidators: true }
     );
@@ -177,20 +189,28 @@ app.post('/api/lawyers/:id/profile-image', upload.single('profileImage'), async 
   const { id } = req.params;
 
   if (!req.file) {
+    console.error("No file uploaded");
     return res.status(400).json({ message: 'No file uploaded' });
   }
 
   try {
+    console.log(`Received file: ${req.file.originalname}`); // Log file name
+
     const lawyer = await Lawyer.findById(id);
     if (!lawyer) {
+      console.error(`Lawyer not found for ID: ${id}`); // Log if lawyer not found
       return res.status(404).json({ message: 'Lawyer not found' });
     }
 
     // Assuming the frontend is hosted on the same server
     const profileImageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+    console.log(`Profile Image URL: ${profileImageUrl}`); // Log the profile image URL
 
     lawyer.profileImage = profileImageUrl;
-    await lawyer.save();
+
+    const saveResult = await lawyer.save();
+    console.log(`Profile image updated in database for lawyer ID ${id}`); // Log successful update
+    console.log(`Save result: ${JSON.stringify(saveResult)}`);
 
     res.status(200).json({ message: 'Profile image uploaded successfully', profileImage: lawyer.profileImage });
   } catch (error) {
@@ -252,24 +272,33 @@ app.get("/api/lawyers/me", authenticateToken, async (req, res) => {
   }
 });
 
-// Update Lawyer Details Endpoint
 app.put("/api/lawyers/update", authenticateToken, async (req, res) => {
   const { id } = req.user;
   const updateData = req.body;
 
+  console.log('Received update request for lawyer with ID:', id);
+  console.log('Update data:', updateData);
+
   try {
     const updatedLawyer = await Lawyer.findByIdAndUpdate(id, updateData, {
       new: true,
+      runValidators: true,
     });
+
     if (!updatedLawyer) {
+      console.error('Lawyer not found');
       return res.status(404).json({ message: "Lawyer not found" });
     }
+
+    console.log('Updated lawyer:', updatedLawyer);
     res.status(200).json(updatedLawyer);
   } catch (error) {
     console.error("Error updating lawyer data:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+
 
 // Search Lawyers by City and Practice Area Endpoint
 app.get("/api/lawyers/search", async (req, res) => {

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCamera } from "react-icons/fa";
 
 interface UserProfileImageProps {
   style?: React.CSSProperties;
   cameraStyle?: React.CSSProperties;
+  imageUrl?: string;
+  onIconClick?: () => void;
 }
+
 interface CustomUserIconProps {
   style?: React.CSSProperties;
   onClick?: () => void;
@@ -29,8 +32,19 @@ const CustomUserIcon: React.FC<CustomUserIconProps> = ({ style, onClick }) => (
 const UserProfileImage: React.FC<UserProfileImageProps> = ({
   style,
   cameraStyle,
+  imageUrl,
+  onIconClick,
 }) => {
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(imageUrl || null);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  useEffect(() => {
+    if (uploadedImage) {
+      setShowSuccessMessage(true);
+      const timer = setTimeout(() => setShowSuccessMessage(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [uploadedImage]);
 
   const handleIconClick = () => {
     document.getElementById("imageUpload")?.click();
@@ -49,9 +63,9 @@ const UserProfileImage: React.FC<UserProfileImageProps> = ({
           src={uploadedImage}
           alt="Profile"
           style={{
-            width: 100,
-            height: 100,
-            borderRadius: "25%",
+            width: 200,
+            height: 200,
+            borderRadius: "15%",
             ...style,
           }}
         />
@@ -61,7 +75,6 @@ const UserProfileImage: React.FC<UserProfileImageProps> = ({
           style={{
             cursor: "pointer",
             color: "#4CAF50",
-
             ...style,
           }}
         />
@@ -79,6 +92,23 @@ const UserProfileImage: React.FC<UserProfileImageProps> = ({
           ...cameraStyle,
         }}
       />
+      {showSuccessMessage && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            backgroundColor: "rgba(0, 128, 0, 0.7)",
+            color: "white",
+            textAlign: "center",
+            borderRadius: "15% 15% 0 0",
+            padding: "5px 0",
+          }}
+        >
+          Upload Successful
+        </div>
+      )}
       <input
         type="file"
         id="imageUpload"

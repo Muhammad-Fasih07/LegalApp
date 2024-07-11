@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import {
   FaUserCircle,
   FaEnvelope,
@@ -7,7 +8,6 @@ import {
   FaMapMarkerAlt,
   FaGavel,
   FaIdBadge,
-  FaEdit,
   FaLocationArrow,
   FaPen,
 } from "react-icons/fa";
@@ -18,30 +18,20 @@ import EditableInputField from "../components/fields/EditableInputField";
 
 const Dashboard: React.FC = () => {
   const [lawyer, setLawyer] = useState<any>(null);
-  const [editData, setEditData] = useState<any>(null);
+  const [editData, setEditData] = useState<any>({});
   const navigate = useNavigate();
   const location = useLocation();
   const passedLawyer = location.state?.lawyer;
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  const [name, setName] = useState("Name Here");
-  const [email, setEmail] = useState("Email Here");
-  const [phone, phoneNumber] = useState("Phone Here");
-  const [address, setAddress] = useState("Address Here");
-  const [licenseNumber, setLicenseNumber] = useState("License Here");
-  const [yearsAdmitted, setYearsAdmitted] = useState("Years Here");
-
-  const [bio, setBio] = useState("Set your bio here");
-  const [fee, setFee] = useState("Fee Here");
-  const [practiceArea, setPracticeArea] = useState("Area Here");
-  const [specialization, setSpecialization] = useState("Specialization Here");
-  const [education, setEducation] = useState("Education Here");
-  const [languages, setLanguages] = useState("Years Here");
-
   useEffect(() => {
+    console.log("Navigated to dashboard");
+
     if (passedLawyer) {
       setLawyer(passedLawyer);
+      localStorage.setItem("lawyerId", passedLawyer._id);
+      setInitialValues(passedLawyer);
       return;
     }
 
@@ -63,6 +53,8 @@ const Dashboard: React.FC = () => {
         }
         const data = await response.json();
         setLawyer(data);
+        localStorage.setItem("lawyerId", data._id);
+        setInitialValues(data);
       } catch (error) {
         console.error("Error fetching lawyer data:", error);
         navigate("/login");
@@ -72,15 +64,28 @@ const Dashboard: React.FC = () => {
     fetchLawyerData();
   }, [navigate, passedLawyer]);
 
+  const setInitialValues = (lawyer: any) => {
+    setEditData({
+      name: lawyer.name,
+      email: lawyer.email,
+      phoneNum: lawyer.phoneNum,
+      address: lawyer.address,
+      licenseNumber: lawyer.licenseNumber,
+      bio: lawyer.bio,
+      fee: lawyer.fee.toString(),
+      practiceArea: lawyer.practiceArea,
+      specialization: lawyer.specialization.join(", "),
+      education: lawyer.education.join(", "),
+      languages: lawyer.languages.join(", "),
+    });
+  };
+
   const handleEditClick = () => {
-    setEditData(lawyer); // Clone the lawyer object for editing
     setIsEditing(true);
   };
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = event.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setEditData((prevData: any) => ({
       ...prevData,
       [name]: value,
@@ -95,6 +100,8 @@ const Dashboard: React.FC = () => {
         return;
       }
 
+      console.log('Saving data:', editData); // Log the data being sent
+
       const response = await fetch(`${ENV.API_BASE_URL}/api/lawyers/update`, {
         method: "PUT",
         headers: {
@@ -104,16 +111,23 @@ const Dashboard: React.FC = () => {
         body: JSON.stringify(editData),
       });
 
+      const responseData = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to update lawyer data");
+        console.error("Response Error:", responseData);
+        throw new Error(responseData.message || "Failed to update lawyer data");
       }
 
-      const updatedLawyer = await response.json();
-      setLawyer(updatedLawyer);
+      console.log('Response Data:', responseData); // Log the response data
+
+      setLawyer(responseData);
       setIsEditing(false);
-    } catch (error) {
+      setInitialValues(responseData);
+
+      toast.success("Changes saved successfully!");
+    } catch (error: any) {
       console.error("Error updating lawyer data:", error);
+      toast.error("Failed to save changes.");
     }
   };
 
@@ -121,28 +135,47 @@ const Dashboard: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  // code of functions used for the image uploader
-
   const handleIconClick = () => {
     document.getElementById("imageUpload")?.click();
   };
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      const imageUrl = URL.createObjectURL(file);
-      setUploadedImage(imageUrl);
+      const formData = new FormData();
+      formData.append("profileImage", file);
+
+      const token = localStorage.getItem("token");
+      const lawyerId = localStorage.getItem("lawyerId");
+
+      try {
+        const response = await fetch(`${ENV.API_BASE_URL}/api/lawyers/${lawyerId}/profile-image`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to upload image");
+        }
+
+        const data = await response.json();
+        console.log(`Image URL: ${data.profileImage}`);
+        setUploadedImage(data.profileImage);
+        setLawyer({ ...lawyer, profileImage: data.profileImage });
+        toast.success("Profile image uploaded successfully");
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        toast.error("Failed to upload profile image");
+      }
     }
   };
 
-  const toggleEdit = () => setIsEditing(!isEditing);
-
-  const handleSave = (value: string) => {
-    setName(value); // Optionally update the placeholder or handle the value as needed
-    setIsEditing(false); // Ensure editing is turned off after saving
-  };
   return (
     <div className="dashboard-container">
+      <ToastContainer />
       <aside className="sidebar">
         <div className="sidebar-header">
           <FaUserCircle size={60} color="#fff" />
@@ -162,6 +195,14 @@ const Dashboard: React.FC = () => {
             <li>
               <FaIdBadge /> Profile
             </li>
+            <li
+              onClick={() => {
+                console.log("Navigating to furtherDetails with lawyerId:", lawyer._id);
+                navigate("/furtherDetails", { state: { lawyerId: lawyer._id } });
+              }}
+            >
+              <FaIdBadge /> Additional Profile Details
+            </li>
             <li>
               <FaMapMarkerAlt /> Contact
             </li>
@@ -172,57 +213,41 @@ const Dashboard: React.FC = () => {
       <main className="main-content">
         <div style={{ display: "flex" }}>
           <div className="dashboard-MainCard" style={{ marginRight: "20px" }}>
-            {" "}
             <UserProfileImage
               style={{ width: 200, height: 200, borderRadius: "15%" }}
               cameraStyle={{ width: 60, height: 60 }}
+              imageUrl={uploadedImage || lawyer?.profileImage}
+              onIconClick={handleIconClick}
             />
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "left",
-              }}
-            >
-              <h1 style={{ marginLeft: 15, marginBottom: 0 }}>{lawyer.name}</h1>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginLeft: 15,
-                }}
-              >
-                <FaLocationArrow
-                  style={{ color: "grey", marginRight: "10px" }}
-                />
-                <p>Hubertusstraße 149, 41239 Mönchengladbach</p>
+            <input
+              id="imageUpload"
+              type="file"
+              style={{ display: "none" }}
+              onChange={handleImageChange}
+            />
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "left" }}>
+              <h1 style={{ marginLeft: 15, marginBottom: 0 }}>{editData.name}</h1>
+              <div style={{ display: "flex", alignItems: "center", marginLeft: 15 }}>
+                <FaLocationArrow style={{ color: "grey", marginRight: "10px" }} />
+                <p>{editData.address}</p>
               </div>
             </div>
           </div>
           <div className="dashboard-InfoCard">
-            <div
-              style={{
-                marginTop: 15,
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+            <div style={{ marginTop: 15, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <text style={{ fontSize: 20, fontWeight: "bold" }}>Profile</text>
-              <button className="edit-button" onClick={toggleEdit}>
+              <button className="edit-button" onClick={handleEditClick}>
                 Edit
                 <FaPen style={{ width: 14, height: "auto" }} />
               </button>
-            </div>{" "}
+            </div>
             <div style={{ marginTop: 12 }}>
-              <text style={{ color: "gray", fontWeight: "bold" }}>
-                User Information
-              </text>
+              <text style={{ color: "gray", fontWeight: "bold" }}>User Information</text>
               <div style={{ marginTop: 18 }}>
                 <text style={{ color: "black", fontWeight: "bold" }}>Name</text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(name)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -236,16 +261,17 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={name}
+                  placeholder="Name"
+                  name="name"
+                  value={editData.name || ""}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={{ marginTop: 15 }}>
-                <text style={{ color: "black", fontWeight: "bold" }}>
-                  Email
-                </text>
+                <text style={{ color: "black", fontWeight: "bold" }}>Email</text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(email)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -259,16 +285,17 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={email}
+                  placeholder="Email"
+                  name="email"
+                  value={editData.email || ""}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={{ marginTop: 15 }}>
-                <text style={{ color: "black", fontWeight: "bold" }}>
-                  Phone
-                </text>
+                <text style={{ color: "black", fontWeight: "bold" }}>Phone</text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(phone)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -282,16 +309,17 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={phone}
+                  placeholder="Phone"
+                  name="phoneNum"
+                  value={editData.phoneNum || ""}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={{ marginTop: 15 }}>
-                <text style={{ color: "black", fontWeight: "bold" }}>
-                  Address
-                </text>
+                <text style={{ color: "black", fontWeight: "bold" }}>Address</text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(address)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -305,16 +333,17 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={address}
+                  placeholder="Address"
+                  name="address"
+                  value={editData.address || ""}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={{ marginTop: 15 }}>
-                <text style={{ color: "black", fontWeight: "bold" }}>
-                  License No.
-                </text>
+                <text style={{ color: "black", fontWeight: "bold" }}>License No.</text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(licenseNumber)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -328,7 +357,10 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={licenseNumber}
+                  placeholder="License No."
+                  name="licenseNumber"
+                  value={editData.licenseNumber || ""}
+                  onChange={handleInputChange}
                 />
               </div>
 
@@ -337,7 +369,7 @@ const Dashboard: React.FC = () => {
                 <text style={{ color: "black", fontWeight: "bold" }}>Bio</text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(bio)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -351,14 +383,17 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={bio}
+                  placeholder="Bio"
+                  name="bio"
+                  value={editData.bio || ""}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={{ marginTop: 15 }}>
                 <text style={{ color: "black", fontWeight: "bold" }}>Fee</text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(fee)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -372,7 +407,10 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={fee}
+                  placeholder="Fee"
+                  name="fee"
+                  value={editData.fee || ""}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={{ marginTop: 15 }}>
@@ -381,7 +419,7 @@ const Dashboard: React.FC = () => {
                 </text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(practiceArea)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -395,7 +433,10 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={practiceArea}
+                  placeholder="Practice Area"
+                  name="practiceArea"
+                  value={editData.practiceArea || ""}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={{ marginTop: 15 }}>
@@ -404,7 +445,7 @@ const Dashboard: React.FC = () => {
                 </text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(specialization)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -418,7 +459,10 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={specialization}
+                  placeholder="Specialization"
+                  name="specialization"
+                  value={editData.specialization || ""}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={{ marginTop: 15 }}>
@@ -427,7 +471,7 @@ const Dashboard: React.FC = () => {
                 </text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(education)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -441,7 +485,10 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={education}
+                  placeholder="Education"
+                  name="education"
+                  value={editData.education || ""}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={{ marginTop: 15 }}>
@@ -450,7 +497,7 @@ const Dashboard: React.FC = () => {
                 </text>
                 <EditableInputField
                   isEditing={isEditing}
-                  toggleEdit={() => handleSave(languages)}
+                  toggleEdit={() => setIsEditing(false)}
                   width="200px"
                   height="30px"
                   style={{
@@ -464,8 +511,16 @@ const Dashboard: React.FC = () => {
                     color: "black",
                     fontSize: "16px",
                   }}
-                  placeholder={languages}
+                  placeholder="Languages"
+                  name="languages"
+                  value={editData.languages || ""}
+                  onChange={handleInputChange}
                 />
+              </div>
+              <div style={{ marginTop: 15, display: "flex", justifyContent: "center" }}>
+                <button className="save-button" onClick={handleSaveClick}>
+                  Save
+                </button>
               </div>
             </div>
           </div>

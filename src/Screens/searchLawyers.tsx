@@ -66,6 +66,7 @@ const SearchLawyers = () => {
     }
   };
 
+  // Slider settings for horizontal display
   const settings = {
     dots: true,
     infinite: true,
@@ -74,6 +75,8 @@ const SearchLawyers = () => {
     slidesToScroll: 1,
     nextArrow: <div className="slick-next">Next</div>,
     prevArrow: <div className="slick-prev">Prev</div>,
+    vertical: false, // Ensure this is set to false for horizontal slider
+    adaptiveHeight: false,
   };
 
   return (
