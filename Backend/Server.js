@@ -133,7 +133,6 @@ app.post("/api/lawyers/signup", async (req, res) => {
 // Update Lawyer Additional Information Endpoint
 app.put("/api/lawyers/:id/additional-info", async (req, res) => {
   const { id } = req.params;
-  console.log('Received lawyerId:', id); // Log the lawyerId
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({ message: 'Invalid Lawyer ID' });
@@ -194,24 +193,15 @@ app.post('/api/lawyers/:id/profile-image', upload.single('profileImage'), async 
   }
 
   try {
-    console.log(`Received file: ${req.file.originalname}`); // Log file name
-
     const lawyer = await Lawyer.findById(id);
     if (!lawyer) {
-      console.error(`Lawyer not found for ID: ${id}`); // Log if lawyer not found
       return res.status(404).json({ message: 'Lawyer not found' });
     }
 
-    // Assuming the frontend is hosted on the same server
     const profileImageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-    console.log(`Profile Image URL: ${profileImageUrl}`); // Log the profile image URL
-
     lawyer.profileImage = profileImageUrl;
 
     const saveResult = await lawyer.save();
-    console.log(`Profile image updated in database for lawyer ID ${id}`); // Log successful update
-    console.log(`Save result: ${JSON.stringify(saveResult)}`);
-
     res.status(200).json({ message: 'Profile image uploaded successfully', profileImage: lawyer.profileImage });
   } catch (error) {
     console.error('Error uploading profile image:', error);
@@ -219,25 +209,21 @@ app.post('/api/lawyers/:id/profile-image', upload.single('profileImage'), async 
   }
 });
 
-
 // Login Endpoint
 app.post("/api/lawyers/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Check if user exists
     const lawyer = await Lawyer.findOne({ email });
     if (!lawyer) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Verify password
     const passwordMatch = await bcrypt.compare(password, lawyer.password);
     if (!passwordMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // Generate JWT token
     const token = jwt.sign({ id: lawyer._id }, JWT_SECRET, { expiresIn: "1h" });
 
     res.status(200).json({ token, lawyer });
@@ -273,12 +259,10 @@ app.get("/api/lawyers/me", authenticateToken, async (req, res) => {
   }
 });
 
+// Update Lawyer Information Endpoint
 app.put("/api/lawyers/update", authenticateToken, async (req, res) => {
   const { id } = req.user;
   const updateData = req.body;
-
-  console.log('Received update request for lawyer with ID:', id);
-  console.log('Update data:', updateData);
 
   try {
     const updatedLawyer = await Lawyer.findByIdAndUpdate(id, updateData, {
@@ -287,18 +271,15 @@ app.put("/api/lawyers/update", authenticateToken, async (req, res) => {
     });
 
     if (!updatedLawyer) {
-      console.error('Lawyer not found');
       return res.status(404).json({ message: "Lawyer not found" });
     }
 
-    console.log('Updated lawyer:', updatedLawyer);
     res.status(200).json(updatedLawyer);
   } catch (error) {
     console.error("Error updating lawyer data:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
 
 
 // Search Lawyers by City and Practice Area Endpoint
@@ -318,6 +299,22 @@ app.get("/api/lawyers/search", async (req, res) => {
     res.status(200).json(lawyers);
   } catch (error) {
     console.error("Error searching for lawyers:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// Get Lawyer Details by ID Endpoint
+app.get("/api/lawyers/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const lawyer = await Lawyer.findById(id);
+    if (!lawyer) {
+      return res.status(404).json({ message: "Lawyer not found" });
+    }
+    res.status(200).json(lawyer);
+  } catch (error) {
+    console.error("Error fetching lawyer details:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });

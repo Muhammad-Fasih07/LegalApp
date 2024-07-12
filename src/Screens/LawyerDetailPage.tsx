@@ -5,7 +5,9 @@ import Button from "../components/buttons/button";
 import { Lawyer } from './types';
 import lawyerImage from "../images/images.png";
 import ENV from '../env';
-import StarRatings from "react-star-ratings";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faIdBadge, faUserShield, faCalendar, faMapMarkerAlt, faBriefcase, faGraduationCap, faLanguage, faDollarSign, faGavel, faPhone } from '@fortawesome/free-solid-svg-icons';
+import "../Css/LawyerDetailPage.css"; // Import the CSS file for styling
 
 const LawyerDetailPage = () => {
   const { lawyerId } = useParams<{ lawyerId: string }>();
@@ -25,106 +27,100 @@ const LawyerDetailPage = () => {
   }, [lawyerId]);
 
   if (!lawyer) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
+  const parseYearsAdmitted = (yearsAdmitted: string): number | "N/A" => {
+    const date = new Date(yearsAdmitted);
+    return isNaN(date.getTime()) ? "N/A" : new Date().getFullYear() - date.getFullYear();
+  };
+
+  const yearsLicensed = parseYearsAdmitted(lawyer.yearsAdmitted);
+
+  const handleCall = () => {
+    window.location.href = `tel:${lawyer.phoneNum}`;
+  };
+
   return (
-    <div className="lawyerDetailPage">
-      <div className="lawyerProfile">
-        <img src={lawyer.profileImage || lawyerImage} alt="Lawyer Profile" />
-        <div className="lawyerInfo">
+    <div className="lawyer-detail-container">
+      <div className="lawyer-header">
+        <img className="lawyer-profile-image" src={lawyer.profileImage || lawyerImage} alt="Lawyer Profile" />
+        <div className="lawyer-info">
           <h2>{lawyer.name}</h2>
-          <p>{lawyer.email}</p>
-          {lawyer.rating && (
-            <StarRatings
-              rating={lawyer.rating}
-              starRatedColor="orange"
-              numberOfStars={5}
-              name='rating'
-            />
-          )}
-          {lawyer.reviews && <p>{lawyer.reviews} reviews</p>}
-          <p>License Number: {lawyer.licenseNumber}</p>
-          <p>Licensed for {new Date().getFullYear() - new Date(lawyer.yearsAdmitted).getFullYear()} years</p>
-          {lawyer.status && <p>Status: <span className="status">{lawyer.status}</span></p>}
+          <p>{lawyer.practiceArea} at {lawyer.city}, Pakistan</p>
+          <div className="contact-buttons">
+            <Button
+              type="button"
+              height="40px"
+              width="200px"
+              buttonColor="#ff9800"
+              textColor="white"
+              onClick={handleCall}
+            >
+              <FontAwesomeIcon icon={faPhone} /> {lawyer.phoneNum}
+            </Button>
+            <Button
+              type="button"
+              height="40px"
+              width="200px"
+              buttonColor="#2196f3"
+              textColor="white"
+            >
+              <FontAwesomeIcon icon={faEnvelope} /> Message
+            </Button>
+            <Button
+              type="button"
+              height="40px"
+              width="200px"
+              buttonColor="#9e9e9e"
+              textColor="white"
+            >
+              <FontAwesomeIcon icon={faGavel} /> Website
+            </Button>
+          </div>
+        </div>
+        <div className="lawyer-details">
+          <h3>Licensed for {yearsLicensed} years</h3>
+          <p><FontAwesomeIcon icon={faMapMarkerAlt} /> State: Pakistan</p>
+          <p><FontAwesomeIcon icon={faCalendar} /> Acquired: {new Date(lawyer.yearsAdmitted).getFullYear()}</p>
+          <p><FontAwesomeIcon icon={faUserShield} /> Status: <span className="status"><span className="green-dot"></span> Active</span></p>
         </div>
       </div>
-      <div className="lawyerContact">
-        <Button
-          type="button"
-          height="50px"
-          width="100%"
-          buttonColor="orange"
-          textColor="white"
-        >
-          Call
-        </Button>
-        <Button
-          type="button"
-          height="50px"
-          width="100%"
-          buttonColor="blue"
-          textColor="white"
-        >
-          Message
-        </Button>
-        <Button
-          type="button"
-          height="50px"
-          width="100%"
-          buttonColor="gray"
-          textColor="white"
-        >
-          Visit Website
-        </Button>
-      </div>
-      <div className="lawyerDetails">
-        <h3>About</h3>
+      <div className="lawyer-details-section">
+        <h3><FontAwesomeIcon icon={faBriefcase} /> About</h3>
         <p>{lawyer.bio}</p>
-        <h3>Address</h3>
+        <h3><FontAwesomeIcon icon={faMapMarkerAlt} /> Address</h3>
         <p>{lawyer.address}, {lawyer.city}, {lawyer.zip}</p>
-        <h3>Practice Areas</h3>
-        <p>{lawyer.practiceArea}</p>
-        {lawyer.morePracticeArea && lawyer.morePracticeArea.length > 0 && (
-          <div>
-            <p>More Practice Areas:</p>
-            <ul>
-              {lawyer.morePracticeArea.map((area, index) => (
-                <li key={index}>{area}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-        <h3>Education</h3>
+        <h3><FontAwesomeIcon icon={faBriefcase} /> More Practice Areas</h3>
+        <ul className="highlight">
+          {lawyer.morePracticeArea.map((area, index) => (
+            <li key={index}>{area}</li>
+          ))}
+        </ul>
+        <h3><FontAwesomeIcon icon={faGraduationCap} /> Education</h3>
         <ul>
           {lawyer.education.map((edu, index) => (
             <li key={index}>{edu}</li>
           ))}
         </ul>
-        <h3>Languages</h3>
+        <h3><FontAwesomeIcon icon={faLanguage} /> Languages</h3>
         <ul>
           {lawyer.languages.map((lang, index) => (
             <li key={index}>{lang}</li>
           ))}
         </ul>
-        <h3>Fee</h3>
-        <p>${lawyer.fee}</p>
-        <h3>Courts</h3>
+        <h3><FontAwesomeIcon icon={faDollarSign} /> Fee</h3>
+        <p>PKR {lawyer.fee}</p>
+        <h3><FontAwesomeIcon icon={faGavel} /> Courts</h3>
         <ul>
           {lawyer.court.map((court, index) => (
             <li key={index}>{court}</li>
           ))}
         </ul>
-        <h3>Specializations</h3>
+        <h3><FontAwesomeIcon icon={faGavel} /> Specializations</h3>
         <ul>
           {lawyer.specialization.map((spec, index) => (
             <li key={index}>{spec}</li>
-          ))}
-        </ul>
-        <h3>Disciplinary History</h3>
-        <ul>
-          {lawyer.disciplinaryHistory.map((history, index) => (
-            <li key={index}>{history}</li>
           ))}
         </ul>
       </div>

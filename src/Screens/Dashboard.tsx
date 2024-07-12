@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import toastify CSS
 import {
   FaUserCircle,
   FaEnvelope,
@@ -100,7 +101,7 @@ const Dashboard: React.FC = () => {
         return;
       }
 
-      console.log('Saving data:', editData); // Log the data being sent
+      console.log("Saving data:", editData); // Log the data being sent
 
       const response = await fetch(`${ENV.API_BASE_URL}/api/lawyers/update`, {
         method: "PUT",
@@ -118,7 +119,7 @@ const Dashboard: React.FC = () => {
         throw new Error(responseData.message || "Failed to update lawyer data");
       }
 
-      console.log('Response Data:', responseData); // Log the response data
+      console.log("Response Data:", responseData); // Log the response data
 
       setLawyer(responseData);
       setIsEditing(false);
@@ -518,9 +519,11 @@ const Dashboard: React.FC = () => {
                 />
               </div>
               <div style={{ marginTop: 15, display: "flex", justifyContent: "center" }}>
-                <button className="save-button" onClick={handleSaveClick}>
-                  Save
-                </button>
+                {isEditing && (
+                  <button className="save-button" onClick={handleSaveClick}>
+                    Save
+                  </button>
+                )}
               </div>
             </div>
           </div>

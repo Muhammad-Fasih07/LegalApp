@@ -1,4 +1,3 @@
-// LawyerDetailCard.tsx
 import React from "react";
 import Button from "./buttons/button";
 import StarRatings from 'react-star-ratings';
@@ -36,7 +35,7 @@ const LawyerDetailCard: React.FC<LawyerDetailCardProps> = ({
     <div style={{ fontWeight: "bold", textAlign: "left", marginLeft: 5 }}>
       {label}
     </div>
-    <div className="lawyerDetailCard">
+    <div className="lawyerDetailCard" onClick={onSeeMore} style={{ cursor: "pointer" }}>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <img
           src={imageSrc}
