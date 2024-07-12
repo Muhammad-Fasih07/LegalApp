@@ -219,6 +219,7 @@ app.post('/api/lawyers/:id/profile-image', upload.single('profileImage'), async 
   }
 });
 
+
 // Login Endpoint
 app.post("/api/lawyers/login", async (req, res) => {
   const { email, password } = req.body;

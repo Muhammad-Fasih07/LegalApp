@@ -7,19 +7,18 @@ import AskFreeQuestion from "./Screens/AskFreeQuestion";
 import logoImage from "./images/Gif.gif"; // replace with your image path
 import SearchLawyers from "./Screens/searchLawyers";
 import HomePage from "./Screens/homePage"; // Import the HomePage component
-// import ViewLawyersScreen from "./Screens/viewLawyersScreen";
 import Login from "../src/Screens/Login";
 import Dashboard from "../src/Screens/Dashboard";
 import ViewLawyersScreen from "./Screens/viewLawyersScreen";
 import FurtherDetails from "./Screens/furtherDetails";
+import LawyerDetailPage from "./Screens/LawyerDetailPage";
 
 function App() {
   return (
     <Router>
       <Header
         logoSrc={logoImage}
-        logoAlt="
-      .0.03Logo"
+        logoAlt="Logo"
       />
       <Routes>
         <Route path="/" element={<HomePage />} /> {/* Add the HomePage route */}
@@ -37,6 +36,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/ViewLawyersScreen" element={<ViewLawyersScreen />} />
         <Route path="/FurtherDetails" element={<FurtherDetails />} />
+        <Route path="/lawyerDetailPage/:lawyerId" element={<LawyerDetailPage />} />
       </Routes>
     </Router>
   );

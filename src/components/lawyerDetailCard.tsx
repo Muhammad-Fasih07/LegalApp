@@ -1,6 +1,7 @@
+// LawyerDetailCard.tsx
 import React from "react";
 import Button from "./buttons/button";
-import Rating from "react-rating";
+import StarRatings from 'react-star-ratings';
 
 interface LawyerDetailCardProps {
   label: string;
@@ -10,11 +11,12 @@ interface LawyerDetailCardProps {
   reviews: number;
   location: string;
   practiceAreas: string;
+  morePracticeAreas: string[];
   descriptionTitle: string;
   descriptionText: string;
   buttonText: string;
+  onSeeMore: () => void; // Add this prop for the click handler
 }
-const MyRating = Rating as any;
 
 const LawyerDetailCard: React.FC<LawyerDetailCardProps> = ({
   label,
@@ -24,9 +26,11 @@ const LawyerDetailCard: React.FC<LawyerDetailCardProps> = ({
   reviews,
   location,
   practiceAreas,
+  morePracticeAreas,
   descriptionTitle,
   descriptionText,
   buttonText,
+  onSeeMore, // Destructure the new prop
 }) => (
   <div style={{ position: "relative", width: "100%", marginTop: 20 }}>
     <div style={{ fontWeight: "bold", textAlign: "left", marginLeft: 5 }}>
@@ -63,15 +67,13 @@ const LawyerDetailCard: React.FC<LawyerDetailCardProps> = ({
               marginLeft: 5,
             }}
           >
-            <MyRating
-              emptySymbol={
-                <span style={{ color: "gray", fontSize: "1.5em" }}>☆</span>
-              }
-              fullSymbol={
-                <span style={{ color: "gold", fontSize: "1.5em" }}>★</span>
-              }
-              initialRating={rating}
-              readonly
+            <StarRatings
+              rating={rating}
+              starRatedColor="blue"
+              numberOfStars={5}
+              starDimension="20px"
+              starSpacing="2px"
+              name='rating'
             />
             <p style={{ fontSize: 12, fontWeight: "bold", marginLeft: 2 }}>
               ({reviews}) reviews
@@ -112,6 +114,16 @@ const LawyerDetailCard: React.FC<LawyerDetailCardProps> = ({
       >
         <text>{practiceAreas}</text>
       </div>
+      {morePracticeAreas && morePracticeAreas.length > 0 && (
+        <div>
+          <p>More Practice Areas:</p>
+          <ul>
+            {morePracticeAreas.map((area, index) => (
+              <li key={index}>{area}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <hr style={{ marginBottom: 10 }} />
       <div style={{ textAlign: "left", marginTop: 2 }}>
         <text style={{ fontWeight: "bold", fontSize: 14, textAlign: "left" }}>
@@ -134,6 +146,7 @@ const LawyerDetailCard: React.FC<LawyerDetailCardProps> = ({
         width="100%"
         buttonColor="#1d73b4"
         textColor="white"
+        onClick={onSeeMore} // Use the new prop here
       >
         {buttonText}
       </Button>

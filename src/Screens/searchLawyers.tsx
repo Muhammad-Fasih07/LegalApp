@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import DropDownField from "../components/fields/DropDownField";
 import Button from "../components/buttons/button";
-import Rating from "react-rating";
 import axios from 'axios';
-import Slider from "react-slick"; // Import Slider
-import { Lawyer, IPracticeAreasData } from '../Screens/types'; // Import types
-import lawyerImage from "../images/lawyer.jpg";
+import Slider from "react-slick";
+import { Lawyer, IPracticeAreasData } from '../Screens/types';
+import lawyerImage from "../images/images.png";
 import LawyerDetailCard from "../components/lawyerDetailCard";
 import ENV from '../env';
 import 'slick-carousel/slick/slick.css';
@@ -36,10 +36,13 @@ const SearchLawyers = () => {
   const [selectedPracticeArea, setSelectedPracticeArea] = useState<string>("");
   const [lawyers, setLawyers] = useState<Lawyer[]>([]);
 
+  const navigate = useNavigate(); // Use useNavigate for navigation
+
   const practiceAreas = practiceAreasData[selectedCity] || [];
 
   const handleCityChange = (city: string) => {
     setSelectedCity(city);
+    setSelectedPracticeArea(""); // Reset selected practice area when city changes
   };
 
   const handlePracticeAreaChange = (practiceArea: string) => {
@@ -79,6 +82,10 @@ const SearchLawyers = () => {
     adaptiveHeight: false,
   };
 
+  const handleSeeMore = (lawyerId: string) => {
+    navigate(`/lawyerDetailPage/${lawyerId}`);
+  };
+
   return (
     <div className="searchTopRatedLawyers-Section">
       <h1 className="searchLawyer-title">Search for top-rated lawyers</h1>
@@ -104,16 +111,18 @@ const SearchLawyers = () => {
           {lawyers.map((lawyer) => (
             <div key={lawyer._id} style={{ padding: "0 10px" }}>
               <LawyerDetailCard
-                label={lawyer.practiceArea}
-                imageSrc={lawyer.imageSrc || lawyerImage}
+                imageSrc={lawyer.profileImage || lawyerImage}
                 name={lawyer.name}
                 rating={lawyer.rating || 0}
                 reviews={lawyer.reviews || 0}
                 location={lawyer.city}
-                practiceAreas={lawyer.practiceAreas?.join(", ") || ""}
+                practiceAreas={lawyer.practiceArea}
                 descriptionTitle="Excellent Lawyer"
                 descriptionText={`This lawyer has received a ${lawyer.rating}-star rating based on ${lawyer.reviews} reviews. Clients have praised their professionalism, responsiveness, and expertise.`}
                 buttonText={`See more ${lawyer.practiceArea}`}
+                label={""}
+                morePracticeAreas={[]}
+                onSeeMore={() => handleSeeMore(lawyer._id)} // Pass the lawyerId to handleSeeMore
               />
             </div>
           ))}

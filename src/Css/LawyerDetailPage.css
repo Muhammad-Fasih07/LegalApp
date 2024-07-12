@@ -1,0 +1,56 @@
+.lawyerDetailPage {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .lawyerProfile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .lawyerProfile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .lawyerInfo h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .lawyerInfo p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .status {
+    color: green;
+  }
+  
+  .lawyerContact {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .lawyerDetails h3 {
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  .lawyerDetails p,
+  .lawyerDetails ul {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .review {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
