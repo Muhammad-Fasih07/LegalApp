@@ -61,17 +61,14 @@ const Login: React.FC = () => {
       const data = await response.json();
       const { token, lawyer } = data;
 
-      // Store token and lawyerId in localStorage or state for further use (e.g., authentication)
       localStorage.setItem("token", token);
       localStorage.setItem("lawyerId", lawyer._id);
 
-      // Show success animation and message
       setShowAnimation(true);
 
-      // Redirect to dashboard after animation
       setTimeout(() => {
         navigate("/dashboard", { state: { lawyer } });
-      }, 1500); // Adjusted the timeout duration to 1.5 seconds
+      }, 1500);
     } catch (error: unknown) {
       console.error("Login error:", error as Error);
       alert((error as Error).message || "Login failed. Please try again.");
@@ -83,11 +80,11 @@ const Login: React.FC = () => {
   return (
     <div className="login-container">
       {showAnimation ? (
-        <div className="animation-container">
+        <div className="login-animation-container">
           <Lottie
             animationData={successAnimation}
             loop={false}
-            style={{ height: "100%", width: "100%" }}
+            style={{ height: "300px", width: "300px" }}
           />
         </div>
       ) : (

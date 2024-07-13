@@ -201,7 +201,7 @@ app.post('/api/lawyers/:id/profile-image', upload.single('profileImage'), async 
     const profileImageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
     lawyer.profileImage = profileImageUrl;
 
-    const saveResult = await lawyer.save();
+    await lawyer.save();
     res.status(200).json({ message: 'Profile image uploaded successfully', profileImage: lawyer.profileImage });
   } catch (error) {
     console.error('Error uploading profile image:', error);
@@ -280,7 +280,6 @@ app.put("/api/lawyers/update", authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
 
 // Search Lawyers by City and Practice Area Endpoint
 app.get("/api/lawyers/search", async (req, res) => {

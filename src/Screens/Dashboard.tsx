@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import toastify CSS
+import "react-toastify/dist/ReactToastify.css";
 import {
   FaUserCircle,
   FaEnvelope,
@@ -67,17 +67,18 @@ const Dashboard: React.FC = () => {
 
   const setInitialValues = (lawyer: any) => {
     setEditData({
-      name: lawyer.name,
-      email: lawyer.email,
-      phoneNum: lawyer.phoneNum,
-      address: lawyer.address,
-      licenseNumber: lawyer.licenseNumber,
-      bio: lawyer.bio,
-      fee: lawyer.fee.toString(),
-      practiceArea: lawyer.practiceArea,
-      specialization: lawyer.specialization.join(", "),
-      education: lawyer.education.join(", "),
-      languages: lawyer.languages.join(", "),
+      name: lawyer.name || "",
+      email: lawyer.email || "",
+      phoneNum: lawyer.phoneNum || "",
+      address: lawyer.address || "",
+      licenseNumber: lawyer.licenseNumber || "",
+      bio: lawyer.bio || "",
+      fee: lawyer.fee ? lawyer.fee.toString() : "0",
+      practiceArea: lawyer.practiceArea || "",
+      specialization: lawyer.specialization ? lawyer.specialization.join(", ") : "",
+      education: lawyer.education ? lawyer.education.join(", ") : "",
+      languages: lawyer.languages ? lawyer.languages.join(", ") : "",
+      profileImage: lawyer.profileImage || ""
     });
   };
 
@@ -101,7 +102,7 @@ const Dashboard: React.FC = () => {
         return;
       }
 
-      console.log("Saving data:", editData); // Log the data being sent
+      console.log("Saving data:", editData);
 
       const response = await fetch(`${ENV.API_BASE_URL}/api/lawyers/update`, {
         method: "PUT",
@@ -119,7 +120,7 @@ const Dashboard: React.FC = () => {
         throw new Error(responseData.message || "Failed to update lawyer data");
       }
 
-      console.log("Response Data:", responseData); // Log the response data
+      console.log("Response Data:", responseData);
 
       setLawyer(responseData);
       setIsEditing(false);

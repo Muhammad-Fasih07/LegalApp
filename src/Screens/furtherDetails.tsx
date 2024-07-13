@@ -105,10 +105,10 @@ function FurtherDetails() {
         setFormState(initialFormState); // Clear form fields
         setShowSuccessAnimation(true); // Show success animation
 
-        // Remove the animation after 4 seconds
+        // Navigate back to the dashboard with the updated lawyer data
         setTimeout(() => {
-          setShowSuccessAnimation(false);
-        }, 4000);
+          navigate("/dashboard", { state: { lawyer: data } });
+        }, 1500); // Adjust the timeout duration to 1.5 seconds
       } else {
         setErrorMessage(`Failed to update lawyer: ${data.message || 'Unknown error'}`);
         console.error("Failed to update lawyer:", data);
@@ -224,7 +224,7 @@ function FurtherDetails() {
       )}
 
       {showSuccessAnimation && (
-        <div className="animation-container">
+        <div className="details-animation-container">
           <Lottie animationData={furtherDetailsAnimation} loop={false} style={{ width: '300px', height: '300px' }} />
         </div>
       )}

@@ -4,7 +4,7 @@ import Signup from "./Screens/signUpLawyer";
 import LawyersPersonalDetails from "../src/Screens/lawyerPersonalDetails";
 import Header from "../src/components/Header";
 import AskFreeQuestion from "./Screens/AskFreeQuestion";
-import logoImage from "./images/Gif.gif"; // replace with your image path
+import logoImage from "./images/Gif1.gif"; // replace with your image path
 import SearchLawyers from "./Screens/searchLawyers";
 import HomePage from "./Screens/homePage"; // Import the HomePage component
 import Login from "../src/Screens/Login";

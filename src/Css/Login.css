@@ -1,5 +1,5 @@
-/* Login.css */
-.animation-container {
+/* Animation container for login */
+.login-animation-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
   right: 0;
   bottom: 0;
   background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
-  z-index: 9999; /* Make sure it is on top */
+  z-index: 9999; /* Ensure it is on top */
 }
 
 /* Login container adjustments */
@@ -55,18 +55,4 @@
 
 .login-form button {
   margin-top: 20px;
-}
-
-/* Dashboard.css */
-.animation-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
-  z-index: 9999; /* Make sure it is on top */
 }
