@@ -2,7 +2,9 @@ import React from "react";
 import SearchImage from "./SearchImage";
 import Footer from "../Screens/Footer";
 import SearchLawyers from "./searchLawyers";
-
+import Searchfooter from "./Searchfooter";
+import Blog from "./Blog";
+import Statistics from "./Statistics";
 const HomePage: React.FC = () => {
   return (
     <div
@@ -17,6 +19,10 @@ const HomePage: React.FC = () => {
       >
         <SearchLawyers />
       </div>
+      <Blog />
+      <Statistics />
+      <Searchfooter />
+
 
       <Footer />
     </div>

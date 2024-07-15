@@ -4,11 +4,12 @@ import Button from "../components/buttons/button";
 import "../Css/AskFreeQuestion.css";
 
 const cities = [
-  "Karachi", "Lahore", "Faisalabad", "Rawalpindi", "Multan", "Hyderabad",
-  "Gujranwala", "Peshawar", "Quetta", "Islamabad", "Sargodha", "Sialkot",
-  "Bahawalpur", "Sukkur", "Jhang", "Sheikhupura", "Larkana", "Gujrat",
-  "Mardan", "Kasur", "Rahim Yar Khan", "Sahiwal", "Okara", "Wah Cantonment",
-  "Dera Ghazi Khan", "Mirpur Khas", "Nawabshah"
+  "Karachi", "Lahore", "Faisalabad", "Multan", "Hyderabad",
+  "Gujranwala", "Peshawar", "Quetta", "Islamabad",  "dera Ismail Khan",
+  "Bahawalpur", "Abbottabad"
+
+
+ 
 ];
 
 type FormData = {

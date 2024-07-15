@@ -142,18 +142,13 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
                   >
                     <div className="dropdown-grid">
                       {[
-                        "Constitutional Rights",
-                        "Consumer Protection",
-                        "Property Rights",
-                        "Contract Law",
-                        "Human Rights",
-                        "Employment Law",
-                        "Family Law",
-                        "Environmental Law",
-                        "Cyber Law",
-                        "Taxation",
-                        "Corporate Governance",
-                        "Criminal Justice",
+                        "Divorce Procedure in Pakistan",
+                        "Property Transfer in Pakistan",
+                        "Cheque bounce legal advice in Pakistan",
+                        "Child Custody Legal Advice in Pakistan",
+                        "Constitution of Pakistan",
+                        "Law Videos",
+                        "Labour & Service Guide",
                       ].map((topic) => (
                         <a href="#" key={topic}>
                           {topic}

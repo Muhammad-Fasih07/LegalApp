@@ -12,6 +12,10 @@ import Dashboard from "../src/Screens/Dashboard";
 import ViewLawyersScreen from "./Screens/viewLawyersScreen";
 import FurtherDetails from "./Screens/furtherDetails";
 import LawyerDetailPage from "./Screens/LawyerDetailPage";
+import Search from "./Screens/Searchfooter";
+import Blog from "./Screens/Blog";
+import Statistics from "./Screens/Statistics";
+
 
 function App() {
   return (
@@ -37,6 +41,11 @@ function App() {
         <Route path="/ViewLawyersScreen" element={<ViewLawyersScreen />} />
         <Route path="/FurtherDetails" element={<FurtherDetails />} />
         <Route path="/lawyerDetailPage/:lawyerId" element={<LawyerDetailPage />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/stats" element={<Statistics/>} />
+        
+        
       </Routes>
     </Router>
   );

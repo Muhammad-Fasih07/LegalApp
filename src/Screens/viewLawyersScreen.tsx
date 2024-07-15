@@ -1,6 +1,6 @@
 import React from "react";
 import ViewLawyerCard from "../components/viewLawyerCard";
-import lawyer from "../images/lawyer.jpg";
+import lawyer from "../images/images.png";
 const ViewLawyersScreen: React.FC = () => {
   return (
     <div
