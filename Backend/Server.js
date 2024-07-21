@@ -1,13 +1,14 @@
 require("dotenv").config(); // Load environment variables
 
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
+
+const app = express();
 
 console.log("MONGO_URL:", process.env.MONGO_URL); // Check if the MONGO_URL is loaded
 console.log("JWT_SECRET:", process.env.JWT_SECRET); // Check if the JWT_SECRET is loaded
@@ -285,11 +286,15 @@ app.put("/api/lawyers/update", authenticateToken, async (req, res) => {
 app.get("/api/lawyers/search", async (req, res) => {
   const { city, practiceArea } = req.query;
 
+  console.log("Received search query:", { city, practiceArea });
+
   try {
     const lawyers = await Lawyer.find({
       city: city,
       practiceArea: practiceArea,
     });
+
+    console.log("Search results:", lawyers);
 
     if (!lawyers.length) {
       return res.status(404).json({ message: "No lawyers found" });
@@ -301,6 +306,7 @@ app.get("/api/lawyers/search", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
 
 // Get Lawyer Details by ID Endpoint
 app.get("/api/lawyers/:id", async (req, res) => {

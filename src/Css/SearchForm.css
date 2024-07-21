@@ -1,0 +1,162 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.search-form h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.search-bar-container {
+  background: url('path_to_your_background_image') no-repeat center center/cover;
+  padding: 40px 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.search-form form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-form select {
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-form button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.search-form .error {
+  color: red;
+  margin-top: 10px;
+}
+
+.search-form .results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.search-form .card {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px;
+  width: 80%;
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
+  justify-content: space-between;
+}
+
+.search-form .card-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-form .card-left img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.search-form .card-right {
+  flex: 1;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-form .card-right h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.search-form .card-right .status {
+  color: green;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.search-form .card-right .bio {
+  margin: 10px 0;
+}
+
+.search-form .card-right .contact-info {
+  margin: 10px 0;
+  display: flex;
+  gap: 20px;
+}
+
+.search-form .card-right .contact-info span {
+  display: flex;
+  align-items: center;
+}
+
+.search-form .card-right .contact-info svg {
+  margin-right: 5px;
+}
+
+.search-form .card-right .actions {
+  display: flex;
+  gap: 10px;
+}
+
+.search-form .card-right .actions a,
+.search-form .card-right .actions button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.search-form .card-right .actions .call-button {
+  background-color: #ff5733;
+  color: white;
+}
+
+.search-form .card-right .actions .message-button,
+.search-form .card-right .actions .website-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.search-form .card-right .actions svg {
+  margin-right: 5px;
+}

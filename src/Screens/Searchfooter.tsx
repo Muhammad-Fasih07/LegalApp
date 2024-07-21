@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../Css/Search.css";
 
 const cities = [
@@ -33,6 +34,16 @@ const practiceAreas = [
 ];
 
 const SearchLawyers: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleCityClick = (city: string) => {
+    navigate(`/search?city=${city}`);
+  };
+
+  const handlePracticeClick = (practiceArea: string) => {
+    navigate(`/search?practiceArea=${practiceArea}`);
+  };
+
   return (
     <div className="search-lawyers">
       <div className="heading-container">
@@ -42,14 +53,14 @@ const SearchLawyers: React.FC = () => {
         <div className="list-column">
           {cities.map((city) => (
             <div className="list-item" key={city}>
-              <a href="#">{city}</a>
+              <a href="#" onClick={() => handleCityClick(city)}>{city}</a>
             </div>
           ))}
         </div>
         <div className="list-column">
           {practiceAreas.map((area) => (
             <div className="list-item" key={area}>
-              <a href="#">{area}</a>
+              <a href="#" onClick={() => handlePracticeClick(area)}>{area}</a>
             </div>
           ))}
         </div>
