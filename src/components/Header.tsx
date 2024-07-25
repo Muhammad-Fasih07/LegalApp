@@ -4,7 +4,6 @@ import { FaSearch } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../components/buttons/button";
 import { useNavigate } from "react-router-dom";
-// import SearchImage from "../Screens/SearchImage"; // Import the new component
 
 interface HeaderProps {
   logoSrc: string;
@@ -38,6 +37,15 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
   const handleLoginClick = () => {
     navigate("/Login");
   };
+
+  const handleCityClick = () => {
+    navigate("/search");
+  };
+
+  const handlePracticeAreaClick = () => {
+    navigate("/search");
+  };
+
   return (
     <>
       <header className="header">
@@ -76,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
                         "Bahawalpur",
                         "Abbottabad",
                       ].map((city) => (
-                        <a href="#" key={city}>
+                        <a href="#" key={city} onClick={handleCityClick}>
                           {city}
                         </a>
                       ))}
@@ -102,21 +110,21 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
                   >
                     <div className="dropdown-grid">
                       {[
-                          "Divorce Lawyers",
-                          "Accident Lawyer",
-                          "Tax Lawyer",
-                          "Criminal Lawyer",
-                          "Family Lawyer",
-                          "Immigration Lawyer",
-                          "Property Lawyer",
-                          "Civil Lawyer",
-                          "Marriage Lawyer",
-                          "Medical Lawyer",
-                          "Inheritance Lawyer",
-                          "Nab & Anti Corruption Lawyer",
-                          "Child Custody Lawyer",
+                        "Divorce Lawyers",
+                        "Accident Lawyer",
+                        "Tax Lawyer",
+                        "Criminal Lawyer",
+                        "Family Lawyer",
+                        "Immigration Lawyer",
+                        "Property Lawyer",
+                        "Civil Lawyer",
+                        "Marriage Lawyer",
+                        "Medical Lawyer",
+                        "Inheritance Lawyer",
+                        "Nab & Anti Corruption Lawyer",
+                        "Child Custody Lawyer",
                       ].map((area) => (
-                        <a href="#" key={area}>
+                        <a href="#" key={area} onClick={handlePracticeAreaClick}>
                           {area}
                         </a>
                       ))}
@@ -190,7 +198,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
               width="90px"
               buttonColor="green"
               textColor="white"
-            onClick={handleLoginClick}
+              onClick={handleLoginClick}
             >
               Login
             </Button>
@@ -207,7 +215,6 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
               Sign Up
             </Button>
           </div>
-
         </div>
       </header>
       {showSearch && (
@@ -224,7 +231,6 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, logoAlt }) => {
           </Button>
         </div>
       )}
-      {/* <SearchImage /> Add the SearchImage component below the header */}
     </>
   );
 };

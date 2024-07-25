@@ -130,7 +130,6 @@ app.post("/api/lawyers/signup", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
 // Update Lawyer Additional Information Endpoint
 app.put("/api/lawyers/:id/additional-info", async (req, res) => {
   const { id } = req.params;
@@ -142,22 +141,16 @@ app.put("/api/lawyers/:id/additional-info", async (req, res) => {
   const {
     bio,
     fee,
-    court,
+    practiceArea,
     specialization,
     education,
-    languages,
-    morePracticeArea
+    languages
   } = req.body;
 
   try {
-    const existingLawyer = await Lawyer.findById(id);
-    if (existingLawyer.bio || existingLawyer.fee || existingLawyer.court.length || existingLawyer.specialization.length || existingLawyer.education.length || existingLawyer.languages.length || existingLawyer.morePracticeArea.length) {
-      return res.status(400).json({ message: "You have already completed this form. Duplicate submissions are not allowed." });
-    }
-
     const updatedLawyer = await Lawyer.findByIdAndUpdate(
       id,
-      { bio, fee, court, specialization, education, languages, morePracticeArea },
+      { bio, fee, practiceArea, specialization, education, languages },
       { new: true, runValidators: true }
     );
 
@@ -171,6 +164,7 @@ app.put("/api/lawyers/:id/additional-info", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
 
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
@@ -289,10 +283,13 @@ app.get("/api/lawyers/search", async (req, res) => {
   console.log("Received search query:", { city, practiceArea });
 
   try {
-    const lawyers = await Lawyer.find({
-      city: city,
-      practiceArea: practiceArea,
-    });
+    const query = {};
+    if (city) query.city = city;
+    if (practiceArea) query.practiceArea = { $regex: new RegExp(practiceArea, 'i') };
+
+    console.log("Constructed query:", query);
+
+    const lawyers = await Lawyer.find(query);
 
     console.log("Search results:", lawyers);
 

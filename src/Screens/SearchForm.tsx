@@ -21,18 +21,18 @@ const cities = [
 
 const practiceAreas = [
   "Divorce Lawyers",
-  "Accident Lawyers",
-  "Tax Lawyers",
-  "Criminal Lawyers",
-  "Family Lawyers",
-  "Immigration Lawyers",
-  "Property Lawyers",
-  "Civil Lawyers",
-  "Marriage Lawyers",
-  "Medical Lawyers",
-  "Inheritance Lawyers",
-  "Nab & Anti Corruption Lawyers",
-  "Child Custody Lawyers"
+  "Accident Lawyer",
+  "Tax Lawyer",
+  "Criminal Lawyer",
+  "Family Lawyer",
+  "Immigration Lawyer",
+  "Property Lawyer",
+  "Civil Lawyer",
+  "Marriage Lawyer",
+  "Medical Lawyer",
+  "Inheritance Lawyer",
+  "Nab & Anti Corruption Lawyer",
+  "Child Custody Lawyer"
 ];
 
 const SearchForm: React.FC = () => {
@@ -46,7 +46,9 @@ const SearchForm: React.FC = () => {
     event.preventDefault();
     setLoading(true);
     setError(null);
-
+  
+    console.log("Searching for:", { city, practiceArea });
+  
     try {
       const response = await axios.get(`${ENV.API_BASE_URL}/api/lawyers/search`, {
         params: { city, practiceArea }
@@ -60,7 +62,7 @@ const SearchForm: React.FC = () => {
       setLoading(false);
     }
   };
-
+  
   return (
     <div className="search-form">
       <div className="search-bar-container">

@@ -97,14 +97,15 @@ const Dashboard: React.FC = () => {
   const handleSaveClick = async () => {
     try {
       const token = localStorage.getItem("token");
-      if (!token) {
+      const lawyerId = localStorage.getItem("lawyerId");
+      if (!token || !lawyerId) {
         navigate("/login");
         return;
       }
 
       console.log("Saving data:", editData);
 
-      const response = await fetch(`${ENV.API_BASE_URL}/api/lawyers/update`, {
+      const response = await fetch(`${ENV.API_BASE_URL}/api/lawyers/${lawyerId}/additional-info`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -167,6 +168,7 @@ const Dashboard: React.FC = () => {
         console.log(`Image URL: ${data.profileImage}`);
         setUploadedImage(data.profileImage);
         setLawyer({ ...lawyer, profileImage: data.profileImage });
+        setEditData({ ...editData, profileImage: data.profileImage }); // Update the editData state
         toast.success("Profile image uploaded successfully");
       } catch (error) {
         console.error("Error uploading image:", error);

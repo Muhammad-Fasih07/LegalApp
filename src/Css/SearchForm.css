@@ -9,21 +9,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  margin-top: 70px; /* Add margin top to ensure it's below the header */
   width: 100%;
-}
-
-.search-form h1 {
-  margin-bottom: 20px;
-  color: #333;
+  z-index: 1; /* Ensure the search form is above other elements */
 }
 
 .search-bar-container {
-  background: url('path_to_your_background_image') no-repeat center center/cover;
+  background: url('../images//search.svg') no-repeat center center/cover;
   padding: 40px 20px;
   width: 100%;
   display: flex;
   justify-content: center;
+  position: relative; /* Ensure it's positioned relative to the document flow */
+  z-index: 2; /* Higher z-index to stay above the background */
 }
 
 .search-form form {
@@ -31,9 +29,10 @@ body {
   flex-direction: row;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 3; /* Ensure the form is above other elements */
 }
 
 .search-form select {
